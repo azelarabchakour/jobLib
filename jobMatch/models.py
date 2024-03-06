@@ -12,4 +12,4 @@ class JobDescription(models.Model):
     title = models.CharField(max_length=200, null=True)
 
 class Cv(models.Model):
-    
+    file = models.FileField(upload_to='files/')
