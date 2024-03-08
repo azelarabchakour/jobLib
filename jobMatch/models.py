@@ -11,4 +11,4 @@ class User(models.Model):
 
 class JobDescription(models.Model):
     title = models.CharField(max_length=200, null=True)
-    user = models.ForeignKey('User', null=True)
+    user = models.ForeignKey('User', null=True,on_delete=models.SET_NULL)
