@@ -4,19 +4,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 from django.shortcuts import HttpResponseRedirect
-
-from jobMatch.forms import CustomUserCreationForm
-from .models import User
-
-from django.contrib.auth import get_user_model
-User = get_user_model()
-
-# Create your views here.
+  
 def signup(request):
     if request.user.is_authenticated:
         return redirect('/')
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -31,12 +24,12 @@ def signup(request):
         return render(request, 'signup.html', {'form': form})
    
 def home(request): 
-    return render(request, 'home.html')
+    return render(request, 'index.html')
    
   
 def signin(request):
     if request.user.is_authenticated:
-        return render(request, 'home.html')
+        return render(request, 'index.html')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -47,10 +40,10 @@ def signin(request):
         else:
             msg = 'Error Login'
             form = AuthenticationForm(request.POST)
-            return render(request, 'signin.html', {'form': form, 'msg': msg})
+            return render(request, 'login.html', {'form': form, 'msg': msg})
     else:
         form = AuthenticationForm()
-        return render(request, 'signin.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
   
 def profile(request): 
     return render(request, 'profile.html')
