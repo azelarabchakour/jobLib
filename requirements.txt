@@ -1,0 +1,5 @@
+python -m venv env #create virtual env
+source env/bin/activate #activate virtual env
+pip install django #installing django
+pip install djangorestframework #installing the rest framework
+pip install mysqlclient #install mysql client  
