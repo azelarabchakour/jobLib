@@ -145,3 +145,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
+## User model
+AUTH_USER_MODEL = 'authentication.User'
