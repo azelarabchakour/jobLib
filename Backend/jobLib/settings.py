@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #___________ADDED BY ME____________________
     #__________________________________________
     'rest_framework',
+    'djoser',
     'employee',
     'employer',
     'authentication',
@@ -148,3 +149,20 @@ DATABASES = {
 
 ## User model
 AUTH_USER_MODEL = 'authentication.User'
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'authentication.serializers.UserCreateSerializer',
+    }
+}

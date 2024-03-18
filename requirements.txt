@@ -3,3 +3,5 @@ source env/bin/activate #activate virtual env
 pip install django #installing django
 pip install djangorestframework #installing the rest framework
 pip install mysqlclient #install mysql client  
+pip install djoser #install the authentication system            
+pip install djangorestframework_simplejwt                                                                                                                    ─╯

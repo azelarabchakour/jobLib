@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from employer import models
 
 # Create your models here.
 
@@ -16,7 +15,7 @@ class JobPosting(models.Model):
     jobDescription = models.TextField()
     salaryMin = models.IntegerField()
     salaryMax = models.IntegerField()
-    jobStatus = models.choices([
+    jobStatus = models.CharField(max_length=255, choices=[
         ('POSTED', ''), #0- default status when the employer post the job
         ('INTERVIEW', ''), #1- when the employer is interviewing the candidates
         ('HOLD', ''), #2- when the employer accept one candidate and wait for him to confirm

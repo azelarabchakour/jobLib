@@ -23,4 +23,7 @@ urlpatterns = [
     path('employer/', include('employer.urls')),
     path('jobMatch/', include('jobMatch.urls')),
     path('authenticate/', include('authentication.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+
 ]

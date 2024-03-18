@@ -7,4 +7,4 @@ class Employee(models.Model):
     rating = models.IntegerField(blank=True, null=True)  # Allows for ratings but avoids empty values
 
     def __str__(self):
-        return self.user.full_name
+        return f'{self.user.first_name} {self.user.last_name}'
