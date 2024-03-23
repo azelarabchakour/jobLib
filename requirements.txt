@@ -5,4 +5,10 @@ pip install djangorestframework #installing the rest framework
 pip install mysqlclient #install mysql client  
 pip install djoser #install the authentication system            
 pip install djangorestframework_simplejwt
-pip install drf-nested-routers #to use nested routers 
+pip install drf-nested-routers #to use nested routers
+
+# for the frontend
+
+npm install
+npm install react-scripts
+
