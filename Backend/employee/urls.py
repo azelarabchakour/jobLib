@@ -6,6 +6,7 @@ from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
 router.register('employees', views.EmployeeViewSet)
+router.register('jobPostings', views.JobPostingViewSet)
 router.urls
 
 urlpatterns = router.urls

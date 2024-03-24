@@ -8,7 +8,7 @@ class Employer(models.Model):
     contact_info = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.user.full_name
+        return self.user.first_name + " " + self.user.last_name
     
 class JobPosting(models.Model):
     jobTitle = models.CharField(max_length=255)

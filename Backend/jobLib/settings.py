@@ -172,5 +172,5 @@ DJOSER = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # Add your React application's URL
 ]
-
+    
 CORS_ORIGIN_ALLOW_ALL = True
