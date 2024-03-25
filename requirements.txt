@@ -7,8 +7,12 @@ pip install djoser #install the authentication system
 pip install djangorestframework_simplejwt
 pip install drf-nested-routers #to use nested routers
 
+
+pip install django-cors-headers
+
 # for the frontend
 
 npm install
 npm install react-scripts
+npm install axios
 
