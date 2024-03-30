@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import ResetPassword from '../ResetPassword/ForgetPassword.jsx'
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // Get the navigate function
+    const navigate = useNavigate();
 
     useEffect(() => {
         const authToken = localStorage.getItem('token');
@@ -30,15 +30,18 @@ const Login = () => {
 
             axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
 
-            // Redirect the user to another page upon successful login
-            navigate('/profile'); // Redirect to '/profile' page
-
+            navigate('/profile');
             setUsername('');
             setPassword('');
         } catch (error) {
             console.error('Login failed:', error);
             setError("Login failed. Please check your credentials and try again.");
         }
+    };
+
+    const handleResetPassword = () => {
+        // Navigate to the ResetPassword component
+        navigate('/forget-password');
     };
 
     const getUserDetails = async () => {
@@ -75,6 +78,7 @@ const Login = () => {
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <Link to="/forget-password" className="forgot-password-link">Forgot password?</Link>
         </div>
     );
 };

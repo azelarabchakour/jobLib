@@ -11,3 +11,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 20px;
+}
+
+/* Navbar ul styles */
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Navbar li styles */
+.navbar ul li {
+  margin-left: 20px;
+}
+
+/* Navbar link styles */
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+/* Navbar link hover styles */
+.navbar ul li a:hover {
+  background-color: #555;
+}
+
+
+
