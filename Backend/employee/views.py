@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action, permission_classes
 from rest_framework.response import Response
 from rest_framework import mixins, viewsets
 from .models import Employee
@@ -24,6 +24,11 @@ class EmployeeViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
+    @action(detail=False, methods=['GET', 'PUT'])
+    def me(self, request):
+        return Response(EmployeeSerializer(request.user.employee).data)
+
+
 
 class MatchedJobsViewSet(viewsets.ModelViewSet):
     def get_queryset(self): #get the matched jobs of the employee logged in
@@ -31,6 +36,9 @@ class MatchedJobsViewSet(viewsets.ModelViewSet):
     
     def get_serializer_class(self):
         return AnalyticsSerializer
+    
+        
+
 
 @api_view()
 def matchedJobDetails(request, pk):
