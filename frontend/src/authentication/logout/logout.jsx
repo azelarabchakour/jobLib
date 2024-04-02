@@ -1,21 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
+const Logout = () => {
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
         // Clear any stored authentication token or user data
         localStorage.removeItem('token'); // the token is stored in localStorage
-        navigate('/login'); // Navigate to login page
+        navigate('/'); // Navigate to login page
     };
 
-    return (
-        <div>
-            <h1>Welcome to your profile!</h1>
-            <button onClick={handleLogout}>Logout</button>
-        </div>
+    
+    return(
+        <button onClick={handleLogout}>Logout</button>
     );
+
 };
 
-export default Profile;
+export default Logout;
