@@ -21,7 +21,7 @@ class JobApplication(models.Model):
     job_posting = models.ForeignKey(JobPosting, on_delete=models.CASCADE, related_name='applications')
 
     def __str__(self):
-        return f'{self.employee} - {self.job_posting.title}'
+        return f'{self.employee} - {self.job_posting.jobTitle}'
     
 class Analytics(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='analytics')

@@ -5,4 +5,6 @@ from django.contrib.auth.models import BaseUserManager, AbstractUser, Permission
 
 class User(AbstractUser):
 	email = models.EmailField(unique=True)
+	#first_name = None
+	#last_name = None
 
