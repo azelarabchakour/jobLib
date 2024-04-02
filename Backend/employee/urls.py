@@ -14,6 +14,7 @@ router.register('matchedJobs', views.MatchedJobsViewSet,basename='matchedjobs')#
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('home', views.home, name='home'),
     path('employee/<int:pk>/', update_employee, name='update_employee'),
     #path('employee/', views.getEmployee, name='getEmployee'),
     #path('employee/update/', views.updateEmployee, name='updateEmployee'),
