@@ -11,7 +11,7 @@ pip install django-cors-headers
 
 #----NEW ONES-------
 pip install pypdf2 
-pip install gensim 
+pip install gensim
 # for the frontend
 
 npm install

@@ -17,21 +17,17 @@ from rest_framework.response import Response
 from authentication.serializers import UserCreateSerializer, UserUpdateSerializer, UserSerializer
 
 from rest_framework import generics
+
 #--------- AI Imports---------------
-from gensim.models.doc2vec import Doc2Vec, TaggedDocument
-from nltk.tokenize import word_tokenize
-from numpy.linalg import norm
-import pandas as pd
-import numpy as np
-import requests
 import PyPDF2
+from gensim.models.doc2vec import Doc2Vec
+import numpy as np
+from numpy.linalg import norm
 import re
-import plotly.graph_objects as go
-import nltk
-nltk.download('punkt')
+
 #-----------------------------------
-
-
+import os
+from django.conf import settings
 
 # Create your views here.
 
@@ -43,7 +39,10 @@ def home(request):
     )
     serializer = EmployeeSerializer(employee)
     resume = employee.resume.name
-    return Response(resume)
+    resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
+    similarity = match(request,resume_path)
+    return Response(similarity)
+
 
 def match(request,resume):
     pdf = PyPDF2.PdfReader(resume)
@@ -101,6 +100,8 @@ Feel free to customize this job description to better fit the specific requireme
     v1 = model.infer_vector(input_CV.split())
     v2 = model.infer_vector(input_JD.split())
     similarity = 100*(np.dot(np.array(v1), np.array(v2))) / (norm(np.array(v1)) * norm(np.array(v2)))
+    return similarity
+
     
 
 
