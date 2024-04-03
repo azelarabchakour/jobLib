@@ -17,6 +17,7 @@ from rest_framework.response import Response
 from authentication.serializers import UserCreateSerializer, UserUpdateSerializer, UserSerializer
 
 from rest_framework import generics
+from django.core.exceptions import ObjectDoesNotExist
 
 #--------- AI Imports---------------
 import PyPDF2
@@ -38,7 +39,7 @@ def home(request):
             user_id = request.user.id
     )
     serializer = EmployeeSerializer(employee)
-    resume = employee.resume.name
+    #resume = employee.resume.name
     resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
     similarity = match(request,resume_path)
     return Response(similarity)
@@ -103,10 +104,6 @@ Feel free to customize this job description to better fit the specific requireme
     return similarity
 
     
-
-
-
-
 def preprocess_text(text):
     # Convert the text to lowercase
     text = text.lower()
@@ -221,4 +218,22 @@ def applicationStatus(request):
     serializer = JobApplicationSerializer(applications, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+@api_view(['POST','GET'])
+def testCV(request):
+
+    if request.method == 'GET':
+        return Response({'message': 'This endpoint accepts POST requests only'})
+
+    try:
+        employee = Employee.objects.get(user_id=request.user.id)
+        serializer = EmployeeSerializer(employee)
+        resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
+        #input_text = request.data.get('input_text', None)
+        input_text = request.body.decode('utf-8')
+    except ObjectDoesNotExist:
+        return Response({'error': 'Employee not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    similarity = match(request,resume_path)
+    return Response(similarity)
 
