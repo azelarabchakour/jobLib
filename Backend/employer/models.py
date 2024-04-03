@@ -8,13 +8,13 @@ class Employer(models.Model):
     contact_info = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.user.first_name + " " + self.user.last_name
+        return f'{self.user.first_name} {self.user.last_name}'
     
 class JobPosting(models.Model):
     jobTitle = models.CharField(max_length=255)
     jobDescription = models.TextField()
-    salaryMin = models.IntegerField()
-    salaryMax = models.IntegerField()
+    salaryMin = models.IntegerField(null=True, blank=True)
+    salaryMax = models.IntegerField(null=True , blank=True)
     jobStatus = models.CharField(max_length=255, choices=[
         ('POSTED', 'Posted'), #0- default status when the employer post the job
         ('INTERVIEW', 'Interview'), #1- when the employer is interviewing the candidates
