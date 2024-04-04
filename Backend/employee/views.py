@@ -178,6 +178,31 @@ class MatchedJobsViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         return AnalyticsSerializer
     
+    # @action(detail=True, methods=['POST'])
+    # def apply(request, pk):
+    #     try:    
+    #         job_posting = JobPosting.objects.get(pk=pk)
+    #     except JobPosting.DoesNotExist:
+    #         return Response({"error": "Job posting not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    #     # Assuming you have appropriate validation logic for the applicationStatus field
+    #     application_status = 'WAIT_FOR_INTERVIEW'
+    #     #jobPosting = JobPosting.objects.get(pk=pk)
+    #     application_data = {
+    #         'application_date': datetime.date.today(),
+    #         'applicationStatus': application_status,
+    #         'employee': request.user.employee.id,
+    #         'job_posting': pk
+    #     }
+
+    #     application_serializer = JobApplicationSerializer(data=application_data)
+    #     if application_serializer.is_valid():
+    #         application_serializer.save()
+    #         return Response(application_serializer.data, status=status.HTTP_201_CREATED)
+    #     else:
+    #         return Response(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
         
 @api_view()
 def matchedJobDetails(request, pk):

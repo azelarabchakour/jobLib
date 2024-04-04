@@ -5,7 +5,11 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action, permission_classes
 from rest_framework import mixins, viewsets, status
-
+from jobMatch.models import JobApplication
+#------------------- AI STUFF -------------------
+from joblib import load
+import pickle
+#------------------------------------------------
 
 
 class EmployerViewSet(ModelViewSet):
@@ -29,14 +33,17 @@ class EmployerViewSet(ModelViewSet):
     
         
 class JobPostingViewSet(ModelViewSet):
-    queryset = JobPosting.objects.all()
+
+    def get_queryset(self):
+        employer = Employer.objects.get(user_id=self.request.user.id)
+        return JobPosting.objects.filter(
+            employer_id = employer.id
+        )   
     #serializer_class = JobPostingSerializer
     def get_serializer_class(self):
         if self.action == 'addJob':
                 return CreateJobPostingSerializer
         return JobPostingSerializer
-
-
     @action(detail=False, methods=['GET','POST'])
     def addJob(self, request):
         employer = Employer.objects.get(user_id=request.user.id)
@@ -45,4 +52,25 @@ class JobPostingViewSet(ModelViewSet):
             serializer.save(employer=employer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-     
+         
+@api_view()
+def acceptApplication(request,pk):
+    try:
+         jobApplication = JobApplication.objects.get(pk=pk)
+    except JobApplication.DoesNotExist:
+        return Response({"error": "Job Application not found."},status=status.HTTP_404_NOT_FOUND)
+    jobApplication.applicationStatus = 'ACCEPTED_AFTER_INTERVIEW'
+    jobApplication.save()
+    return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
+
+@api_view()
+def refuseApplication(request,pk):
+    try:
+         jobApplication = JobApplication.objects.get(pk=pk)
+    except JobApplication.DoesNotExist:
+        return Response({"error": "Job Application not found."},status=status.HTTP_404_NOT_FOUND)
+    
+    jobApplication.applicationStatus = 'REFUSE_AFTER_INTERVIEW'
+    jobApplication.save()
+    return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
+
