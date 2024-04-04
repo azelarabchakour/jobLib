@@ -118,6 +118,69 @@ def preprocess_text(text):
     text = ' '.join(text.split())
     
     return text
+
+
+
+#------------------------------------------------------        
+def matchCvWithJd(resume,jobDescription):
+    pdf = PyPDF2.PdfReader(resume)
+    resume = ""
+    for i in range(len(pdf.pages)):
+        pageObj = pdf.pages[i]
+        resume += pageObj.extract_text()
+
+    input_CV = preprocess_text(resume)
+    input_JD = preprocess_text(jobDescription)
+
+    model = Doc2Vec.load('./AiModels/cv_job_maching.model')
+    v1 = model.infer_vector(input_CV.split())
+    v2 = model.infer_vector(input_JD.split())
+    similarity = 100*(np.dot(np.array(v1), np.array(v2))) / (norm(np.array(v1)) * norm(np.array(v2)))
+    return similarity
+
+def getAllJobPostings():
+    job_postings = JobPosting.objects.get(jobStatus='POSTED')
+    serializer = JobPostingSerializer(job_postings, many=True)
+    return serializer.data
+
+def getJobDescription(job_id):
+    job = JobPosting.objects.get(pk=job_id)
+    return job.jobDescription
+
+def addMatch(employeeId,jobPostingId,matchPercentage):
+    match_data = {
+        'matchPercentage': matchPercentage,
+        'employee_id': employeeId,
+        'jobPosting_id': jobPostingId,
+    }
+    match_serializer = AnalyticsSerializer(data=match_data)
+    if match_serializer.is_valid():
+        match_serializer.save()
+    #     return Response(match_serializer.data, status=status.HTTP_201_CREATED)
+    # else:
+    #     return Response(match_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def testIfAlreadyMatched(employeeId,jobPostingId):
+    try:
+        match = Analytics.objects.get(employee_id=employeeId,jobPosting_id=jobPostingId)
+        return False
+    except Analytics.DoesNotExist:
+        return True
+
+
+def getMatches(request):
+    employee = Employee.objects.get(user_id=request.user.id)
+    # TEST IF HE ALREADY HAS RESUME
+    resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
+    jobs = getAllJobPostings()
+    for job in jobs:
+        if testIfAlreadyMatched(employee.id,job.id):
+            jobDescription = getJobDescription(job['id'])
+            percentage = matchCvWithJd(resume_path,jobDescription)
+            addMatch(employee.id,job.id,percentage)
+    
+
+
 #-----------------------------------------------------------------------------------------------------------------
 
 class EmployeeViewSet(ModelViewSet):
@@ -203,6 +266,8 @@ class MatchedJobsViewSet(viewsets.ModelViewSet):
     #         return Response(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
+
+
         
 @api_view()
 def matchedJobDetails(request, pk):
