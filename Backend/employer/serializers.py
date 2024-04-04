@@ -26,11 +26,11 @@ class JobPostingSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'employer', 'salaryMin', 'salaryMax', 'jobStatus']
 
 class CreateJobPostingSerializer(serializers.ModelSerializer):
-    jobApplications = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    applications = JobApplicationSerializer(many=True, read_only=True)
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription', 'salaryMin', 'salaryMax', 'jobStatus', 'employer']
+        fields = ['id', 'jobTitle', 'jobDescription', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications']
         read_only_fields = ['id', 'employer','salaryMin', 'salaryMax', 'jobStatus']
     
     def create(self, validated_data):
