@@ -48,7 +48,7 @@ function EmployerGetJobs() {
     return (
         <div className='employer-body-container'>
             <div className="card-old-job-descriptions">
-                <h2>Old Job Descriptions</h2>
+                <h2>Old Job</h2>
                 <ul>
                     {oldJobDescriptions.map(job => (
                         <li key={job.id} className="job-card">
