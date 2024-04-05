@@ -10,9 +10,9 @@ function Employer() {
 
   useEffect(() => {
     // Check if user is authenticated
-    const authToken = localStorage.getItem('token');
+    const authToken = localStorage.getItem('accessToken');
     if (!authToken) {
-      // If not authenticated, redirect to login page or handle appropriately
+      // If not authenticated
       setError("You need to login to access this page.");
     }
   }, []);
@@ -27,7 +27,7 @@ function Employer() {
     // Send a POST request to create the job posting
     axios.post('http://127.0.0.1:8000/employer/jobs/addJob/', newPost, {
       headers: {
-        'Authorization': `JWT ${localStorage.getItem('token')}`
+        'Authorization': `JWT ${localStorage.getItem('accessToken')}`
       }
     })
       .then(response => {
