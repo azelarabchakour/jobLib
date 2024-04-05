@@ -27,8 +27,8 @@ const Signup = () => {
 
       // Registration successful
       console.log('Registration successful:', response.data);
-      // Redirect the user to the switch-user page
-      window.location.href = '/switch-user';
+      // Redirect the user to the profile page
+      window.location.href = '/profile';
     } catch (error) {
       console.error('Registration failed:', error);
       setError("Registration failed. Please try again.");
@@ -36,34 +36,35 @@ const Signup = () => {
   };
 
   return (
-    <div className="container">
-  <form className="signup-form" onSubmit={handleSubmit}>
-    {/* <p>REGISTER NOW</p> */}
-    <h2 className="signup-title">Sign Up For Free</h2>
-    <h5>already have an account? <a href='/login'>Sign In</a> </h5> <br></br>
-    {error && <p className="error-message">{error}</p>}
-    <div>
-      <label className="form-label">Username</label>
-      <input className="form-input" type="text" value={username}  onChange={(e) => setUsername(e.target.value)} />
-    </div>
-    <div>
-      <label className="form-label">Email</label>
-      <input className="form-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    </div>
-    <div>
-      <label className="form-label">Password</label>
-      <input className="form-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-    </div>
-    <div>
-      <label className="form-label">Confirm Password</label>
-      <input className="form-input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-    </div>
-    <button className="signup-button" type="submit">Sign Up</button>
-  </form>
-  <img src={require('../../Assets/signup2.png')} alt="signup" className="signup-image" />
+    <div className='container-body-signup'>
+      <div className="container-signup">
+        <form className="signup-form" onSubmit={handleSubmit}>
+          {/* <p>REGISTER NOW</p> */}
+          <h2 className="signup-title">Sign Up For Free</h2>
+          <h5>already have an account? <a href='/login'>Sign In</a> </h5> <br></br>
+          {error && <p className="error-message">{error}</p>}
+          <div>
+            <label className="form-label">Username</label>
+            <input className="form-input" type="text" value={username}  onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div>
+            <label className="form-label">Email</label>
+            <input className="form-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <label className="form-label">Password</label>
+            <input className="form-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <div>
+            <label className="form-label">Confirm Password</label>
+            <input className="form-input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          </div>
+          <button className="signup-button" type="submit">Sign Up</button>
+        </form>
+        <img src={require('../../Assets/signup2.png')} alt="signup" className="signup-image" />
 
+    </div>
 </div>
-
   );
 };
 

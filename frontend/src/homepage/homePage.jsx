@@ -4,10 +4,12 @@ import FirstSection from './FirstSection';
 
 function HomePage() {
     return (
-        <>
+        <div className='container-body-homePage'>
             <Navbar/>
             <FirstSection/>
-        </>
+        </div>
+            
+        
     );
 }
 

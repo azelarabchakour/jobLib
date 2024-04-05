@@ -9,7 +9,8 @@ pip install drf-nested-routers #to use nested routers
 pip install django-cors-headers
 
 #---- AI STUFF -------
-scikit-learn
+pip install scikit-learn
+pip install joblib
 #--------------------
 
 

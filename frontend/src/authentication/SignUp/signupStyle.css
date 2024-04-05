@@ -1,5 +1,5 @@
-body {
-  background-color: #4672fd;
+.container-body-signup {
+  background: linear-gradient(to top, #16397b, #2b71ed);
   margin: 0; /* Remove default body margin */
   display: flex; /* Use flexbox */
   justify-content: center; /* Center horizontally */
@@ -10,7 +10,7 @@ body {
 }
 
 /* Main container */
-.container {
+.container-signup {
   display: flex;
   align-items: center;
   justify-content: center;
