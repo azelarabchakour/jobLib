@@ -38,7 +38,7 @@ const Login = () => {
             console.log('Login successful:', response.data);
 
             //navigate to the profile after successful login
-            navigate('/profile');
+            navigate('/switch-user');
 
             setUsername('');
             setPassword('');
@@ -49,7 +49,8 @@ const Login = () => {
     };
 
     return (
-        <div className='login-container'>
+        <div className='container-body-login'>
+            <div className='login-container'>
             <img src={require('../../Assets/login2.png')} alt="login" className="login-image" />
             <form className='login-form' onSubmit={handleSubmit}>
                 <h1 className='login-title'>Sign in to Joblib</h1>
@@ -66,6 +67,8 @@ const Login = () => {
                 <button className='login-button' type="submit">Login</button> <br></br>
             </form>
         </div>
+        </div>
+        
     );
 };
 

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Logout from '../authentication/logout/logout';
+import { Link, useNavigate } from 'react-router-dom';
 import './EmployerStyle.css'
 
-function Employer() {
+function EmployerPost() {
   const [jobTitle, setJobTitle] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if user is authenticated
@@ -34,8 +36,9 @@ function Employer() {
         // Reset form fields
         setJobTitle('');
         setJobDescription('');
-        // Optionally, you can handle success response here
+        
         console.log('Job posting created successfully:', response.data);
+        navigate('/employer-old-jobs');
       })
       .catch(error => {
         console.error('Error creating job posting:', error);
@@ -81,4 +84,4 @@ function Employer() {
   );
 }
 
-export default Employer;
+export default EmployerPost;

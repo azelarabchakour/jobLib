@@ -5,8 +5,8 @@ import Logout from '../authentication/logout/logout.jsx';
 import logo1 from '../Assets/Hr.png';
 import logo2 from '../Assets/jobSeeker.jpeg';
 
-const Profile = () => {
-    const navigate = useNavigate();
+const SwitchUser = () => {
+    const navigate = useNavigate(); 
 
     const handleChoose = (page) => {
         navigate(page); 
@@ -27,11 +27,11 @@ const Profile = () => {
                 <div className='card'>
                     <h2>Employer</h2>
                     <img src={logo2} alt='img2'/>
-                    <button onClick={() => handleChoose('/employer-page')}>Choose!</button>
+                    <button onClick={() => handleChoose('/employer-post')}>Choose!</button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Profile;
+export default SwitchUser;

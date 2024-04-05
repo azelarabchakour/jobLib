@@ -1,0 +1,31 @@
+    .card-old-job-descriptions {
+        max-width: 800px; /* Set the maximum width */
+        margin: 0 auto; /* Center the container horizontally */
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px; /* Add some space at the top */
+    }
+    
+    .job-card {
+        list-style: none;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    
+    .job-card-content {
+        padding: 20px;
+    }
+    
+    .job-title {    
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .job-description {
+        font-size: 16px;
+    }
+    

@@ -1,5 +1,5 @@
 .employer-body-container {
-  background-color: white !important;
+  background-color: white;
   min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
   display: flex;
   justify-content: center; /* Center horizontally */
@@ -67,5 +67,44 @@
 
 .employer-container li p {
   margin-top: 5px;
+  color: #666;
+}
+
+/*  §§§§§§§§§§§§§§§*/
+.employer-body-container {
+  padding: 20px;
+}
+
+.loading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.employer-error-message {
+  color: red;
+}
+
+.job-list-heading {
+  font-size: 24px;
+  color: #333;
+}
+
+.job-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.job-item {
+  margin-bottom: 20px;
+}
+
+.job-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.job-description {
+  font-size: 16px;
   color: #666;
 }
