@@ -18,7 +18,7 @@ from authentication.serializers import UserCreateSerializer, UserUpdateSerialize
 
 from rest_framework import generics
 from django.core.exceptions import ObjectDoesNotExist
-
+from employer.models import Employer
 #--------- AI Imports---------------
 import PyPDF2
 from gensim.models.doc2vec import Doc2Vec
@@ -42,6 +42,7 @@ def home(request):
     #resume = employee.resume.name
     resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
     similarity = match(request,resume_path)
+    getMatches(request) #TEST
     return Response(similarity)
 
 
@@ -136,26 +137,39 @@ def matchCvWithJd(resume,jobDescription):
     v1 = model.infer_vector(input_CV.split())
     v2 = model.infer_vector(input_JD.split())
     similarity = 100*(np.dot(np.array(v1), np.array(v2))) / (norm(np.array(v1)) * norm(np.array(v2)))
-    return similarity
+    #print("{:.2f}".format(similarity))
+    return "{:.2f}".format(similarity)
 
-def getAllJobPostings():
-    job_postings = JobPosting.objects.get(jobStatus='POSTED')
+def getAllJobPostings(userId):
+    employer_profile = Employer.objects.get(user_id=userId)
+    job_postings = JobPosting.objects.filter(
+        jobStatus='POSTED',
+    ).exclude(employer=employer_profile)  # Exclude job postings created by the connected user's employer profile
     serializer = JobPostingSerializer(job_postings, many=True)
+    #print(serializer.data)
     return serializer.data
 
 def getJobDescription(job_id):
     job = JobPosting.objects.get(pk=job_id)
+    #print(job.jobDescription)
     return job.jobDescription
 
 def addMatch(employeeId,jobPostingId,matchPercentage):
     match_data = {
         'matchPercentage': matchPercentage,
-        'employee_id': employeeId,
-        'jobPosting_id': jobPostingId,
+        'employee': employeeId,
+        'jobPosting': jobPostingId,
     }
+    
+    #print(match_data)
     match_serializer = AnalyticsSerializer(data=match_data)
+    #print(match_serializer.initial_data)
     if match_serializer.is_valid():
+        #print(True)
         match_serializer.save()
+    else:
+        errors = match_serializer.errors
+        print(errors)
     #     return Response(match_serializer.data, status=status.HTTP_201_CREATED)
     # else:
     #     return Response(match_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -165,22 +179,27 @@ def testIfAlreadyMatched(employeeId,jobPostingId):
         match = Analytics.objects.get(employee_id=employeeId,jobPosting_id=jobPostingId)
         return False
     except Analytics.DoesNotExist:
+        #print(True)
         return True
 
+def testIfHasCv(employeeId):
+    employee = Employee.objects.get(pk=employeeId)
+    if employee.resume:
+        #print("has cv TRUE")
+        return True
+    return False
 
 def getMatches(request):
     employee = Employee.objects.get(user_id=request.user.id)
-    # TEST IF HE ALREADY HAS RESUME
-    resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
-    jobs = getAllJobPostings()
-    for job in jobs:
-        if testIfAlreadyMatched(employee.id,job.id):
-            jobDescription = getJobDescription(job['id'])
-            percentage = matchCvWithJd(resume_path,jobDescription)
-            addMatch(employee.id,job.id,percentage)
+    if testIfHasCv(employee.id):
+        resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
+        jobs = getAllJobPostings(request.user.id) # Add restrictions to not match with his own jobs
+        for job in jobs:
+            if testIfAlreadyMatched(employee.id,job['id']):
+                jobDescription = getJobDescription(job['id'])
+                percentage = matchCvWithJd(resume_path,jobDescription)
+                addMatch(employee.id,job['id'],percentage)   
     
-
-
 #-----------------------------------------------------------------------------------------------------------------
 
 class EmployeeViewSet(ModelViewSet):
