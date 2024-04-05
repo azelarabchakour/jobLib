@@ -1,0 +1,93 @@
+body {
+    background-color: #4672fd;
+    margin: 0; /* Remove default body margin */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; 
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+/* Main container */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100vw - 500px);
+    height: calc(100vh - 100px);
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Signup image */
+.login-image {
+    width: 50%;
+    height: 100%;
+    border-radius: 30px;
+}
+
+.login-form {
+    width: 50%;
+    padding: 30px;
+    border-radius: 0 30px 30px 0;
+}
+
+
+.login-title {
+    /* font-size: 24px;
+    font-weight: bold; */
+    margin-bottom: 20px;
+    color: #201568;
+
+}
+
+
+.form-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+    color: #5f5a7c;
+    font-weight: bold;
+
+}
+
+.form-input {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    width: 70%;
+}
+
+
+
+.login-button {
+    width: calc(100% - 110px); /* Adjusted width to match inputs */
+    background-color: #0095ff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+h5{
+    color: #5f5a7c;
+}
+
+
+
+    

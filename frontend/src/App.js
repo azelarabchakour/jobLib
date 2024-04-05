@@ -6,6 +6,7 @@ import Profile from './Profile/Profile';
 import ForgetPass from './authentication/ResetPassword/ForgetPassword.jsx';
 import ResetPass from './authentication/ResetPassword/ResetPassword.jsx';
 import HomePage from './homepage/homePage.jsx';
+import Employer from './Employer/Employer.jsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/forget-password" element={<ForgetPass/>} />
         <Route path="/reset-password" element={<ResetPass/>} />
+        <Route path="/employer-page"  element={<Employer/>} />
       </Routes>
     </Router>
   );

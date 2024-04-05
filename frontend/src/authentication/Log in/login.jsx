@@ -64,7 +64,7 @@ const Login = () => {
     };
 
     return (
-        <div className='login-container'>
+        <div className='container'>
             
             <img src={require('../../Assets/login2.png')} alt="login" className="login-image" />
             <form className='login-form' onSubmit={handleSubmit}>
