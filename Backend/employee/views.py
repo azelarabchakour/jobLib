@@ -46,53 +46,13 @@ def home(request):
     return Response(similarity)
 
 
-def match(request,resume):
+def match(request,resume,jd):
     pdf = PyPDF2.PdfReader(resume)
     resume = ""
     for i in range(len(pdf.pages)):
         pageObj = pdf.pages[i]
         resume += pageObj.extract_text()
-    jd = """
-        Position: Data Scientist
-
-Company: [Your Company Name]
-
-Location: [Location]
-
-About Us: [Your Company Description]
-
-Job Description:
-
-We are seeking a talented and experienced Data Scientist to join our team. As a Data Scientist, you will be responsible for analyzing complex datasets, deriving actionable insights, and building predictive models to drive business decisions. You will work closely with cross-functional teams to identify opportunities for leveraging data to solve business problems and improve processes.
-
-Responsibilities:
-
-Analyze large datasets to identify trends, patterns, and insights.
-Develop predictive models and machine learning algorithms to solve business problems and optimize processes.
-Design and implement data pipelines and workflows for data collection, processing, and analysis.
-Collaborate with stakeholders to define project objectives, requirements, and success criteria.
-Communicate findings and insights to non-technical stakeholders through data visualization and storytelling.
-Stay up-to-date with the latest advancements in data science, machine learning, and analytics techniques.
-Requirements:
-
-Bachelor's or Master's degree in Computer Science, Statistics, Mathematics, or related field.
-Proven experience as a Data Scientist or similar role, with a strong track record of delivering impactful insights and solutions.
-Proficiency in programming languages such as Python or R, and experience with data manipulation and analysis libraries (e.g., pandas, numpy, scikit-learn).
-Experience with machine learning techniques such as regression, classification, clustering, and deep learning.
-Strong problem-solving skills and ability to work with complex, unstructured datasets.
-Excellent communication and collaboration skills, with the ability to explain technical concepts to non-technical stakeholders.
-Experience with data visualization tools (e.g., Matplotlib, Seaborn, Tableau) is a plus.
-Knowledge of big data technologies (e.g., Hadoop, Spark) and cloud platforms (e.g., AWS, Azure) is a plus.
-Benefits:
-
-Competitive salary and benefits package
-Opportunity to work on cutting-edge projects with a talented team
-Professional development and training opportunities
-Flexible working hours and remote work options
-If you're passionate about leveraging data to drive business decisions and solve complex problems, we'd love to hear from you! Apply now to join our team and make an impact.
-
-Feel free to customize this job description to better fit the specific requirements and culture of your company.
-    """
+    
     
     # Apply to CV and JD
     input_CV = preprocess_text(resume)
@@ -173,7 +133,7 @@ def addMatch(employeeId,jobPostingId,matchPercentage):
     #     return Response(match_serializer.data, status=status.HTTP_201_CREATED)
     # else:
     #     return Response(match_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+ 
 def testIfAlreadyMatched(employeeId,jobPostingId):
     try:
         match = Analytics.objects.get(employee_id=employeeId,jobPosting_id=jobPostingId)
@@ -343,6 +303,6 @@ def testCV(request):
     except ObjectDoesNotExist:
         return Response({'error': 'Employee not found'}, status=status.HTTP_404_NOT_FOUND)
 
-    similarity = match(request,resume_path)
+    similarity = match(request,resume_path,input_text)
     return Response(similarity)
 

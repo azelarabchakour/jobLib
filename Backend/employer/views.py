@@ -54,6 +54,16 @@ class JobPostingViewSet(ModelViewSet):
             serializer.save(employer=employer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=True, methods=['GET', 'PUT', 'PATCH'])
+    def deleteJob(self, request, pk):
+        try:
+            jobPosting = JobPosting.objects.get(pk=pk)
+        except JobPosting.DoesNotExist:
+            return Response({"error": "Job Posting not found."}, status=status.HTTP_404_NOT_FOUND)
+        jobPosting.delete()
+        return Response({"message": "Job Posting deleted successfully."}, status=status.HTTP_200_OK)
+
 
 
 @api_view()
