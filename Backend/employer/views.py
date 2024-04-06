@@ -34,13 +34,15 @@ class EmployerViewSet(ModelViewSet):
 
 class JobPostingViewSet(ModelViewSet):
 
+    #http_method_names = ['get', 'post', 'patch', 'delete','put','patch']
+
     def get_queryset(self):
         employer = Employer.objects.get(user_id=self.request.user.id)
         return JobPosting.objects.filter(
             employer_id=employer.id
         )
     # serializer_class = JobPostingSerializer
-    
+
     def get_serializer_class(self):
         if self.action == 'addJob':
             return CreateJobPostingSerializer

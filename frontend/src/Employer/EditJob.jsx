@@ -10,19 +10,6 @@ function EditJob() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch the job details based on the jobId
-        axios.get(`http://127.0.0.1:8000/employer/jobs/${jobId}`)
-            .then(response => {
-                setJobTitle(response.data.jobTitle);
-                setJobDescription(response.data.jobDescription);
-            })
-            .catch(error => {
-                console.error('Error fetching job details:', error);
-            });
-    }, [jobId]);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
         // Get the JWT token from localStorage
         const accessToken = localStorage.getItem('accessToken');
     
@@ -37,6 +24,20 @@ function EditJob() {
         const headers = {
             'Authorization': `JWT ${accessToken}`
         };
+        // Fetch the job details based on the jobId
+        axios.get(`http://127.0.0.1:8000/employer/jobs/${jobId}`)
+            .then(response => {
+                setJobTitle(response.data.jobTitle);
+                setJobDescription(response.data.jobDescription);
+            })
+            .catch(error => {
+                console.error('Error fetching job details:', error);
+            });
+    }, [jobId]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
     
         // Send a PUT request to update the job details with authorization header
         axios.put(`http://127.0.0.1:8000/employer/jobs/${jobId}`, {
