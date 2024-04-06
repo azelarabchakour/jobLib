@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; 
+import { Link, useParams, useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
+import './EditJobStyle.css'; 
 
 function EditJob() {
     const { jobId } = useParams(); // Get the jobId from the URL
@@ -17,7 +18,6 @@ function EditJob() {
             })
             .catch(error => {
                 console.error('Error fetching job details:', error);
-                
             });
     }, [jobId]);
 
@@ -39,29 +39,32 @@ function EditJob() {
     };
 
     return (
-        <div>
-            <h2>Edit Job</h2>
+        <div className="edit-job-container">
+            <Link to="/employer/employer-old-jobs" className="back-link">Back to Jobs</Link>
+            <h2 className="edit-job-heading">Edit Job</h2>
             <form onSubmit={handleSubmit}>
-                <label>
+                <label className="job-title-label">
                     Job Title:
                     <input
                         type="text"
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
                         required
+                        className="job-title-input"
                     />
                 </label>
                 <br />
-                <label>
+                <label className="job-description-label">
                     Job Description:
                     <textarea
                         value={jobDescription}
                         onChange={(e) => setJobDescription(e.target.value)}
                         required
+                        className="job-description-textarea"
                     />
                 </label>
                 <br />
-                <button type="submit">Update Job</button>
+                <button type="submit" className="update-button">Update Job</button>
             </form>
         </div>
     );

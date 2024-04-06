@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import EmployerNavbar from './EmployerNavbar/EmployerNavbar';
 import './EmployerJobsStyle.css';
 
 function EmployerGetJobs() {
@@ -35,7 +36,7 @@ function EmployerGetJobs() {
 
     const handleEdit = (jobId) => {
         // Redirect to the edit job page, passing the jobId as a parameter
-        navigate(`/edit-job/${jobId}`);
+        navigate(`/employer/edit-job/${jobId}`);
     };
 
     const handleDelete = (jobId) => {
@@ -70,9 +71,11 @@ function EmployerGetJobs() {
     }
 
     return (
+        <>
+        <EmployerNavbar />
         <div className='employer-body-container'>
             <div className="card-old-job-descriptions">
-                <h2>Old Job Descriptions</h2>
+                <h2>Your Jobs!</h2> <br></br>
                 <ul>
                     {oldJobDescriptions.map(job => (
                         <li key={job.id} className="job-card">
@@ -80,8 +83,8 @@ function EmployerGetJobs() {
                                 <h3 className="job-title">{job.jobTitle}</h3>
                                 <p className="job-description">{job.jobDescription}</p>
                                 <div className="job-actions">
-                                    <button onClick={() => handleEdit(job.id)}>Edit</button>
-                                    <button onClick={() => handleDelete(job.id)}>Delete</button>
+                                    <button className='Edit' onClick={() => handleEdit(job.id)}>Edit</button>
+                                    <button className='delete' onClick={() => handleDelete(job.id)}>Delete</button>
                                 </div>
                             </div>
                         </li>
@@ -89,6 +92,7 @@ function EmployerGetJobs() {
                 </ul>
             </div>
         </div>
+        </>
     );
 }
 

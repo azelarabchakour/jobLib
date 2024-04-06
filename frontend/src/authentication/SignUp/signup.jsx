@@ -28,7 +28,7 @@ const Signup = () => {
       // Registration successful
       console.log('Registration successful:', response.data);
       // Redirect the user to the profile page
-      window.location.href = '/profile';
+      window.location.href = '/switch-user';
     } catch (error) {
       console.error('Registration failed:', error);
       setError("Registration failed. Please try again.");

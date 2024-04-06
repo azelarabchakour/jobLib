@@ -7,7 +7,7 @@ const Logout = () => {
 
     const handleLogout = () => {
         // Clear any stored authentication token or user data
-        localStorage.removeItem('token'); // the token is stored in localStorage
+        localStorage.removeItem('accesstoken'); // the token is stored in localStorage
         navigate('/'); // Navigate to login page
     };
 

@@ -1,10 +1,10 @@
     .card-old-job-descriptions {
-        max-width: 800px; /* Set the maximum width */
-        margin: 0 auto; /* Center the container horizontally */
+        max-width: 800px; 
+        margin: 0 auto;
         background-color: #f9f9f9;
         border-radius: 10px;
         padding: 20px;
-        margin-top: 20px; /* Add some space at the top */
+        margin-top: 100px; 
     }
     
     .job-card {
@@ -29,3 +29,25 @@
         font-size: 16px;
     }
     
+    /* EmployerJobsStyle.css */
+.job-actions button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.job-actions button.edit {
+    background-color: #4CAF50; /* Green */
+}
+
+.job-actions button.delete {
+    background-color: #f44336; /* Red */
+}

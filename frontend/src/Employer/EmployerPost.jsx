@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Logout from '../authentication/logout/logout';
+import Logout from '../authentication/Logout/logout';
 import { Link, useNavigate } from 'react-router-dom';
+import EmployerNavbar from './EmployerNavbar/EmployerNavbar';
 import './EmployerStyle.css'
+
 
 function EmployerPost() {
   const [jobTitle, setJobTitle] = useState('');
@@ -54,10 +56,11 @@ function EmployerPost() {
   }
 
   return (
-    <div className='employer-body-container'>
-      <Link to="/employer-old-jobs" className="employer-old-jobs-link">Check Your Jobs!</Link>
+    <>
+      <EmployerNavbar/>
+      <div className='employer-body-container'>
       <div className="employer-container">
-        <h2>Post a job description!</h2>
+        <h2>Post a job description!</h2> <br></br>
         <form className='employer-post-form' onSubmit={handleSubmit}>
           <label>
             Job Title
@@ -82,6 +85,7 @@ function EmployerPost() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

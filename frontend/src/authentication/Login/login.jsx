@@ -38,7 +38,7 @@ const Login = () => {
             console.log('Login successful:', response.data);
 
             
-            navigate('/EmployerPost');
+            navigate('/employer/employer-post');
 
             setUsername('');
             setPassword('');
