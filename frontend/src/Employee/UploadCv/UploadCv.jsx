@@ -27,7 +27,7 @@ function UploadCv() {
         }
 
         const formData = new FormData();
-        formData.append('pdf', file);
+        formData.append('resume', file);
 
         axios.post(api, formData, {
             headers: {

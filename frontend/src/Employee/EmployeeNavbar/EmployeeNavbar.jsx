@@ -31,8 +31,8 @@ function EmployerNavbar() {
             </a>
             <ul className={active}>
                 <li className="nav__item">
-                    <a href="#" className="nav__link">
-                        Update your Cv!
+                    <a href="upload-cv" className="nav__link">
+                        Upload your Cv!
                     </a>
                 </li>
                 <li className="nav__item">
