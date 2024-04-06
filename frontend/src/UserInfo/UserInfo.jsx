@@ -9,7 +9,7 @@ function UserInfo() {
 
 useEffect(() => {
     // Fetch user info when component mounts
-    axios.get('http://127.0.0.1:8000/auth/users/me')
+    axios.get('http://127.0.0.1:8000/auth/users/me/')
         .then(response => {
         // Set user info state
         setUserInfo(response.data);

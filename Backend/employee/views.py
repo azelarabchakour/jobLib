@@ -184,6 +184,20 @@ class EmployeeViewSet(ModelViewSet):
         employee = Employee.objects.get(user_id=request.user.id)
 
 
+@api_view(['PATCH', 'PUT', 'GET','POST'])
+def uploadCv(request):
+        employee = Employee.objects.get(
+            user_id = request.user.id
+        )
+        if request.method == 'GET':
+            serializer = EmployeeSerializer(employee)
+            return Response(serializer.data)
+        elif request.method in ['PUT', 'PATCH']:
+            serializer = EmployeeSerializer(employee, data=request.data, partial=True)  # Use partial=True for PATCH
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
+
 
 
 @api_view(['PATCH', 'PUT', 'GET'])

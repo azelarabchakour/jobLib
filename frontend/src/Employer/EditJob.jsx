@@ -26,7 +26,7 @@ function EditJob() {
             'Authorization': `JWT ${accessToken}`
         };
         // Fetch the job details based on the jobId
-        axios.get(`http://127.0.0.1:8000/employer/jobs/${jobId}`)
+        axios.get(`http://127.0.0.1:8000/employer/job/${jobId}/modifyJob/`)
             .then(response => {
                 setJobTitle(response.data.jobTitle);
                 setJobDescription(response.data.jobDescription);
@@ -41,7 +41,7 @@ function EditJob() {
         
     
         // Send a PUT request to update the job details with authorization header
-        axios.put(`http://127.0.0.1:8000/employer/jobs/${jobId}`, {
+        axios.put(`http://127.0.0.1:8000/employer/job/${jobId}/modifyJob/`, {
             jobTitle: jobTitle,
             jobDescription: jobDescription
         }, {

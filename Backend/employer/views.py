@@ -34,8 +34,6 @@ class EmployerViewSet(ModelViewSet):
 
 class JobPostingViewSet(ModelViewSet):
 
-    #http_method_names = ['get', 'post', 'patch', 'delete','put','patch']
-
     def get_queryset(self):
         employer = Employer.objects.get(user_id=self.request.user.id)
         return JobPosting.objects.filter(
@@ -66,6 +64,11 @@ class JobPostingViewSet(ModelViewSet):
         jobPosting.delete()
         return Response({"message": "Job Posting deleted successfully."}, status=status.HTTP_200_OK)
 
+    # @action(detail=True, methods=['GET', 'PUT', 'PATCH'])
+    # def getInfos(self, request,pk):
+    #     jobPosting = JobPosting.objects.get(pk=pk)
+    #     serializer = JobPostingSerializer(jobPosting)
+    #     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view()
 def acceptApplication(request, pk):
@@ -88,3 +91,21 @@ def refuseApplication(request, pk):
     jobApplication.applicationStatus = 'REFUSE_AFTER_INTERVIEW'
     jobApplication.save()
     return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', 'PUT', 'PATCH'])
+def modifyJob(request, pk):
+    try:
+        jobPosting = JobPosting.objects.get(pk=pk)
+    except JobPosting.DoesNotExist:
+        return Response({"error": "Job Posting not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = JobPostingSerializer(jobPosting)
+        return Response(serializer.data)
+    elif request.method in ['PUT', 'PATCH']:
+        serializer = JobPostingSerializer(jobPosting, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

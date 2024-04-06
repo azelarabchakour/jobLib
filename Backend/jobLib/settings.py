@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']  # ADDED BY ME
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,15 +48,15 @@ INSTALLED_APPS = [
     'employer',
     'authentication',
     'jobMatch',
-    'corsheaders',
+    
 
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -172,15 +173,15 @@ DJOSER = {
     }
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Add your React application's URL
-    'http://127.0.0.1:3000',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',  # Add your React application's URL
+#     'http://127.0.0.1:3000',
+# ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-BACKEND_DIR = BASE_DIR  # rename variable for clarity
-FRONTEND_DIR = BASE_DIR.parent.parent / 'frontend'
+
+
