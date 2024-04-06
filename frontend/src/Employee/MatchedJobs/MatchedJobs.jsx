@@ -1,58 +1,84 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EmployerNavbar from '../EmployeeNavbar/EmployeeNavbar';
 
 const MatchedJobs = () => {
-    const [matchedJobDescriptions, setMatchedJobDescriptions] = useState([]);
+    const [matchedJobs, setMatchedJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const authToken = localStorage.getItem('accessToken');
-        if (!authToken) {
-            setError("You need to login to access this page.");
-            setLoading(false);
-        } else {
-            axios.get('http://127.0.0.1:8000/employee/matchedJobs/', {
-                headers: {
-                    'Authorization': `JWT ${authToken}`
+        const fetchMatchedJobsAndDetails = async () => {
+            try {
+                const authToken = localStorage.getItem('accessToken');
+                if (!authToken) {
+                    setError("You need to login to access this page.");
+                    setLoading(false);
+                } else {
+                    const response = await axios.get('http://127.0.0.1:8000/employee/matchedJobs/', {
+                        headers: {
+                            'Authorization': `JWT ${authToken}`
+                        }
+                    });
+                    console.log('Matched jobs:', response.data);
+                    const updatedMatchedJobs = await Promise.all(
+                        response.data.map(async job => {
+                            try {
+                                const jobDetailsResponse = await axios.get(`http://127.0.0.1:8000/employee/jobs/${job.jobPosting}/`);
+                                const jobDetails = jobDetailsResponse.data;
+                                return {
+                                    ...job,
+                                    jobTitle: jobDetails.jobTitle,
+                                    jobDescription: jobDetails.jobDescription,
+                                    salaryMax: jobDetails.salaryMax,
+                                    salaryMin: jobDetails.salaryMin
+                                };
+                            } catch (error) {
+                                console.error('Error fetching job details:', error);
+                                return {
+                                    ...job,
+                                    jobTitle: '',
+                                    jobDescription: ''
+                                };
+                            }
+                        })
+                    );
+                    console.log('Updated matched jobs:', updatedMatchedJobs);
+                    setMatchedJobs(updatedMatchedJobs);
+                    setLoading(false);
                 }
-            })
-            .then(response => {
-                setMatchedJobDescriptions(response.data);
-                setLoading(false);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching matched job descriptions:', error);
                 setError('Error fetching matched job descriptions. Please try again later.');
                 setLoading(false);
-            });
-        }
-    }, []);
+            }
+        };
 
+        fetchMatchedJobsAndDetails();
+    }, []);
 
     return (
         <>
-        <EmployerNavbar />
-        <div className='employer-body-container'>
-            <div className="card-old-job-descriptions">
-                <h2>Your Matched Jobs!</h2> <br />
-                <ul>
-                    {matchedJobDescriptions.map(job => (
-                        <li key={job.id} className="job-card">
-                            <div className="job-card-content">
-                                <h3 className="job-title">{job.jobTitle}</h3>
-                                <p className="job-description">{job.jobDescription}</p>
-                                <div className='job-actions'>
-                                <button className="apply-button">Apply</button>
+            <EmployerNavbar />
+            <div className='employer-body-container'>
+                <div className="card-old-job-descriptions">
+                    <h2>Your Matched Jobs!</h2> <br />
+                    <ul>
+                        {matchedJobs.map(job => (
+                            <li key={job.id} className="job-card">
+                                <div className="job-card-content">
+                                    <h3 className="job-title">{job.jobTitle}</h3>
+                                    <p className="job-description">{job.jobDescription}</p>
+                                    <h3>Salary Range: {job.salaryMax}-{job.salaryMin}</h3>
+                                    <div className='job-actions'>
+                                        <button className="apply-button">Apply</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
-        </div>
         </>
     );
 }
