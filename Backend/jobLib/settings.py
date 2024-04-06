@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#@p2ev%b0_(u4zhe83%e0v=0@0s9t7uc70@nf5(au_0x9ut2i5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1'] #ADDED BY ME
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']  # ADDED BY ME
 
 
 # Application definition
@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'jobLib.urls'
@@ -176,7 +176,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # Add your React application's URL
     'http://127.0.0.1:3000',
 ]
-    
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

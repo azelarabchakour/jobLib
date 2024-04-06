@@ -7,6 +7,7 @@ function EditJob() {
     const { jobId } = useParams(); // Get the jobId from the URL
     const [jobTitle, setJobTitle] = useState('');
     const [jobDescription, setJobDescription] = useState('');
+    const accessToken = localStorage.getItem('accessToken');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -44,7 +45,9 @@ function EditJob() {
             jobTitle: jobTitle,
             jobDescription: jobDescription
         }, {
-            headers: headers // Include headers in the request
+            headers: {
+                    'Authorization': `JWT ${accessToken}`
+                }
         })
         .then(response => {
             console.log('Job updated successfully:', response.data);
