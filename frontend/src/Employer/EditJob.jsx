@@ -23,10 +23,27 @@ function EditJob() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Send a PUT request to update the job details
+        // Get the JWT token from localStorage
+        const accessToken = localStorage.getItem('accessToken');
+    
+        // Check if accessToken exists
+        if (!accessToken) {
+            console.error('Access token not found');
+            // Handle not having access token, maybe redirect to login or display an error message
+            return;
+        }
+    
+        // Define the headers with Authorization token
+        const headers = {
+            'Authorization': `JWT ${accessToken}`
+        };
+    
+        // Send a PUT request to update the job details with authorization header
         axios.put(`http://127.0.0.1:8000/employer/jobs/${jobId}`, {
             jobTitle: jobTitle,
             jobDescription: jobDescription
+        }, {
+            headers: headers // Include headers in the request
         })
         .then(response => {
             console.log('Job updated successfully:', response.data);
@@ -37,6 +54,7 @@ function EditJob() {
             // Handle error
         });
     };
+    
 
     return (
         <div className="edit-job-container">
