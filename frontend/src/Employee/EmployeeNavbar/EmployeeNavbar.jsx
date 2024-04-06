@@ -31,12 +31,12 @@ function EmployerNavbar() {
             </a>
             <ul className={active}>
                 <li className="nav__item">
-                    <a href="employer-post" className="nav__link">
+                    <a href="#" className="nav__link">
                         Update your Cv!
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="employer-old-jobs" className="nav__link">
+                    <a href="matched-jobs" className="nav__link">
                         your matched jobs
                     </a>
                 </li>

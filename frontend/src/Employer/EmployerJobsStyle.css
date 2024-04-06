@@ -44,7 +44,7 @@
     border-radius: 4px;
 }
 
-.job-actions button.edit {
+.job-actions button.edit ,.apply-button {
     background-color: #4CAF50; /* Green */
 }
 
