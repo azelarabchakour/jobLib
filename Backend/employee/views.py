@@ -19,6 +19,9 @@ from authentication.serializers import UserCreateSerializer, UserUpdateSerialize
 from rest_framework import generics
 from django.core.exceptions import ObjectDoesNotExist
 from employer.models import Employer
+
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import parser_classes
 #--------- AI Imports---------------
 import PyPDF2
 from gensim.models.doc2vec import Doc2Vec
@@ -179,24 +182,46 @@ class EmployeeViewSet(ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
+        elif request.method in ['POST']:
+            serializer = EmployeeSerializer(employee, data=request.data, partial=True)  # Use partial=True for PATCH
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
 
     def testCv(self, request):
         employee = Employee.objects.get(user_id=request.user.id)
 
 
-@api_view(['PATCH', 'PUT', 'GET','POST'])
+@parser_classes([MultiPartParser, FormParser])
+@api_view(['PATCH', 'PUT', 'GET', 'POST'])
 def uploadCv(request):
-        employee = Employee.objects.get(
-            user_id = request.user.id
-        )
-        if request.method == 'GET':
-            serializer = EmployeeSerializer(employee)
-            return Response(serializer.data)
-        elif request.method in ['PUT', 'PATCH']:
-            serializer = EmployeeSerializer(employee, data=request.data, partial=True)  # Use partial=True for PATCH
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-            return Response(serializer.data)
+    employee = Employee.objects.get(user_id=request.user.id)
+    
+    if request.method == 'GET':
+        serializer = EmployeeSerializer(employee)
+        return Response(serializer.data)
+    
+    elif request.method in ['PUT', 'PATCH']:
+        serializer = EmployeeSerializer(employee, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        # Assuming 'cv' is the name of the file field in the request
+        cv_file = request.data.get('cv')
+        
+        if not cv_file:
+            return Response({'error': 'No CV file provided'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # You may want to save the file to a specific location or process it further
+        
+        # Update the Employee object with the file information
+        employee.cv = cv_file
+        employee.save()
+        
+        serializer = EmployeeSerializer(employee)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 

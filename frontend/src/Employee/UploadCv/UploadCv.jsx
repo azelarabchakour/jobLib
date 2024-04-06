@@ -19,7 +19,7 @@ function UploadCv() {
         formData.append('cv', selectedFile);
 
         // Send file to the server using Axios
-        axios.post('http://127.0.0.1:8000/employee/uploadCv/', formData, {
+        axios.post('http://127.0.0.1:8000/employee/employee/me/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
