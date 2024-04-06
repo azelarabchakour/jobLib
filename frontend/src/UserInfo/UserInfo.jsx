@@ -13,7 +13,6 @@ function UserInfo() {
         // Check if accessToken exists
         if (!accessToken) {
             console.error('Access token not found');
-            // Handle not having access token, maybe redirect to login or display an error message
             return;
         }
 
@@ -29,33 +28,36 @@ function UserInfo() {
         .then(response => {
             // Set user info state
             setUserInfo(response.data);
-  
+
         })
         .catch(error => {
             // Handle errors
             setError(error);
-
         });
     }, []);
-
-
 
     if (error) {
         return <div>Error: {error.message}</div>;
     }
 
     return (
+        <>
         <div className="user-info-container">
             <h2 className="user-info-title">User Info</h2>
-            <div className="user-info-item">
-                <strong className="user-info-label">Username:</strong> 
-                <span className="user-info-value">{userInfo.username}</span>
-            </div>
-            <div className="user-info-item">
-                <strong className="user-info-label">Email:</strong>
-                <span className="user-info-value">{userInfo.email}</span> 
-            </div>
+            {userInfo && (
+                <>
+                    <div className="user-info-item">
+                        <strong className="user-info-label">Username:</strong> 
+                        <span className="user-info-value">{userInfo.username}</span>
+                    </div>
+                    <div className="user-info-item">
+                        <strong className="user-info-label">Email:</strong>
+                        <span className="user-info-value">{userInfo.email}</span> 
+                    </div>
+                </>
+            )}
         </div>
+        </>
     );
 }
 

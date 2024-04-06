@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EmployerNavbar from '../EmployeeNavbar/EmployeeNavbar';
+import '../../Employer/EmployerJobsStyle.css';
 
 const MatchedJobs = () => {
     const [matchedJobs, setMatchedJobs] = useState([]);
@@ -35,11 +36,6 @@ const MatchedJobs = () => {
                                 };
                             } catch (error) {
                                 console.error('Error fetching job details:', error);
-                                return {
-                                    ...job,
-                                    jobTitle: '',
-                                    jobDescription: ''
-                                };
                             }
                         })
                     );
@@ -71,7 +67,7 @@ const MatchedJobs = () => {
                                     <p className="job-description">{job.jobDescription}</p>
                                     <h3>Salary Range: {job.salaryMax}-{job.salaryMin}</h3>
                                     <div className='job-actions'>
-                                        <button className="apply-button">Apply</button>
+                                        <button className="details-button">Details</button>
                                     </div>
                                 </div>
                             </li>

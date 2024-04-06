@@ -44,8 +44,12 @@
     border-radius: 4px;
 }
 
-.job-actions button.edit ,.apply-button {
+.job-actions button.edit {
     background-color: #4CAF50; /* Green */
+}
+
+.job-actions button.details-button {
+    background-color: #396da5;
 }
 
 .job-actions button.delete {
