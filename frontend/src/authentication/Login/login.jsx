@@ -37,8 +37,8 @@ const Login = () => {
 
             console.log('Login successful:', response.data);
 
-            //navigate to the profile after successful login
-            navigate('/switch-user');
+            
+            navigate('/EmployerPost');
 
             setUsername('');
             setPassword('');

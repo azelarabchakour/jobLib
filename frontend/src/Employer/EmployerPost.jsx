@@ -55,6 +55,7 @@ function EmployerPost() {
 
   return (
     <div className='employer-body-container'>
+      <Link to="/employer-old-jobs" className="employer-old-jobs-link">Check Your Jobs!</Link>
       <div className="employer-container">
         <h2>Post a job description!</h2>
         <form className='employer-post-form' onSubmit={handleSubmit}>

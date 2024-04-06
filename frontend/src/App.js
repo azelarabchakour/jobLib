@@ -7,6 +7,7 @@ import ResetPass from './authentication/ResetPassword/ResetPassword.jsx';
 import HomePage from './homepage/homePage.jsx';
 import EmployerPost from './Employer/EmployerPost.jsx';
 import EmployerGetJobs from './Employer/EmployerGetJobs.jsx';
+import EditJob from './Employer/EditJob.jsx';
 import SwitchUser from './SwitchUser/SwitchUser.jsx';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPass/>} />
         <Route path="/employer-post"  element={<EmployerPost/>} />
         <Route path="/employer-old-jobs"  element={<EmployerGetJobs/>} />
+        <Route path="/edit-job/:jobId" element={<EditJob />} />
       </Routes>
     </Router>
   );
