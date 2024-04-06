@@ -40,7 +40,7 @@ function EmployerPost() {
         setJobDescription('');
         
         console.log('Job posting created successfully:', response.data);
-        navigate('/employer-old-jobs');
+        navigate('/employer/employer-old-jobs');
       })
       .catch(error => {
         console.error('Error creating job posting:', error);

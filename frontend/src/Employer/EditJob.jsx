@@ -30,7 +30,7 @@ function EditJob() {
         })
         .then(response => {
             console.log('Job updated successfully:', response.data);
-            navigate('/employer-old-jobs'); // Redirect to the old jobs page after successful update
+            navigate('/employer/employer-old-jobs'); // Redirect to the old jobs page after successful update
         })
         .catch(error => {
             console.error('Error updating job:', error);

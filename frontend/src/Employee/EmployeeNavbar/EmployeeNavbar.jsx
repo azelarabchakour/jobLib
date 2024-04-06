@@ -51,7 +51,7 @@ function EmployerNavbar() {
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="../employee/Upload-cv" className="nav__link">
+                    <a href="../employer/employer-old-jobs" className="nav__link">
                         switch user
                     </a>
                 </li>

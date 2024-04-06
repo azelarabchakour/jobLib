@@ -40,7 +40,7 @@ class JobPostingViewSet(ModelViewSet):
             employer_id=employer.id
         )
     # serializer_class = JobPostingSerializer
-
+    
     def get_serializer_class(self):
         if self.action == 'addJob':
             return CreateJobPostingSerializer

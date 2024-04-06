@@ -166,7 +166,7 @@ class EmployeeViewSet(ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
-    @action(detail=False, methods=['GET', 'PUT', 'PATCH'])
+    @action(detail=False, methods=['GET', 'PUT', 'PATCH','POST'])
     def me(self,request):
         employee = Employee.objects.get(
             user_id = request.user.id
