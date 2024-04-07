@@ -330,7 +330,7 @@ def apply(request, pk):
         return Response(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view()(['POST', 'GET'])
+@api_view()
 def applicationStatus(request):
     applications = JobApplication.objects.filter(
         employee=request.user.employee)

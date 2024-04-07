@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Logout from '../authentication/Logout/logout';
+import Logout from '../authentication/logout/logout';
 import { Link, useNavigate } from 'react-router-dom';
 import EmployerNavbar from './EmployerNavbar/EmployerNavbar';
 import './EmployerStyle.css'

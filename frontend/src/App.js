@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './authentication/Login/login.jsx';
-import Logout from './authentication/Logout/logout.jsx';
+import Logout from './authentication/logout/logout.jsx';
 import Signup from './authentication/SignUp/signup.jsx';
 import ForgetPass from './authentication/ResetPassword/ForgetPassword.jsx';
 import ResetPass from './authentication/ResetPassword/ResetPassword.jsx';
@@ -13,7 +13,7 @@ import SwitchUser from './SwitchUser/SwitchUser.jsx';
 import UserInfo from './UserInfo/UserInfo.jsx';
 import UploadCv from './Employee/UploadCv/UploadCv.jsx';
 import MatchedJobs from './Employee/MatchedJobs/MatchedJobs.jsx';
-import EmployeeApplications from './Employee/EmployeeApplications/EmployeeApplications.jsx';
+import Applications from './Employee/EmployeeApplications/EmployeeApplications.jsx';
 
 function App() {
   return (
@@ -36,8 +36,7 @@ function App() {
         {/* employee  */}
         <Route path="/employee/upload-cv" element={<UploadCv/>}/>
         <Route path="/employee/matched-jobs" element={<MatchedJobs/>}/>
-        <Route path="/employee/applications" element={<EmployeeApplications/>}/>
-
+        <Route path='/employee/applications'  element={<Applications/>}/>
         {/* shared  */}
         <Route path="/user-info" element={<UserInfo/>} />
       </Routes>
