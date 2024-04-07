@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EmployerNavbar from './EmployerNavbar/EmployerNavbar';
 import './EmployerJobsStyle.css';
 
@@ -36,7 +36,7 @@ function EmployerGetJobs() {
 
     const handleEdit = (jobId) => {
         // Redirect to the edit job page, passing the jobId as a parameter
-        navigate(`/employer/edit-job/${jobId}`);
+        navigate(`/employer/edit-job/${jobId}/`);
     };
 
     const handleDelete = (jobId) => {
@@ -56,7 +56,10 @@ function EmployerGetJobs() {
             setError('Error deleting job. Please try again later.');
         });
     };
-    
+
+    const handleJobCardClick = (jobId) => {
+        navigate(`/employer/${jobId}/applications`);
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -68,6 +71,7 @@ function EmployerGetJobs() {
                 <p>{error}</p>
             </div>
         );
+    
     }
 
     return (
@@ -79,13 +83,13 @@ function EmployerGetJobs() {
                 <ul>
                     {oldJobDescriptions.map(job => (
                         <li key={job.id} className="job-card">
-                            <div className="job-card-content">
+                            <div className="job-application-card-content" onClick={() => handleJobCardClick(job.id)}>
                                 <h3 className="job-title">{job.jobTitle}</h3>
                                 <p className="job-description">{job.jobDescription}</p>
-                                <div className="job-actions">
-                                    <button className='Edit' onClick={() => handleEdit(job.id)}>Edit</button>
-                                    <button className='delete' onClick={() => handleDelete(job.id)}>Delete</button>
-                                </div>
+                            </div>
+                            <div className="job-actions">
+                                <button className='Edit' onClick={() => handleEdit(job.id)}>Edit</button>
+                                <button className='delete' onClick={() => handleDelete(job.id)}>Delete</button>
                             </div>
                         </li>
                     ))}
@@ -97,4 +101,3 @@ function EmployerGetJobs() {
 }
 
 export default EmployerGetJobs;
- 

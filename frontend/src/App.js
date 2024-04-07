@@ -34,7 +34,7 @@ function App() {
         <Route path="/employer/employer-post"  element={<EmployerPost/>} />
         <Route path="/employer/employer-old-jobs"  element={<EmployerGetJobs/>} />
         <Route path="/employer/edit-job/:jobId" element={<EditJob />} />
-        <Route path="/employer/applications" element={<EmployerApplications />} />
+        <Route path="/employer/:jobId/applications" element={<EmployerApplications />} />
         {/* employee  */}
         <Route path="/employee/upload-cv" element={<UploadCv/>}/>
         <Route path="/employee/matched-jobs" element={<MatchedJobs/>}/>
