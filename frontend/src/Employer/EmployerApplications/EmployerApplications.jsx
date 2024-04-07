@@ -9,44 +9,44 @@ function ApplicationPage() {
     const [error, setError] = useState('');
     const { jobId } = useParams(); // Extract jobId from the URL
 
-    useEffect(() => {
-        const authToken = localStorage.getItem('accessToken');
+    // Function to fetch job details
+    const fetchJobDetails = async () => {
+        try {
+            const authToken = localStorage.getItem('accessToken');
 
-        if (!authToken) {
-            setError("You need to login to access this page.");
-            setLoading(false);
-            return;
-        }
-
-        axios.get(`http://127.0.0.1:8000/employee/jobs/${jobId}/`, {
-            headers: {
-                'Authorization': `JWT ${authToken}`
+            if (!authToken) {
+                setError("You need to login to access this page.");
+                setLoading(false);
+                return;
             }
-        })
-        .then(response => {
+
+            const response = await axios.get(`http://127.0.0.1:8000/employee/jobs/${jobId}/`, {
+                headers: {
+                    'Authorization': `JWT ${authToken}`
+                }
+            });
             setJob(response.data);
             setLoading(false);
-        })
-        .catch(error => {
+        } catch (error) {
             setError('Error fetching data: ' + error.message);
             setLoading(false);
-        });
+        }
+    };
+
+    useEffect(() => {
+        fetchJobDetails(); // Fetch job details on initial render
     }, [jobId]); // Re-fetch data whenever jobId changes
 
     const handleAcceptApplication = async (applicationId) => {
         try {
             const authToken = localStorage.getItem('accessToken');
-            await axios.get(`http://127.0.0.1:8000/employer/applications/${applicationId}/accept/`, {}, {
+            await axios.get(`http://127.0.0.1:8000/employer/applications/${applicationId}/accept/`, {
                 headers: {
                     'Authorization': `JWT ${authToken}`
                 }
             });
-            // Assuming you want to update the UI after accepting the application, you might want to re-fetch job data here
-            // You can call the useEffect hook again or make a separate function to fetch job details
-            // Example:
-            // setJob(null);
-            // setLoading(true);
-            // fetchJobDetails(); // Define fetchJobDetails function to fetch job details
+            // Update job details after accepting application
+            fetchJobDetails();
         } catch (error) {
             console.error('Error accepting application:', error);
             // Handle error
@@ -56,17 +56,13 @@ function ApplicationPage() {
     const handleRefuseApplication = async (applicationId) => {
         try {
             const authToken = localStorage.getItem('accessToken');
-            await axios.get(`http://127.0.0.1:8000/employer/applications/${applicationId}/refuse/`, {}, {
+            await axios.get(`http://127.0.0.1:8000/employer/applications/${applicationId}/refuse/`, {
                 headers: {
                     'Authorization': `JWT ${authToken}`
                 }
             });
-            // Assuming you want to update the UI after refusing the application, you might want to re-fetch job data here
-            // You can call the useEffect hook again or make a separate function to fetch job details
-            // Example:
-            // setJob(null);
-            // setLoading(true);
-            // fetchJobDetails(); // Define fetchJobDetails function to fetch job details
+            // Update job details after refusing application
+            fetchJobDetails();
         } catch (error) {
             console.error('Error refusing application:', error);
             // Handle error
