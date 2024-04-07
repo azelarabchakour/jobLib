@@ -307,16 +307,14 @@ def matchedJobDetails(request, pk):
     return Response(serializer.data)
 
 
-@api_view()
+@api_view(['POST', 'GET'])
 def apply(request, pk):
     try:
         job_posting = JobPosting.objects.get(pk=pk)
     except JobPosting.DoesNotExist:
         return Response({"error": "Job posting not found."}, status=status.HTTP_404_NOT_FOUND)
 
-    # Assuming you have appropriate validation logic for the applicationStatus field
     application_status = 'WAIT_FOR_INTERVIEW'
-    # jobPosting = JobPosting.objects.get(pk=pk)
     application_data = {
         'application_date': datetime.date.today(),
         'applicationStatus': application_status,

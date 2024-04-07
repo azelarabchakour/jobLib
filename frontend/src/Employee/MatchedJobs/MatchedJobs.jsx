@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import EmployerNavbar from '../EmployeeNavbar/EmployeeNavbar';
 import '../../Employer/EmployerJobsStyle.css';
 
@@ -7,6 +8,8 @@ const MatchedJobs = () => {
     const [matchedJobs, setMatchedJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [expandedJobId, setExpandedJobId] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchMatchedJobsAndDetails = async () => {
@@ -21,7 +24,6 @@ const MatchedJobs = () => {
                             'Authorization': `JWT ${authToken}`
                         }
                     });
-                    console.log('Matched jobs:', response.data);
                     const updatedMatchedJobs = await Promise.all(
                         response.data.map(async job => {
                             try {
@@ -39,7 +41,6 @@ const MatchedJobs = () => {
                             }
                         })
                     );
-                    console.log('Updated matched jobs:', updatedMatchedJobs);
                     setMatchedJobs(updatedMatchedJobs);
                     setLoading(false);
                 }
@@ -53,6 +54,22 @@ const MatchedJobs = () => {
         fetchMatchedJobsAndDetails();
     }, []);
 
+
+    const handleApplyButtonClick = async (jobPostingId) => {
+    try {
+        const authToken = localStorage.getItem('accessToken');
+        await axios.post(`http://127.0.0.1:8000/employee/jobs/${jobPostingId}/apply/`, {}, {
+            headers: {
+                'Authorization': `JWT ${authToken}`
+            }
+        });
+        alert('You have successfully applied to this job!');
+    } catch (error) {
+        console.error('Error applying to job:', error);
+        alert('Error applying to job. Please try again later.');
+    }
+};
+
     return (
         <>
             <EmployerNavbar />
@@ -64,10 +81,10 @@ const MatchedJobs = () => {
                             <li key={job.id} className="job-card">
                                 <div className="job-card-content">
                                     <h3 className="job-title">{job.jobTitle}</h3>
-                                    <p className="job-description">{job.jobDescription}</p>
-                                    <h3>Salary Range: {job.salaryMax}-{job.salaryMin}</h3>
+                                    <p className="job-description">{expandedJobId === job.id ? job.jobDescription : job.jobDescription.substring(0, 100)}</p>
+                                    <h3>Salary Range: {job.salaryMin}-{job.salaryMax}</h3>
                                     <div className='job-actions'>
-                                        <button className="details-button">Details</button>
+                                        <button className="apply-button" onClick={() => handleApplyButtonClick(job.jobPosting)}>Apply</button>
                                     </div>
                                 </div>
                             </li>

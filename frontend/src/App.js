@@ -13,6 +13,7 @@ import SwitchUser from './SwitchUser/SwitchUser.jsx';
 import UserInfo from './UserInfo/UserInfo.jsx';
 import UploadCv from './Employee/UploadCv/UploadCv.jsx';
 import MatchedJobs from './Employee/MatchedJobs/MatchedJobs.jsx';
+import DetailJob from './Employee/DetailJob/DetailJob.jsx';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         {/* employee  */}
         <Route path="/employee/upload-cv" element={<UploadCv/>}/>
         <Route path="/employee/matched-jobs" element={<MatchedJobs/>}/>
+
         {/* shared  */}
         <Route path="/user-info" element={<UserInfo/>} />
       </Routes>
