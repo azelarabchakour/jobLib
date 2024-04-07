@@ -76,7 +76,7 @@ def acceptApplication(request, pk):
         jobApplication = JobApplication.objects.get(pk=pk)
     except JobApplication.DoesNotExist:
         return Response({"error": "Job Application not found."}, status=status.HTTP_404_NOT_FOUND)
-    jobApplication.applicationStatus = 'ACCEPTED_AFTER_INTERVIEW'
+    jobApplication.applicationStatus = 'ACCEPTED'
     jobApplication.save()
     return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
 
@@ -88,7 +88,7 @@ def refuseApplication(request, pk):
     except JobApplication.DoesNotExist:
         return Response({"error": "Job Application not found."}, status=status.HTTP_404_NOT_FOUND)
 
-    jobApplication.applicationStatus = 'REFUSE_AFTER_INTERVIEW'
+    jobApplication.applicationStatus = 'REFUSED'
     jobApplication.save()
     return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
 

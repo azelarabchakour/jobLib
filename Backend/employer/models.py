@@ -16,11 +16,9 @@ class JobPosting(models.Model):
     salaryMin = models.IntegerField(null=True, blank=True)
     salaryMax = models.IntegerField(null=True , blank=True)
     jobStatus = models.CharField(max_length=255, choices=[
-        ('POSTED', 'Posted'), #0- default status when the employer post the job
-        ('INTERVIEW', 'Interview'), #1- when the employer is interviewing the candidates
-        ('HOLD', 'Hold'), #2- when the employer accept one candidate and wait for him to confirm
-        ('DONE', 'Done'), #3- when the candidate accepted confirmed the job and start it
-        ('CANCELED', 'Canceled'), #4- when the employer cancel the job
+        ('POSTED', 'Posted'), #default status when the employer post the job
+        ('DONE', 'Done'), #when the job is taken
+        ('CANCELED', 'Canceled'), #when the employer cancel or delete the job
     ])
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='jobPostings')
 

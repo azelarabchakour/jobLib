@@ -273,7 +273,8 @@ def update_employee(request, pk):
 
 class MatchedJobsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):  # get the matched jobs of the employee logged in
-        return Analytics.objects.filter(employee=self.request.user.employee, matchPercentage__gte=50)
+        getMatches(self.request)
+        return Analytics.objects.filter(employee=self.request.user.employee, matchPercentage__gte=50,appliedOrNot=False)
 
     def get_serializer_class(self):
         return AnalyticsSerializer
@@ -321,7 +322,7 @@ def apply(request, pk):
     except JobPosting.DoesNotExist:
         return Response({"error": "Job posting not found."}, status=status.HTTP_404_NOT_FOUND)
 
-    application_status = 'WAIT_FOR_INTERVIEW'
+    application_status = 'APPLIED'
     application_data = {
         'application_date': datetime.date.today(),
         'applicationStatus': application_status,
@@ -332,8 +333,15 @@ def apply(request, pk):
 
     application_serializer = CreateJobApplicationSerializer(data=application_data)
     if application_serializer.is_valid():
-        application_serializer.save()
-        return Response(application_serializer.data, status=status.HTTP_201_CREATED)
+        analytics.appliedOrNot = True
+        analyticsJson = AnalyticsSerializer(analytics)
+        analyticsSerializer = AnalyticsSerializer(analytics,data=analyticsJson.data, partial=True)
+        if analyticsSerializer.is_valid():
+            analyticsSerializer.save()
+            application_serializer.save()
+            return Response(application_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(analyticsSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(application_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

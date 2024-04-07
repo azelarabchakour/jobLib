@@ -22,4 +22,4 @@ class AnalyticsSerializer(serializers.ModelSerializer):
     #jobPosting = JobPostingSerializer()
     class Meta:
         model = Analytics
-        fields = ['id', 'employee', 'jobPosting','matchPercentage']
+        fields = ['id', 'employee', 'jobPosting','matchPercentage', 'appliedOrNot']
