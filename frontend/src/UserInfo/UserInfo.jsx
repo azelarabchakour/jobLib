@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 import './UserInfoStyle.css';
 
 function UserInfo() {
@@ -28,7 +29,6 @@ function UserInfo() {
         .then(response => {
             // Set user info state
             setUserInfo(response.data);
-
         })
         .catch(error => {
             // Handle errors
@@ -56,6 +56,7 @@ function UserInfo() {
                     </div>
                 </>
             )}
+            <Link to="/edit-user-info">Edit User Info</Link> {/* Add Link to edit user info */}
         </div>
         </>
     );

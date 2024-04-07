@@ -11,9 +11,11 @@ import EmployerGetJobs from './Employer/EmployerGetJobs.jsx';
 import EditJob from './Employer/EditJob.jsx';
 import SwitchUser from './SwitchUser/SwitchUser.jsx';
 import UserInfo from './UserInfo/UserInfo.jsx';
+import EditUserInfo from './UserInfo/EditUserInfo.jsx';
 import UploadCv from './Employee/UploadCv/UploadCv.jsx';
 import MatchedJobs from './Employee/MatchedJobs/MatchedJobs.jsx';
-import Applications from './Employee/EmployeeApplications/EmployeeApplications.jsx';
+import EmployeeApplications from './Employee/EmployeeApplications/EmployeeApplications.jsx';
+import EmployerApplications from './Employer/EmployerApplications/EmployerApplications.jsx';
 
 function App() {
   return (
@@ -32,13 +34,14 @@ function App() {
         <Route path="/employer/employer-post"  element={<EmployerPost/>} />
         <Route path="/employer/employer-old-jobs"  element={<EmployerGetJobs/>} />
         <Route path="/employer/edit-job/:jobId" element={<EditJob />} />
-        {/* <Route path="/employer/applications" element={<Applications />} /> */}
+        <Route path="/employer/applications" element={<EmployerApplications />} />
         {/* employee  */}
         <Route path="/employee/upload-cv" element={<UploadCv/>}/>
         <Route path="/employee/matched-jobs" element={<MatchedJobs/>}/>
-        <Route path='/employee/applications'  element={<Applications/>}/>
+        <Route path='/employee/applications'  element={<EmployeeApplications/>}/>
         {/* shared  */}
         <Route path="/user-info" element={<UserInfo/>} />
+        <Route path="/edit-user-info" element={<EditUserInfo/>} />
       </Routes>
     </Router>
   );
