@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SwitchUserStyle.css'; 
-import Logout from '../authentication/logout/logout.jsx';
+import Logout from '../authentication/logout/logout';
 import logo1 from '../Assets/Hr.png';
 import logo2 from '../Assets/jobSeeker.jpeg';
 
