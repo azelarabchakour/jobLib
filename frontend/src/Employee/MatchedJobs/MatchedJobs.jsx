@@ -81,7 +81,7 @@ const MatchedJobs = () => {
                             <li key={job.id} className="job-card">
                                 <div className="job-card-content">
                                     <h3 className="job-title">{job.jobTitle}</h3>
-                                    <p className="job-description">{expandedJobId === job.id ? job.jobDescription : job.jobDescription.substring(0, 100)}</p>
+                                    <p className="job-description">{expandedJobId === job.id ? job.jobDescription : job.jobDescription}</p>
                                     <h3>Salary Range: {job.salaryMin}-{job.salaryMax}</h3>
                                     <div className='job-actions'>
                                         <button className="apply-button" onClick={() => handleApplyButtonClick(job.jobPosting)}>Apply</button>
