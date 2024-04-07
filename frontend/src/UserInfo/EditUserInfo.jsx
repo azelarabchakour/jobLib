@@ -6,6 +6,7 @@ function EditUserInfo() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ function EditUserInfo() {
 
         axios.get('http://127.0.0.1:8000/auth/users/me/', { headers })
             .then(response => {
-                setUsername(response.data.new_username);
+                setUsername(response.data.username);
                 setEmail(response.data.email);
             })
             .catch(error => {
@@ -44,6 +45,10 @@ function EditUserInfo() {
         setPassword(event.target.value);
     };
 
+    const handleNewPasswordChange = (event) => {
+        setNewPassword(event.target.value);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const accessToken = localStorage.getItem('accessToken');
@@ -51,19 +56,20 @@ function EditUserInfo() {
             console.error('Access token not found');
             return;
         }
-    
+
         const headers = {
             'Authorization': `JWT ${accessToken}`,
             'Content-Type': 'application/json'
         };
-    
+
         try {
-            // Update username
-            await axios.post('http://127.0.0.1:8000/auth/users/set_username/', { current_password: password, new_username: username }, { headers });
-    
+                   // Update username
+            await axios.post('http://127.0.0.1:8000/auth/users/set_username/', { new_username: username, current_password: password }, { headers });
+            // Update email
+            await axios.put('http://127.0.0.1:8000/auth/users/me/', { email }, { headers });
             // Update password
-            await axios.post('http://127.0.0.1:8000/auth/users/set_password/', { current_password: password, new_password: password }, { headers });
-    
+            await axios.post('http://127.0.0.1:8000/auth/users/set_password/', { current_password: password, new_password: newPassword }, { headers });
+
             // Redirect back to user info page
             navigate('/user-info');
         } catch (error) {
@@ -71,7 +77,7 @@ function EditUserInfo() {
             setError(error);
         }
     };
-    
+
     if (error) {
         return <div>Error: {error.message}</div>;
     }
@@ -89,8 +95,12 @@ function EditUserInfo() {
                     <input type="email" value={email} onChange={handleEmailChange} />
                 </div>
                 <div>
-                    <label>New Password:</label>
+                    <label>Current Password:</label>
                     <input type="password" value={password} onChange={handlePasswordChange} />
+                </div>
+                <div>
+                    <label>New Password:</label>
+                    <input type="password" value={newPassword} onChange={handleNewPasswordChange} />
                 </div>
                 <button type="submit">Save Changes</button>
             </form>
