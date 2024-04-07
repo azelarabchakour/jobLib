@@ -6,6 +6,7 @@ from employee.serializers import EmployeeSerializer
 from employer.serializers import JobPostingSerializer
 
 class JobApplicationSerializer(serializers.ModelSerializer):
+    employee = EmployeeSerializer()
     class Meta:
         model = JobApplication
         fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting']

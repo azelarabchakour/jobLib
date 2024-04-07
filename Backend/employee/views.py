@@ -366,5 +366,5 @@ def getCv(request,pk):
         resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
         return FileResponse(open(resume_path, 'rb'), as_attachment=True)
     except ObjectDoesNotExist:
-        return Response({'error': 'Employee not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'CV not found'}, status=status.HTTP_404_NOT_FOUND)
     
