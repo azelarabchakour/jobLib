@@ -23,8 +23,9 @@ urlpatterns = [
     path('jobs/<int:pk>/', views.matchedJobDetails, name='matchedjobdetails'),
     path('jobs/<int:pk>/apply/', views.apply, name='apply'),
     path('jobs/status/', views.applicationStatus, name='applicationStatus'),
-    path('testCv', views.testCV, name='testCv'),
+    path('testCv/', views.testCV, name='testCv'),
     path('uploadCv/', views.uploadCv, name='uploadCv'),
+    path('getCv/<int:pk>',views.getCv, name='getCv'),
 
     # path('uploadCv',views.uploadCv, name='uploadCv'),
     # path('uploadCv/', views.FileUploadView.as_view(), name='uploadcv'),

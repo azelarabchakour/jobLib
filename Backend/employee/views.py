@@ -355,3 +355,16 @@ def testCV(request):
 
     similarity = match(request, resume_path, input_text)
     return Response(similarity)
+
+from django.http import FileResponse
+
+@api_view()
+def getCv(request,pk):
+    try:
+        employee = Employee.objects.get(user_id=pk)
+        serializer = EmployeeSerializer(employee)
+        resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
+        return FileResponse(open(resume_path, 'rb'), as_attachment=True)
+    except ObjectDoesNotExist:
+        return Response({'error': 'Employee not found'}, status=status.HTTP_404_NOT_FOUND)
+    
