@@ -12,6 +12,8 @@ import datetime
 from employee.models import Employee
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
+from jobMatch.serializers import CreateJobApplicationSerializer
+
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from authentication.serializers import UserCreateSerializer, UserUpdateSerializer, UserSerializer
@@ -28,6 +30,8 @@ from gensim.models.doc2vec import Doc2Vec
 import numpy as np
 from numpy.linalg import norm
 import re
+
+from .serializers import EmployeeCustomSerializer
 
 # -----------------------------------
 import os
@@ -311,6 +315,9 @@ def matchedJobDetails(request, pk):
 def apply(request, pk):
     try:
         job_posting = JobPosting.objects.get(pk=pk)
+        employee = Employee.objects.get(user_id=request.user.id)
+        employeSerializer = EmployeeCustomSerializer(employee)
+        analytics = Analytics.objects.get(employee=employee.id, jobPosting=pk)
     except JobPosting.DoesNotExist:
         return Response({"error": "Job posting not found."}, status=status.HTTP_404_NOT_FOUND)
 
@@ -318,11 +325,12 @@ def apply(request, pk):
     application_data = {
         'application_date': datetime.date.today(),
         'applicationStatus': application_status,
-        'employee': request.user.employee.id,
-        'job_posting': pk
+        'employee': employee.id,
+        'job_posting': pk,
+        'matchPercentage': analytics.matchPercentage
     }
 
-    application_serializer = JobApplicationSerializer(data=application_data)
+    application_serializer = CreateJobApplicationSerializer(data=application_data)
     if application_serializer.is_valid():
         application_serializer.save()
         return Response(application_serializer.data, status=status.HTTP_201_CREATED)

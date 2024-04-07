@@ -19,6 +19,7 @@ class JobApplication(models.Model):
     ])
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='applications')
     job_posting = models.ForeignKey(JobPosting, on_delete=models.CASCADE, related_name='applications')
+    matchPercentage = models.FloatField(null=True)
 
     def __str__(self):
         return f'{self.employee} - {self.job_posting.jobTitle}'
