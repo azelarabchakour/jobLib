@@ -49,7 +49,6 @@ function ApplicationPage() {
             fetchJobDetails();
         } catch (error) {
             console.error('Error accepting application:', error);
-            // Handle error
         }
     };
 
@@ -65,9 +64,38 @@ function ApplicationPage() {
             fetchJobDetails();
         } catch (error) {
             console.error('Error refusing application:', error);
-            // Handle error
+        }
+    }; 
+
+    const DownloadResume = async (applicationId) => {
+        try {
+            const authToken = localStorage.getItem('accessToken');
+            const response = await axios.get(`http://127.0.0.1:8000/employee/getCv/${applicationId}`, {
+                headers: {
+                    'Authorization': `JWT ${authToken}`,
+                },
+                responseType: 'blob' // Specify the response type as 'blob'
+            });
+    
+            // Create a blob URL for the PDF
+            const blob = new Blob([response.data], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+    
+            // Create a link element and trigger the download
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `resume_${applicationId}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+    
+            // Clean up
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Error downloading resume:', error);
         }
     };
+    
 
     if (loading) {
         return <div>Loading...</div>;
@@ -90,10 +118,12 @@ function ApplicationPage() {
                     {job.applications.map(application => (
                         <li key={application.id}>
                             <p>Application ID: {application.id}</p>
-                            <p>Candidate Name: {application.candidateName}</p>
+                            <p>Candidate Name: {application.employee.user.username}</p>
+                            <p>Contact info: {application.employee.user.email}</p>
                             <p>Application Status: {application.applicationStatus}</p>
                             <button onClick={() => handleAcceptApplication(application.id)}>Accept</button>
                             <button onClick={() => handleRefuseApplication(application.id)}>Refuse</button>
+                            <button onClick={() => DownloadResume(application.id)}>Download Cv</button>
                         </li>
                     ))}
                 </ul>

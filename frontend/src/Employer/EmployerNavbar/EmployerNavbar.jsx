@@ -40,11 +40,7 @@ function EmployerNavbar() {
                         your jobs
                     </a>
                 </li>
-                <li className="nav__item">
-                    <a href="applications" className="nav__link">
-                        applications
-                    </a>
-                </li>
+                
                 <li className="nav__item">
                     <a href="../user-info" className="nav__link">
                         Profile
