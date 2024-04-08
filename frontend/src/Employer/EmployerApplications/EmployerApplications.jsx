@@ -5,7 +5,6 @@ import EmployerNavbar from '../EmployerNavbar/EmployerNavbar.jsx';
 
 function ApplicationPage() {
     const [job, setJob] = useState(null);
-    const [matchedPercentage, setMatchedPercentage] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const { jobId } = useParams(); // Extract jobId from the URL
@@ -34,33 +33,40 @@ function ApplicationPage() {
         }
     };
 
-    // Function to fetch matched percentage for matched jobs
-    const fetchMatchedPercentage = async () => {
+    useEffect(() => {
+        fetchJobDetails(); // Fetch job details on initial render
+    }, [jobId]); // Re-fetch data whenever jobId changes
+
+    const handleAcceptApplication = async (applicationId) => {
         try {
             const authToken = localStorage.getItem('accessToken');
-            const response = await axios.get(`http://127.0.0.1:8000/employee/matchedJobs/${jobId}/`, {
+            await axios.get(`http://127.0.0.1:8000/employer/applications/${applicationId}/accept/`, {
                 headers: {
                     'Authorization': `JWT ${authToken}`
                 }
             });
-            setMatchedPercentage(response.data.matchPercentage);
+            // Refresh job details after accepting the application
+            fetchJobDetails();
         } catch (error) {
-            console.error('Error fetching matched percentage:', error);
+            console.error('Error accepting application:', error);
             // Handle error
         }
     };
 
-    useEffect(() => {
-        fetchJobDetails(); // Fetch job details on initial render
-        fetchMatchedPercentage(); // Fetch matched percentage for matched jobs
-    }, [jobId]); // Re-fetch data whenever jobId changes
-
-    const handleAcceptApplication = async (applicationId) => {
-        // Implementation for accepting application
-    };
-
     const handleRefuseApplication = async (applicationId) => {
-        // Implementation for refusing application
+        try {
+            const authToken = localStorage.getItem('accessToken');
+            await axios.get(`http://127.0.0.1:8000/employer/applications/${applicationId}/refuse/`, {
+                headers: {
+                    'Authorization': `JWT ${authToken}`
+                }
+            });
+            // Refresh job details after refusing the application
+            fetchJobDetails();
+        } catch (error) {
+            console.error('Error refusing application:', error);
+            // Handle error
+        }
     };
 
     if (loading) {
@@ -84,8 +90,8 @@ function ApplicationPage() {
                     {job.applications.map(application => (
                         <li key={application.id}>
                             <p>Application ID: {application.id}</p>
+                            <p>Candidate Name: {application.candidateName}</p>
                             <p>Application Status: {application.applicationStatus}</p>
-                            {matchedPercentage && <p>Match Percentage: {matchedPercentage}%</p>}
                             <button onClick={() => handleAcceptApplication(application.id)}>Accept</button>
                             <button onClick={() => handleRefuseApplication(application.id)}>Refuse</button>
                         </li>
