@@ -9,6 +9,7 @@ const MatchedJobs = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [expandedJobId, setExpandedJobId] = useState(null);
+    const [refreshTrigger, setRefreshTrigger] = useState(false); // Added state variable for refresh
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,23 +53,23 @@ const MatchedJobs = () => {
         };
 
         fetchMatchedJobsAndDetails();
-    }, []);
-
+    }, [refreshTrigger]); // Added refreshTrigger as a dependency to useEffect
 
     const handleApplyButtonClick = async (jobPostingId) => {
-    try {
-        const authToken = localStorage.getItem('accessToken');
-        await axios.post(`http://127.0.0.1:8000/employee/jobs/${jobPostingId}/apply/`, {}, {
-            headers: {
-                'Authorization': `JWT ${authToken}`
-            }
-        });
-        alert('You have successfully applied to this job!');
-    } catch (error) {
-        console.error('Error applying to job:', error);
-        alert('Error applying to job. Please try again later.');
-    }
-};
+        try {
+            const authToken = localStorage.getItem('accessToken');
+            await axios.post(`http://127.0.0.1:8000/employee/jobs/${jobPostingId}/apply/`, {}, {
+                headers: {
+                    'Authorization': `JWT ${authToken}`
+                }
+            });
+            alert('You have successfully applied to this job!');
+            setRefreshTrigger(!refreshTrigger); // Toggle refreshTrigger to refresh the component
+        } catch (error) {
+            console.error('Error applying to job:', error);
+            alert('Error applying to job. Please try again later.');
+        }
+    };
 
     return (
         <>

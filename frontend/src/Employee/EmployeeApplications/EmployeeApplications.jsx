@@ -46,9 +46,10 @@ function ApplicationPage() {
                 <div className="job-card-content">
                   <h2 className="job-title">{job.job_posting.jobTitle}</h2>
                   <p className="job-description">{job.job_posting.jobDescription}</p>
-                  <p className="job-description"><b>Application Date:</b> {job.application_date}</p>
-                  <p className="job-description"><b>Application Status:</b> {job.applicationStatus}</p>
-                  <p className="job-description"><b>Company/Hr:</b> {job.job_posting.employer.user.username}</p>
+                  <p className="job-description">Application Date: {job.application_date}</p>
+                  <p className="job-description">Application Status: {job.applicationStatus}</p>
+                  <p className="job-description">Employer: {job.job_posting.employer.user.username}</p>
+                  {/* Add more information about employer if needed */}
                 </div>
                 <div className="job-actions">
                   {/* Add your buttons here */}
