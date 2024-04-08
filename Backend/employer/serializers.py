@@ -5,7 +5,7 @@ from authentication.serializers import UserCreateSerializer,UserUpdateSerializer
 from authentication.serializers import UserSerializer
 from jobMatch.utils import calculateSalaryEstimation, calculateSalaryEstimationV2
 from jobMatch.models import JobApplication
-
+from employee.serializers import EmployeeSerializer
 class EmployerSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
@@ -13,6 +13,7 @@ class EmployerSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'contact_info']
 
 class JobApplicationSerializer(serializers.ModelSerializer):
+    employee = EmployeeSerializer(read_only=True)
     class Meta:
         model = JobApplication
         fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting']

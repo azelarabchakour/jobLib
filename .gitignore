@@ -4,4 +4,4 @@ env2/
 env3/
 env4/
 Backend/media/resumes/
-*.pyc
+Backend/*.pyc
