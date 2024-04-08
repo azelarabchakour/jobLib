@@ -7,6 +7,7 @@ from employer.serializers import JobPostingSerializer
 
 class JobApplicationSerializer(serializers.ModelSerializer):
     employee = EmployeeCustomSerializer(read_only=True)
+    job_posting = JobPostingSerializer(read_only=True)
     class Meta:
         model = JobApplication
         fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting','matchPercentage']
