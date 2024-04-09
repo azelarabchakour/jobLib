@@ -21,7 +21,18 @@ function ApplicationPage() {
       }
     })
     .then(response => {
-      setJobs(response.data);
+      const updatedJobs = response.data.map(job => ({
+        ...job,
+        jobTitle: job.job_posting.jobTitle,
+        jobDescription: job.job_posting.jobDescription,
+        applicationDate: job.application_date,
+        applicationStatus: job.applicationStatus,
+        employer: job.job_posting.employer.user.username,
+        salaryMin: job.job_posting.salaryMin,
+        salaryMax: job.job_posting.salaryMax,
+        matchPercentage: job.matchPercentage
+      }));
+      setJobs(updatedJobs);
       setLoading(false);
     })
     .catch(error => {
@@ -44,11 +55,13 @@ function ApplicationPage() {
             {jobs.map(job => (
               <li key={job.id} className="job-card">
                 <div className="job-card-content">
-                  <h2 className="job-title">{job.job_posting.jobTitle}</h2>
-                  <p className="job-description">{job.job_posting.jobDescription}</p>
-                  <p className="job-description">Application Date: {job.application_date}</p>
+                  <h2 className="job-title">{job.jobTitle}</h2>
+                  <p className="job-description">{job.jobDescription}</p>
+                  <p className="job-description">Application Date: {job.applicationDate}</p>
                   <p className="job-description">Application Status: {job.applicationStatus}</p>
-                  <p className="job-description">Employer: {job.job_posting.employer.user.username}</p>
+                  <p className="job-description">Employer: {job.employer}</p>
+                  <p className="job-description">Salary Range: {job.salaryMin} - {job.salaryMax}</p>
+                  <p className="job-description">Match Percentage: {job.matchPercentage}%</p>
                   {/* Add more information about employer if needed */}
                 </div>
                 <div className="job-actions">

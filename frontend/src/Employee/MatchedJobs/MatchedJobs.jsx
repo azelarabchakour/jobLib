@@ -35,7 +35,8 @@ const MatchedJobs = () => {
                                     jobTitle: jobDetails.jobTitle,
                                     jobDescription: jobDetails.jobDescription,
                                     salaryMax: jobDetails.salaryMax,
-                                    salaryMin: jobDetails.salaryMin
+                                    salaryMin: jobDetails.salaryMin,
+                                    matchPercentage: job.matchPercentage // Added match percentage
                                 };
                             } catch (error) {
                                 console.error('Error fetching job details:', error);
@@ -84,6 +85,7 @@ const MatchedJobs = () => {
                                     <h3 className="job-title">{job.jobTitle}</h3>
                                     <p className="job-description">{expandedJobId === job.id ? job.jobDescription : job.jobDescription}</p>
                                     <h3>Salary Range: {job.salaryMin}-{job.salaryMax}</h3>
+                                    <h3>Match Percentage: {job.matchPercentage}%</h3> {/* Display match percentage */}
                                     <div className='job-actions'>
                                         <button className="apply-button" onClick={() => handleApplyButtonClick(job.jobPosting)}>Apply</button>
                                     </div>

@@ -71,7 +71,6 @@ function EmployerGetJobs() {
                 <p>{error}</p>
             </div>
         );
-    
     }
 
     return (
@@ -86,6 +85,7 @@ function EmployerGetJobs() {
                             <div className="job-application-card-content" onClick={() => handleJobCardClick(job.id)}>
                                 <h3 className="job-title">{job.jobTitle}</h3>
                                 <p className="job-description">{job.jobDescription}</p>
+                                <p className="job-salary">Salary: ${job.salaryMin} - ${job.salaryMax}</p>
                             </div>
                             <div className="job-actions">
                                 <button className='Edit' onClick={() => handleEdit(job.id)}>Edit</button>

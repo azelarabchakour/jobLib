@@ -31,11 +31,13 @@ function App() {
         {/* choose the user  */}
         <Route path="/switch-user" element={<SwitchUser />} />
         {/* employer  */}
+        <Route path="/employer"  element={<EmployerPost/>} />
         <Route path="/employer/employer-post"  element={<EmployerPost/>} />
         <Route path="/employer/employer-old-jobs"  element={<EmployerGetJobs/>} />
         <Route path="/employer/edit-job/:jobId" element={<EditJob />} />
         <Route path="/employer/:jobId/applications" element={<EmployerApplications />} />
         {/* employee  */}
+        <Route path="/employee" element={<UploadCv/>}/>
         <Route path="/employee/upload-cv" element={<UploadCv/>}/>
         <Route path="/employee/matched-jobs" element={<MatchedJobs/>}/>
         <Route path='/employee/applications'  element={<EmployeeApplications/>}/>

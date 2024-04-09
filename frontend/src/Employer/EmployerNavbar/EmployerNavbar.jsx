@@ -26,28 +26,28 @@ function EmployerNavbar() {
 
     return (
         <nav className="nav__employer">
-            <a href="#" className="nav__brand">
+            <a href="/" className="nav__brand"> {/* Use absolute path */}
                 JobLib
             </a>
             <ul className={active}>
                 <li className="nav__item">
-                    <a href="employer-post" className="nav__link">
+                    <a href="/employer/employer-post" className="nav__link"> {/* Use absolute path */}
                         Create new job!
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="employer-old-jobs" className="nav__link">
+                    <a href="/employer/employer-old-jobs" className="nav__link"> {/* Use absolute path */}
                         your jobs
                     </a>
                 </li>
                 
                 <li className="nav__item">
-                    <a href="../user-info" className="nav__link">
+                    <a href="/user-info" className="nav__link"> {/* Use absolute path */}
                         Profile
                     </a>
                 </li>
                 <li className="nav__item">
-                    <a href="../employee/Upload-cv" className="nav__link">
+                    <a href="/employee/Upload-cv" className="nav__link"> {/* Use absolute path */}
                         switch user
                     </a>
                 </li>
