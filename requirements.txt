@@ -7,20 +7,13 @@ pip install djoser #install the authentication system
 pip install djangorestframework_simplejwt
 pip install drf-nested-routers #to use nested routers
 pip install django-cors-headers
-
-#---- AI STUFF -------
-pip install scikit-learn
-pip install joblib
-#--------------------
-
-
-
-#----NEW ONES-------
-pip install pypdf2 
-pip install gensim
 # for the frontend
-
 npm install
 npm install react-scripts
 npm install axios
 npm install react-router-dom
+
+#----NEW ONES-------
+npm i @material-tailwind/react
+npm i @heroicons/react
+npx tailwindcss init -p 

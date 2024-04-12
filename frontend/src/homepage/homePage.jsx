@@ -1,13 +1,14 @@
 import React from 'react';
-import Navbar from './navBar';
-import FirstSection from './FirstSection';
+import NewNavbar from './navBar';
+
+
 
 function HomePage() {
     return (
-        <div className='container-body-homePage'>
-            <Navbar/>
-            <FirstSection/>
-        </div>
+            <div>
+                <NewNavbar/>
+            </div>
+        
             
         
     );
