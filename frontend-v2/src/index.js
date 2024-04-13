@@ -9,16 +9,20 @@ import FooterComponent from "./Components/Footer";
 import Auth from "./Components/Auth";
 import { PricingCard } from "./Components/PricingCard";
 import JobPostingCard from "./Components/JobPostingCard";
+import CreateJobPosting from "./Components/CreateJobPosting";
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <NavbarComponent />
 
-    <div className="flex flex-col items-center">
-      <JobPostingCard />
-      <JobPostingCard />
-      <JobPostingCard />
+    <div className="flex justify-center items-center">
+    <CreateJobPosting />
+    
     </div>
+
+    
     
     <FooterComponent />
   </React.StrictMode>
