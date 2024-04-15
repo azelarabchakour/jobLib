@@ -28,7 +28,7 @@ import {
    
   export function PricingCard() {
     return (
-      <Card color="gray" variant="gradient" className="w-full max-w-[20rem] p-8">
+      <Card color="gray" variant="gradient" className="w-full max-w-[20rem] p-8 mt-8 mr-8">
         <CardHeader
           floated={false}
           shadow={false}

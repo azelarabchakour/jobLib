@@ -19,14 +19,19 @@ root.render(
     <NavbarComponent />
 
     <div className="flex justify-center items-center">
-    {/* <JobPostingCard /> */}
+    
+    <PricingCard />
+    <PricingCard />
+
+    <PricingCard />
+
     {/* <CreateJobPosting /> */}
     {/* <AlertWithList /> */}
     {/* <UploadCv /> */}
     {/* <StepperWithContent /> */}
     </div>
 
-    
+   
     
     <FooterComponent />
   </React.StrictMode>
