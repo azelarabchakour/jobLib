@@ -129,9 +129,7 @@ export default function NavbarComponent() {
         </Typography>
         <div className="hidden lg:block">{navList}</div>
         <div className="flex items-center gap-x-1">
-          <Button variant="text" size="sm" className="hidden lg:inline-block">
-            <span>Sign up</span>
-          </Button>
+          
           <Auth />
         </div>
         <IconButton

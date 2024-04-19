@@ -1,9 +1,10 @@
 import { Button } from "@material-tailwind/react";
- 
+import { ThemeProvider } from "@material-tailwind/react";
+
+
 export default function UploadCv() {
   return (
-      
-      <Button variant="gradient" className="flex items-center gap-3">
+      <Button variant="filled" className=" bg-myBlue-300 text-myBlue-950 flex items-center gap-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

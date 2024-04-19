@@ -13,27 +13,17 @@ import CreateJobPosting from "./Components/CreateJobPosting";
 import AlertWithList from "./Components/AlertWithList";
 import UploadCv from "./Components/UploadCv";
 import StepperWithContent from "./Components/StepperWithContent";
+import { ThemeProvider } from "@material-tailwind/react";
+import HomePage from "./HomePage/HomePage";
+import EmployeeRole from "./Components/EmployeeRole";
+import EmployerRole from "./Components/EmployerRole";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <NavbarComponent />
-
-    <div className="flex justify-center items-center">
     
-    <PricingCard />
-    <PricingCard />
+    <EmployeeRole />
+    <EmployerRole />
 
-    <PricingCard />
-
-    {/* <CreateJobPosting /> */}
-    {/* <AlertWithList /> */}
-    {/* <UploadCv /> */}
-    {/* <StepperWithContent /> */}
-    </div>
-
-   
-    
-    <FooterComponent />
   </React.StrictMode>
 );
 

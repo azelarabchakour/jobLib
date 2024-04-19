@@ -36,7 +36,7 @@ import {
           <Textarea label="Job Description" size="lg" />
         </CardBody>
         <CardFooter className="pt-0">
-          <Button variant="gradient" fullWidth>
+          <Button  variant="gradient" fullWidth>
             Post Job
           </Button>
           
