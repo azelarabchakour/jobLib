@@ -33,13 +33,15 @@ export default function Auth() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       // navigate to the profile if accessToken is already present
-      // navigate('/profile');
+      navigate('/matchedJobs');
     }
   }, []);
 
@@ -66,7 +68,7 @@ export default function Auth() {
 
       console.log("Login successful:", response.data);
 
-      //navigate("/employer/employer-post"); //EDIT NAVIGATION
+      navigate("/matchedJobs"); //EDIT NAVIGATION
 
       setUsername("");
       setPassword("");
@@ -98,7 +100,7 @@ export default function Auth() {
       // Registration successful
       console.log("Registration successful:", response.data);
       // Redirect the user to the profile page
-      //window.location.href = "/switch-user";  //fix the redirection
+      navigate('/chooseRole');
     } catch (error) {
       console.error("Registration failed:", error);
       setError("Registration failed. Please try again.");

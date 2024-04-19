@@ -1,13 +1,19 @@
 import {
-    Card,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-  } from "@material-tailwind/react";
-   
-  export default function EmployerRole() {
-    return (
+  Card,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import { Router, useNavigate } from "react-router-dom";
+
+const EmployerRole = () => {
+
+  const navigate = useNavigate();
+  const handleChoose = (page) => {
+    navigate(page);
+  };
+  return (
       <Card className="mt-6 w-96">
         <CardBody>
           <svg
@@ -26,13 +32,16 @@ import {
           <Typography variant="h5" color="blue-gray" className="mb-2">
             Employer
           </Typography>
-          <Typography>
-            I'm a client, hiring for a project
-          </Typography>
+          <Typography>I'm a client, hiring for a project</Typography>
         </CardBody>
         <CardFooter className="pt-0">
           <a href="#" className="inline-block">
-            <Button size="sm" variant="text" className="flex items-center gap-2">
+            <Button
+              size="sm"
+              variant="text"
+              className="flex items-center gap-2"
+              onClick={() => handleChoose("/jobs")}
+            >
               Join as a Client
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +61,7 @@ import {
           </a>
         </CardFooter>
       </Card>
-    );
-  }
-  
+  );
+};
+
+export default EmployerRole;
