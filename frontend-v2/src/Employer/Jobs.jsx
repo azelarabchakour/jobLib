@@ -113,6 +113,7 @@ export default function Jobs() {
         //   </div>
         // </li>
         <JobPostingCard
+        
           jobTitle={job.jobTitle}
           jobDescription={job.jobDescription}
           salary = {job.salaryMin + "$ - " + job.salaryMax + "$"} 
