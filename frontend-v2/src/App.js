@@ -5,7 +5,7 @@ import MatchedJobs from "./Employee/MatchedJobs";
 import ChooseRole from "./HomePage/ChooseRole";
 import Profile from "./Profile/Profile";
 import JobPostingDetails from "./Components/JobPostingDetails";
-
+import EditProfile from "./Profile/EditProfile";
 function App() {
   return (
     <Router>
@@ -22,6 +22,7 @@ function App() {
         <Route path="/matchedJobs" element={<MatchedJobs/>} />
         {/* shared  */}
         <Route path="/profile" element={<Profile/>} />
+        <Route path="/editProfile" element={<EditProfile/>} />
       </Routes>
     </Router>
   );

@@ -109,3 +109,11 @@ def modifyJob(request, pk):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+# @api_view(['GET'])
+# def getNumberOfApplicants(request, pk):
+#     try:
+#         jobPosting = JobPosting.objects.get(pk=pk)
+#     except JobPosting.DoesNotExist:
+#         return Response({"error": "Job Posting not found."}, status=status.HTTP_404_NOT_FOUND)
+#     return Response({"numberOfApplicants": jobPosting.numberOfApplicants}, status=status.HTTP_200_OK)

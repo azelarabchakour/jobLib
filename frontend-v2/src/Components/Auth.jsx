@@ -120,7 +120,7 @@ export default function Auth() {
         Join US
       </Button>
       <Dialog
-        size="s"
+        size="sm"
         open={open}
         handler={handleOpen}
         className="bg-transparent shadow-none"
