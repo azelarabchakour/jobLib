@@ -8,6 +8,9 @@ export default function HomePage() {
       <>
         <Navbar/>
         <HeroSection/>
+
+        <Auth/>
+
       </>
     );
   }

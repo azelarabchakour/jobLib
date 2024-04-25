@@ -103,8 +103,8 @@ def modifyJob(request, pk):
     if request.method == 'GET':
         serializer = JobPostingSerializer(jobPosting)
         return Response(serializer.data)
-    elif request.method in ['PUT', 'PATCH']:
-        serializer = JobPostingSerializer(jobPosting, data=request.data)
+    elif request.method in ['PUT', 'PATCH']: #Update the job posting
+        serializer = CreateJobPostingSerializer(jobPosting, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

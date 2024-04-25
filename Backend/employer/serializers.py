@@ -7,6 +7,7 @@ from jobMatch.utils import calculateSalaryEstimation, calculateSalaryEstimationV
 from jobMatch.models import JobApplication
 from employee.serializers import EmployeeSerializer
 class EmployerSerializer(serializers.ModelSerializer):
+
     user = UserSerializer(read_only=True)
     class Meta:
         model = Employer
@@ -45,3 +46,24 @@ class CreateJobPostingSerializer(serializers.ModelSerializer):
         validated_data['salaryMax'] = salary_estimation['max_salary']
         # Call the parent class's create method to save the instance
         return super().create(validated_data)
+    
+
+    #this method is not working for now 
+    def update(self, instance, validated_data):
+        # Extract job description from validated data
+        job_description = validated_data.get('jobDescription', instance.jobDescription)
+
+        salary_estimation = calculateSalaryEstimationV2(job_description)
+        validated_data['jobDescription'] = job_description
+        # Add salary estimation to validated data
+        validated_data['salaryMin'] = salary_estimation['min_salary']
+        validated_data['salaryMax'] = salary_estimation['max_salary']
+        
+
+
+        # Call the parent class's update method to save the instance
+        return super().update(instance, validated_data)
+    
+
+    
+    
