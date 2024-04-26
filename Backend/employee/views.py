@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from jobMatch.utils import calculateSalaryEstimationV2
 from rest_framework.decorators import api_view, action, permission_classes
 from rest_framework.response import Response
 from rest_framework import mixins, viewsets, status
@@ -359,7 +360,6 @@ def testCV(request):
 
     if request.method == 'GET':
         return Response({'message': 'This endpoint accepts POST requests only'})
-
     try:
         employee = Employee.objects.get(user_id=request.user.id)
         serializer = EmployeeSerializer(employee)
@@ -369,8 +369,14 @@ def testCV(request):
     except ObjectDoesNotExist:
         return Response({'error': 'Employee not found'}, status=status.HTTP_404_NOT_FOUND)
 
+
     similarity = match(request, resume_path, input_text)
-    return Response(similarity)
+    estimation = calculateSalaryEstimationV2(input_text)
+    data = {
+        'estimation': estimation,
+        'similarity': similarity
+    }
+    return Response(data, status=status.HTTP_200_OK)
 
 from django.http import FileResponse
 
