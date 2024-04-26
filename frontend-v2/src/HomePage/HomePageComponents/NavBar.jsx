@@ -54,7 +54,7 @@ const NavBar = () => {
                             className="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
                             onClick={toggleMenu}
                         >
-                            <span className="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
+                            <span className="relative my-[6px]  block h-[2px] w-[30px] bg-white"></span>
                             <span className="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
                             <span className="relative my-[6px] block h-[2px] w-[30px] bg-white"></span>
                         </button>
@@ -64,56 +64,109 @@ const NavBar = () => {
                                 className="absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2"
                             >
                                 <ul className="block">
-                                    <li className="group relative">
+                                    <li className="group relative ">
                                         <Link
-                                            to="#home"
-                                            className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white"
+                                            to="/#home"
+                                            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium 'text-dark'} group-hover:text-primary`}
                                         >
                                             Home
                                         </Link>
                                     </li>
                                     <li className="group relative">
                                         <Link
-                                            to="#about"
-                                            className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white"
+                                            to="/#about"
+                                            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark} group-hover:text-primary`}
                                         >
                                             About
                                         </Link>
                                     </li>
                                     <li className="group relative">
                                         <Link
-                                            to="#pricing"
-                                            className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white"
+                                            to="/#pricing"
+                                            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark'} group-hover:text-primary`}
                                         >
                                             Pricing
                                         </Link>
                                     </li>
                                     <li className="group relative">
                                         <Link
-                                            to="#team"
-                                            className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white"
+                                            to="/#team"
+                                            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark'} group-hover:text-primary`}
                                         >
                                             Team
                                         </Link>
                                     </li>
                                     <li className="group relative">
                                         <Link
-                                            to="#blog"
-                                            className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white"
+                                            to="/#blog"
+                                            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark'} group-hover:text-primary`}
                                         >
                                             Blog
                                         </Link>
                                     </li>
                                     <li className="group relative">
                                         <Link
-                                            to="#faq"
-                                            className="ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white"
+                                            to="/#faq"
+                                            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary`}
                                         >
                                             FAQ
                                         </Link>
                                     </li>
                                 </ul>
                             </nav>
+                        </div>
+                        {/* Navigation links for larger screens */}
+                        <div className={`hidden lg:flex w-full items-center justify-between px-4`}>
+                            <ul className="flex">
+                                <li className="group relative">
+                                    <Link
+                                        to="/#home"
+                                        className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${isDarkMode ? 'text-dark' : 'text-white'} group-hover:text-primary`}
+                                    >
+                                        Home
+                                    </Link>
+                                </li>
+                                <li className="group relative">
+                                    <Link
+                                        to="/#about"
+                                        className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${isDarkMode ? 'text-dark' : 'text-white'} group-hover:text-primary`}
+                                    >
+                                        About
+                                    </Link>
+                                </li>
+                                <li className="group relative">
+                                    <Link
+                                        to="/#pricing"
+                                        className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${isDarkMode ? 'text-dark' : 'text-white'} group-hover:text-primary`}
+                                    >
+                                        Pricing
+                                    </Link>
+                                </li>
+                                <li className="group relative">
+                                    <Link
+                                        to="/#team"
+                                        className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${isDarkMode ? 'text-dark' : 'text-white'} group-hover:text-primary`}
+                                    >
+                                        Team
+                                    </Link>
+                                </li>
+                                <li className="group relative">
+                                    <Link
+                                        to="/#blog"
+                                        className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${isDarkMode ? 'text-dark' : 'text-white'} group-hover:text-primary`}
+                                    >
+                                        Blog
+                                    </Link>
+                                </li>
+                                <li className="group relative">
+                                    <Link
+                                        to="/#faq"
+                                        className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${isDarkMode ? 'text-dark' : 'text-white'} group-hover:text-primary`}
+                                    >
+                                        FAQ
+                                    </Link>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div className="flex items-center justify-end pr-16 lg:pr-0 mr-4">
