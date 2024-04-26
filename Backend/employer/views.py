@@ -8,6 +8,7 @@ from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import render
 from .models import Employer, JobPosting
 from .serializers import EmployerSerializer, JobPostingSerializer, CreateJobPostingSerializer
+from jobMatch.models import Analytics
 # ------------------- AI STUFF -------------------
 # ------------------------------------------------
 
@@ -106,7 +107,14 @@ def modifyJob(request, pk):
     elif request.method in ['PUT', 'PATCH']: #Update the job posting
         serializer = CreateJobPostingSerializer(jobPosting, data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save() 
+            #After saving the new job posting delete all the job applications and the matches for this jobposting
+            jobApplications = JobApplication.objects.filter(job_posting=pk)
+            for jobApplication in jobApplications:
+                jobApplication.delete()
+            analytics = Analytics.objects.filter(jobPosting=pk)
+            for match in analytics:
+                match.delete()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
