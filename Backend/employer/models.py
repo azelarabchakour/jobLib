@@ -13,6 +13,7 @@ class Employer(models.Model):
 class JobPosting(models.Model):
     jobTitle = models.CharField(max_length=255)
     jobDescription = models.TextField()
+    #salary = models.IntegerField(null=True, blank=True, default=0)
     salaryMin = models.IntegerField(null=True, blank=True)
     salaryMax = models.IntegerField(null=True , blank=True)
     jobStatus = models.CharField(max_length=255, choices=[
@@ -20,6 +21,7 @@ class JobPosting(models.Model):
         ('DONE', 'Done'), #when the job is taken
         ('CANCELED', 'Canceled'), #when the employer cancel or delete the job
     ])
+    numberOfApplicants = models.IntegerField(default=0)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='jobPostings')
 
     def __str__(self):

@@ -25,6 +25,9 @@ from employer.models import Employer
 
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import parser_classes
+
+from django.http import FileResponse
+
 # --------- AI Imports---------------
 import PyPDF2
 from gensim.models.doc2vec import Doc2Vec
@@ -340,6 +343,9 @@ def apply(request, pk):
         if analyticsSerializer.is_valid():
             analyticsSerializer.save()
             application_serializer.save()
+            #increment the number of applicant for a jobPosting
+            job_posting.numberOfApplicants += 1
+            job_posting.save()
             return Response(application_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(analyticsSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -378,7 +384,6 @@ def testCV(request):
     }
     return Response(data, status=status.HTTP_200_OK)
 
-from django.http import FileResponse
 
 @api_view()
 def getCv(request,pk):

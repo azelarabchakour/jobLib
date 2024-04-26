@@ -12,7 +12,7 @@ class JobApplication(models.Model):
         ('ACCEPTED', 'accepted'), #when the employer accept the employee
         ('REFUSED', 'refused'), #when the employer refuse the employee
         ('TAKEN', 'Taken by other Employee'), #when the employer accept other employee
-        ('CANCELED', 'got the job'), #when the employee canceled or removed the job
+        ('CANCELED', 'Job is canceled or deleted by the Employer'), #when the employer canceled or removed the job
     ])
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='applications')
     job_posting = models.ForeignKey(JobPosting, on_delete=models.CASCADE, related_name='applications')

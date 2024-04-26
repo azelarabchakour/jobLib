@@ -38,8 +38,8 @@ class JobPostingViewSet(ModelViewSet):
     def get_queryset(self):
         employer = Employer.objects.get(user_id=self.request.user.id)
         return JobPosting.objects.filter(
-            employer_id=employer.id
-        )
+            employer_id=employer.id,
+        ).exclude(jobStatus='CANCELED')
     # serializer_class = JobPostingSerializer
 
     def get_serializer_class(self):
@@ -62,7 +62,19 @@ class JobPostingViewSet(ModelViewSet):
             jobPosting = JobPosting.objects.get(pk=pk)
         except JobPosting.DoesNotExist:
             return Response({"error": "Job Posting not found."}, status=status.HTTP_404_NOT_FOUND)
-        jobPosting.delete()
+        #jobPosting.delete()
+        #insted of deleting the job we just mark it as deleted and all the job applications should be marked as canceled
+        jobPosting.jobStatus = 'CANCELED'
+        jobPosting.save()
+        #mark all the job applications as canceled
+        jobApplications = JobApplication.objects.filter(jobPosting_id=pk)
+        for jobApplication in jobApplications:
+            jobApplication.applicationStatus = 'CANCELED'
+            jobApplication.save()
+        #delete all the matched employees with that job
+        analytics = Analytics.objects.filter(jobPosting_id=pk)
+        for analytic in analytics:
+            analytic.delete()
         return Response({"message": "Job Posting deleted successfully."}, status=status.HTTP_200_OK)
 
     # @action(detail=True, methods=['GET', 'PUT', 'PATCH'])
@@ -79,6 +91,15 @@ def acceptApplication(request, pk):
         return Response({"error": "Job Application not found."}, status=status.HTTP_404_NOT_FOUND)
     jobApplication.applicationStatus = 'ACCEPTED'
     jobApplication.save()
+    #mark the jobPosting as DONE
+    jobPosting = JobPosting.objects.get(pk=jobApplication.job_posting.id)
+    jobPosting.jobStatus = 'DONE'
+    jobPosting.save()
+    #mark the jobApllication of all other employees as taken
+    jobApplications = JobApplication.objects.filter(job_posting=jobPosting.id).exclude(pk=pk)
+    for jobApplication in jobApplications:
+        jobApplication.applicationStatus = 'TAKEN'
+        jobApplication.save()
     return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
 
 
@@ -91,6 +112,10 @@ def refuseApplication(request, pk):
 
     jobApplication.applicationStatus = 'REFUSED'
     jobApplication.save()
+    #decrement the number of applications of the jobPosting
+    jobPosting = JobPosting.objects.get(pk=jobApplication.job_posting.id)
+    jobPosting.numberOfApplicants -= 1
+    jobPosting.save()
     return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
 
 
