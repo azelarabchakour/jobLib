@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body{
-    background-color: #282c34;
-  } */
+html {
+    font-family: 'Inter', sans-serif; 
+}
+
+.transparent-background {
+  background-color: transparent !important;
+}

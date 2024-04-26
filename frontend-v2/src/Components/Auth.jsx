@@ -114,11 +114,13 @@ export default function Auth() {
       <Button
         variant="gradient"
         size="sm"
-        className="hidden lg:inline-block"
+        className=" transparent-background rounded-md bg-transparent px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-white hover:text-dark"
+        style={{ whiteSpace: 'nowrap' , backgroundColor: 'transparent' }}
         onClick={handleOpen}
       >
-        Join US
-      </Button>
+    <span style={{ display: 'inline-block' }}>Join Us</span>
+</Button>
+
       <Dialog
         size="sm"
         open={open}
@@ -127,7 +129,7 @@ export default function Auth() {
       >
         <Card className="mx-auto w-full max-w-[24rem] ">
           <CardHeader
-            color="gray"
+            color="gray" //header card color
             floated={false}
             shadow={false}
             className="m-0 grid place-items-center px-4 py-8 text-center"
