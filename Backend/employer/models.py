@@ -13,7 +13,7 @@ class Employer(models.Model):
 class JobPosting(models.Model):
     jobTitle = models.CharField(max_length=255)
     jobDescription = models.TextField()
-    #salary = models.IntegerField(null=True, blank=True, default=0)
+    salary = models.IntegerField(null=True, blank=True, default=0)
     salaryMin = models.IntegerField(null=True, blank=True)
     salaryMax = models.IntegerField(null=True , blank=True)
     jobStatus = models.CharField(max_length=255, choices=[
