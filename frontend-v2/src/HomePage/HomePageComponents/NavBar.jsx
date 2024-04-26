@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Dialog } from '@material-tailwind/react'; 
+import Auth from '../../Components/Auth';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
+    const [openAuthDialog, setOpenAuthDialog] = useState(false); 
 
     // Set toggle
     const toggleMenu = () => {
@@ -22,7 +25,7 @@ const NavBar = () => {
         window.addEventListener('scroll', handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll); // Remove the event listener
+            window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
@@ -115,22 +118,32 @@ const NavBar = () => {
                             {/* Add the theme switcher input and SVG icons here */}
                         </label>
                         <div className="hidden sm:flex">
-                            <a
-                                href="signin.html"
-                                className="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70"
-                            >
+                        {/* <Auth
+                                variant="link"
+                                size="sm"
+                                className="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70"                            >
                                 Sign In
-                            </a>
-                            <a
-                                href="signup.html"
+                            </Auth> */}
+                            {/* Sign-up button */}
+                            <Auth
+                                variant="outlined"
+                                size="sm"
                                 className="signUpBtn rounded-md bg-white bg-opacity-20 px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark"
                             >
                                 Sign Up
-                            </a>
+                            </Auth>
                         </div>
                     </div>
                 </div>
             </div>
+            <Dialog
+                size="sm"
+                open={openAuthDialog}
+                handler={() => setOpenAuthDialog(false)}
+                className="bg-transparent shadow-none"
+            >
+                <Auth /> 
+            </Dialog>
         </header>
     );
 };
