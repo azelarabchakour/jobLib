@@ -24,16 +24,16 @@ class JobPostingSerializer(serializers.ModelSerializer):
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications']
-        read_only_fields = ['id', 'employer', 'salaryMin', 'salaryMax', 'jobStatus']
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants']
+        read_only_fields = ['id', 'employer', 'salaryMin', 'salaryMax', 'jobStatus','numberOfApplicants']
 
 class CreateJobPostingSerializer(serializers.ModelSerializer):
     applications = JobApplicationSerializer(many=True, read_only=True)
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications']
-        read_only_fields = ['id', 'employer','salaryMin', 'salaryMax', 'jobStatus']
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants']
+        read_only_fields = ['id', 'employer','salaryMin', 'salaryMax', 'jobStatus','numberOfApplicants']
     
     def create(self, validated_data):
         job_description = validated_data.pop('jobDescription', '')  # Extract job description

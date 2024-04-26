@@ -18,6 +18,7 @@ function App() {
         {/* employer  */}
         <Route path="/jobs" element={<Jobs/>} />
         <Route path="/employer/:jobId/applications" element={<JobPostingDetails />} />
+        
         {/* employee  */}
         <Route path="/matchedJobs" element={<MatchedJobs/>} />
         {/* shared  */}
