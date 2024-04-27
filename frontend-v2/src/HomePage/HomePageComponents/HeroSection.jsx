@@ -1,4 +1,5 @@
 import React from 'react';
+import Auth from '../../Components/Auth';
 import heroImg from '../../Assets/hero-img.png';
 
 const HeroSection = () => {
@@ -16,9 +17,7 @@ const HeroSection = () => {
                             </p>
                             <ul className="mb-10 flex flex-wrap items-center justify-center lg:justify-start gap-5">
                                 <li>
-                                    <a href="#" className="inline-flex items-center justify-center rounded-md bg-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color">
-                                        Join us Now
-                                    </a>
+                                        <Auth className="inline-flex items-center justify-center rounded-md bg-white px-7 py-[14px] text-center text-base font-medium text-dark shadow-1 transition duration-300 ease-in-out hover:bg-gray-2 hover:text-body-color"/>
                                 </li>
                             </ul>
                         </div>
