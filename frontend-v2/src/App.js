@@ -6,13 +6,13 @@ import ChooseRole from "./HomePage/ChooseRole";
 import Profile from "./Profile/Profile";
 import EditProfile from "./Profile/EditProfile";
 import JobApplication from "./Components/JobApplication";
-import JobDetails from "./Employer/JobDetails";
 import JobPostingDetails from "./Employer/JobPostingDetails";
+import JobDetails from "./Employer/JobDetails";
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/test" element={<JobDetails/>} />
+        {/* <Route path="/test" element={<JobDetails/>} /> */}
         <Route path="/" element={<HomePage/>} />
         {/* authentication routes  */}
 
@@ -20,7 +20,7 @@ function App() {
         <Route path="/chooseRole" element={<ChooseRole/>} />
         {/* employer  */}
         <Route path="/jobs" element={<Jobs/>} />
-        <Route path="/employer/:jobId/applications" element={<JobPostingDetails />} />
+        <Route path="/employer/:jobId/applications" element={<JobDetails />} />
 
         {/* employee  */}
         <Route path="/matchedJobs" element={<MatchedJobs/>} />
