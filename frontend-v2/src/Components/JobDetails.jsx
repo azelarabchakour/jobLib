@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import person from "../Assets/person.jpeg";
+import { TrashIcon } from "@heroicons/react/24/solid";
 
 export default function JobPostingCard(props) {
   const numberOfApplicants = props.numberOfApplicants;
@@ -36,10 +37,7 @@ export default function JobPostingCard(props) {
   };
 
   return (
-    <Card
-      className="mt-6 w-4/5 max-h-80 overflow-hidden"
-      
-    >
+    <Card className="mt-6 w-4/5 max-h-80 overflow-hidden">
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
           Data Analytics Intern
@@ -48,31 +46,26 @@ export default function JobPostingCard(props) {
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
           ratione fugiat ducimus, temporibus alias nostrum commodi sit, tenetur
           officia, aspernatur unde a dolore quos sed doloribus odio? Atque, quis
-          expedita?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
-          ratione fugiat ducimus, temporibus alias nostrum commodi sit, tenetur
-          officia, aspernatur unde a dolore quos sed doloribus odio? Atque, quis
-          expedita?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
-          ratione fugiat ducimus, temporibus alias nostrum commodi sit, tenetur
-          officia, aspernatur unde a dolore quos sed doloribus odio? Atque, quis
-          expedita?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
-          ratione fugiat ducimus, temporibus alias nostrum commodi sit, tenetur
-          officia, aspernatur unde a dolore quos sed doloribus odio? Atque, quis
-          expedita?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
-          ratione fugiat ducimus, temporibus alias nostrum commodi sit, tenetur
-          officia, aspernatur unde a dolore quos sed doloribus odio? Atque, quis
-          expedita?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
-          ratione fugiat ducimus, temporibus alias nostrum commodi sit, tenetur
-          officia, aspernatur unde a dolore quos sed doloribus odio? Atque, quis
-          expedita?
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates
-          ratione fugiat ducimus, temporibus alias nostrum commodi sit, tenetur
-          officia, aspernatur unde a dolore quos sed doloribus odio? Atque, quis
-          expedita?
+          expedita? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Voluptates ratione fugiat ducimus, temporibus alias nostrum commodi
+          sit, tenetur officia, aspernatur unde a dolore quos sed doloribus
+          odio? Atque, quis expedita? Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. Voluptates ratione fugiat ducimus, temporibus alias
+          nostrum commodi sit, tenetur officia, aspernatur unde a dolore quos
+          sed doloribus odio? Atque, quis expedita? Lorem ipsum, dolor sit amet
+          consectetur adipisicing elit. Voluptates ratione fugiat ducimus,
+          temporibus alias nostrum commodi sit, tenetur officia, aspernatur unde
+          a dolore quos sed doloribus odio? Atque, quis expedita? Lorem ipsum,
+          dolor sit amet consectetur adipisicing elit. Voluptates ratione fugiat
+          ducimus, temporibus alias nostrum commodi sit, tenetur officia,
+          aspernatur unde a dolore quos sed doloribus odio? Atque, quis
+          expedita? Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Voluptates ratione fugiat ducimus, temporibus alias nostrum commodi
+          sit, tenetur officia, aspernatur unde a dolore quos sed doloribus
+          odio? Atque, quis expedita? Lorem ipsum, dolor sit amet consectetur
+          adipisicing elit. Voluptates ratione fugiat ducimus, temporibus alias
+          nostrum commodi sit, tenetur officia, aspernatur unde a dolore quos
+          sed doloribus odio? Atque, quis expedita?
         </Textarea>
       </CardBody>
       <CardFooter className="flex items-center justify-between">
@@ -81,7 +74,8 @@ export default function JobPostingCard(props) {
           {remainingApplicants > 0 && `+${remainingApplicants}`}
         </div>
         <div className="flex items-center -space-x-3">
-        <Button color="red">Delete</Button>
+            
+          <Button color="red" className="flex items-center"> <TrashIcon className="w-4"></TrashIcon> Delete</Button>
         </div>
       </CardFooter>
     </Card>
