@@ -388,7 +388,7 @@ def testCV(request):
 @api_view()
 def getCv(request,pk):
     try:
-        employee = Employee.objects.get(id=pk)
+        employee = Employee.objects.get(user_id=pk)
         serializer = EmployeeSerializer(employee)
         resume_path = os.path.join(settings.MEDIA_ROOT, employee.resume.name)
         return FileResponse(open(resume_path, 'rb'), as_attachment=True)
