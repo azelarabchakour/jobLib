@@ -8,11 +8,15 @@ import EditProfile from "./Profile/EditProfile";
 import JobApplication from "./Components/JobApplication";
 import JobPostingDetails from "./Employer/JobPostingDetails";
 import JobDetails from "./Employer/JobDetails";
+import NavbarComponent from "./Components/NavbarComponent";
+import NavbarComponent1 from "./Components/NavBarComponent1"
+
 function App() {
   return (
     <Router>
       <Routes>
         {/* <Route path="/test" element={<JobDetails/>} /> */}
+        <Route path="/test" element={<NavbarComponent1 />} />
         <Route path="/" element={<HomePage/>} />
         {/* authentication routes  */}
 

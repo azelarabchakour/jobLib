@@ -16,6 +16,7 @@ import EmployeeRole from "./EmployeeRole";
 import SalaryEstimation from "./SalaryEstimation";
 import JobDetails from "../Components/JobDetails";
 import NumberOfApplicants from "../Components/NumberOfApplicants";
+import Level from "./Level";
   export default function Test() {
     return (
      <div className="center">
@@ -23,7 +24,7 @@ import NumberOfApplicants from "../Components/NumberOfApplicants";
              <div className="flex items-center justify-between pr-20 pl-20">
    
           <SalaryEstimation></SalaryEstimation>
-          <SalaryEstimation></SalaryEstimation>
+          <Level></Level>
 
             <NumberOfApplicants></NumberOfApplicants>
           </div>

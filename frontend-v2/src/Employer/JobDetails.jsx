@@ -15,6 +15,9 @@ import FooterLight from "../Components/FooterLight";
 import Footer from "../Components/Footer";
 import SalaryCard from "../Components/SalaryCard";
 import Test from "../Components/Test";
+import NavbarComponent from "../Components/NavbarComponent";
+import NavbarComponent2 from "../Components/NavBarComponent2";
+import NavBarComponent1 from "../Components/NavBarComponent1";
 function setRating(score) {
   if (score > 90) return <Rating value={5} readonly ratedColor="blue" />;
   else if (score > 80) return <Rating value={4} readonly ratedColor="blue" />;
@@ -142,8 +145,10 @@ function JobDetails() {
 
   return (
     <>
+
+    <NavBarComponent1></NavBarComponent1>
       <div className="card-old-job-descriptions">
-        <h1>Job Applications for {job.jobTitle}</h1> <br />
+          
         <div className="">
           {/* this is section left */}
           <Test className="center"></Test>
