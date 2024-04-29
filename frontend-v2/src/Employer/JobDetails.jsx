@@ -145,8 +145,7 @@ function JobDetails() {
 
   return (
     <>
-
-    <NavBarComponent1></NavBarComponent1>
+    <NavBarComponent1 />
       <div className="card-old-job-descriptions">
           
         <div className="">

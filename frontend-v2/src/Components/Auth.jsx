@@ -41,7 +41,7 @@ export default function Auth() {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       // navigate to the profile if accessToken is already present
-      navigate('/matchedJobs');
+      navigate('/chooseRole');
     }
   }, []);
 
@@ -68,7 +68,7 @@ export default function Auth() {
 
       console.log("Login successful:", response.data);
 
-      navigate("/matchedJobs"); //EDIT NAVIGATION
+      navigate("/chooseRole"); //EDIT NAVIGATION
 
       setUsername("");
       setPassword("");

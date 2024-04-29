@@ -4,7 +4,8 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import JobPostingCard from "../Components/JobPostingCard";
-
+import NavBarComponent1 from "../Components/NavBarComponent1";
+import Footer from "../Components/Footer";
 export default function Jobs() {
   const [oldJobDescriptions, setOldJobDescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -89,29 +90,9 @@ export default function Jobs() {
 
   return (
     <div>
-      <Button onClick={handleLogout}>logout</Button>
-      Hello world Employer
+      <NavBarComponent1 />
+      <center>
       {oldJobDescriptions.map((job) => (
-        // <li key={job.id} className="job-card">
-        //   <div
-        //     className="job-application-card-content"
-        //     onClick={() => handleJobCardClick(job.id)}
-        //   >
-        //     <h3 className="job-title">{job.jobTitle}</h3>
-        //     <p className="job-description">{job.jobDescription}</p>
-        //     <p className="job-salary">
-        //       Salary: ${job.salaryMin} - ${job.salaryMax}
-        //     </p>
-        //   </div>
-        //   <div className="job-actions">
-        //     <button className="Edit" onClick={() => handleEdit(job.id)}>
-        //       Edit
-        //     </button>
-        //     <button className="delete" onClick={() => handleDelete(job.id)}>
-        //       Delete
-        //     </button>
-        //   </div>
-        // </li>
         <JobPostingCard
           id={job.id}
           jobTitle={job.jobTitle}
@@ -120,6 +101,8 @@ export default function Jobs() {
           numberOfApplicants={job.numberOfApplicants}
         ></JobPostingCard>
       ))}
+      </center>
+      <Footer />
     </div>
   );
 }

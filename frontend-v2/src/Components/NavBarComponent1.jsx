@@ -14,7 +14,8 @@ import {
   MenuItem,
   Avatar,
 } from "@material-tailwind/react";
-
+import logo from "../Assets/logo.png";
+import { useNavigate } from "react-router-dom";
 import {
   CubeTransparentIcon,
   UserCircleIcon,
@@ -29,6 +30,19 @@ import {
   Bars2Icon,
 } from "@heroicons/react/24/solid";
 import { SparklesIcon } from "@heroicons/react/24/solid";
+import Auth from "../Components/Auth";
+
+function ProfileMenu() {
+
+  const navigate = useNavigate();
+
+const handleLogout = () => {
+  // Clear any stored authentication token or user data
+  localStorage.removeItem("accessToken"); // the token is stored in localStorage
+  localStorage.removeItem("refreshToken");
+  navigate("/"); // Navigate to login page
+};
+
 const profileMenuItems = [
     {
       label: "My Profile",
@@ -39,20 +53,11 @@ const profileMenuItems = [
       icon: Cog6ToothIcon,
     },
     {
-      label: "Inbox",
-      icon: InboxArrowDownIcon,
-    },
-    {
-      label: "Help",
-      icon: LifebuoyIcon,
-    },
-    {
       label: "Sign Out",
       icon: PowerIcon,
+      onclick: handleLogout,
     },
   ];
-
-function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const closeMenu = () => setIsMenuOpen(false);
@@ -86,7 +91,7 @@ function ProfileMenu() {
           return (
             <MenuItem
               key={label}
-              onClick={closeMenu}
+              onClick={handleLogout}
               className={`flex items-center gap-2 rounded ${
                 isLastItem
                   ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
@@ -112,7 +117,7 @@ function ProfileMenu() {
     </Menu>
   );
 }
-export default function NavBarComponent1() {
+export default function HomePageNavBarComponent1() {
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -178,9 +183,10 @@ export default function NavBarComponent1() {
             variant="h4"
           >
             <div className="flex items-center gap-1">
-              <Typography variant="h4" color="blue" className="font-mono">
+              {/* <Typography variant="h4" color="blue" className="font-mono">
                 JobMatch
-              </Typography>
+              </Typography> */}
+              <img src={logo} className="w-40 pl-5" alt="" />
             </div>
           </Typography>
           <div className="flex items-center gap-4">
@@ -242,6 +248,7 @@ export default function NavBarComponent1() {
         </MobileNav>
       </Navbar>
       <div className="mx-auto max-w-screen-md py-12"></div>
+      {/* <Auth/> */}
     </div>
   );
 }

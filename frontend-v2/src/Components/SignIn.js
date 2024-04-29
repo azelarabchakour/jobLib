@@ -11,7 +11,7 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 
-export function SignInDialog() {
+export default function SignInDialog() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
 
