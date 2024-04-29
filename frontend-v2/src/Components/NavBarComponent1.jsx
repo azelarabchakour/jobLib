@@ -247,7 +247,7 @@ export default function HomePageNavBarComponent1() {
           </div>
         </MobileNav>
       </Navbar>
-      <div className="mx-auto max-w-screen-md py-12"></div>
+      <div className="mx-auto max-w-screen-md py-7"></div>
       {/* <Auth/> */}
     </div>
   );

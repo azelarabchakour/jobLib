@@ -11,6 +11,8 @@ import NavbarComponent from "./Components/NavbarComponent";
 import NavbarComponent1 from "./Components/NavBarComponent1"
 import HomePage from "./HomePage/HomePage";
 import StepperWithContent from "./Components/StepperWithContent"
+import JobApplicants from "./Employer/JobApplicants";
+
 function App() {
   return (
     <Router>
@@ -25,7 +27,8 @@ function App() {
         <Route path="/chooseRole" element={<ChooseRole/>} />
         {/* employer  */}
         <Route path="/jobs" element={<Jobs/>} />
-        <Route path="/employer/:jobId/applications" element={<JobDetails />} />
+        <Route path="/employer/:jobId/details" element={<JobDetails />} />
+        <Route path="/employer/:jobId/applicants" element={<JobApplicants />} />
 
         {/* employee  */}
         <Route path="/matchedJobs" element={<MatchedJobs/>} />

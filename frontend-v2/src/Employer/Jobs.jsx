@@ -73,7 +73,7 @@ export default function Jobs() {
   };
 
   const handleJobCardClick = (jobId) => {
-    navigate(`/employer/${jobId}/applications`);
+    navigate(`/employer/${jobId}/details`);
   };
 
   if (loading) {

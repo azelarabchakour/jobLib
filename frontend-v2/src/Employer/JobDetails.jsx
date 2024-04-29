@@ -8,16 +8,18 @@ import {
   Typography,
   Avatar,
   Button,
+  Timeline,
 } from "@material-tailwind/react";
 import person from "../Assets/person.jpeg";
 import { Rating } from "@material-tailwind/react";
 import FooterLight from "../Components/FooterLight";
 import Footer from "../Components/Footer";
 import SalaryCard from "../Components/SalaryCard";
-import Test from "../Components/Test";
-import NavbarComponent from "../Components/NavbarComponent";
-import NavbarComponent2 from "../Components/NavBarComponent2";
 import NavBarComponent1 from "../Components/NavBarComponent1";
+import SalaryEstimation from "../Components/SalaryEstimation";
+import NumberOfApplicants from "../Components/NumberOfApplicants";
+import Level from "../Components/Level";
+import JobDetailsComponent from "../Components/JobDetailsComponent";
 function setRating(score) {
   if (score > 90) return <Rating value={5} readonly ratedColor="blue" />;
   else if (score > 80) return <Rating value={4} readonly ratedColor="blue" />;
@@ -145,70 +147,87 @@ function JobDetails() {
 
   return (
     <>
-    <NavBarComponent1 />
+      <NavBarComponent1 />
       <div className="card-old-job-descriptions">
-          
         <div className="">
-          {/* this is section left */}
-          <Test className="center"></Test>
-          {/* this is a section right */}
-        <div>
-          {job.applications
-            .filter(
-              (application) => application.applicationStatus !== "REFUSED"
-            )
-            .map((application) => (
-              <Card color="transparent" className="w-full max-w-[26rem] p-2">
-                <CardHeader
-                  color="transparent"
-                  floated={false}
-                  shadow={false}
-                  className="mx-0 flex items-center gap-4 pt-0 pb-8"
-                >
-                  <Avatar
-                    size="lg"
-                    variant="circular"
-                    src={person}
-                    alt="tania andrew"
-                  />
-                  <div className="flex w-full flex-col gap-0.5">
-                    <div className="flex items-center justify-between">
-                      <Typography variant="h5" color="blue-gray">
-                        {application.employee.user.first_name}{" "}
-                        {application.employee.user.last_name}
-                      </Typography>
-                      <div className="flex items-center gap-2 font-bold text-blue-gray-500">
-                        {application.matchPercentage}
-                        {setRating(application.matchPercentage)}
-                      </div>
-                    </div>
-                    <Typography variant="small" color="blue-gray">
-                      {application.application_date}
-                    </Typography>
-                  </div>
-                </CardHeader>
-                <CardBody className="mb-6 p-0">
-                  <div className="flex items-center justify-between ">
-                    <Button
-                      onClick={() => handleAcceptApplication(application.id)}
-                    >
-                      Accept
-                    </Button>
-                    <Button
-                      onClick={() => handleRefuseApplication(application.id)}
-                    >
-                      Refuse{" "}
-                    </Button>
-                    <Button
-                      onClick={() => DownloadResume(application.employee.id)}
-                    >
-                      Download Resume{" "}
-                    </Button>
-                  </div>
-                </CardBody>
-              </Card>
-            ))}
+          <div>
+            <Timeline>
+              <div className="flex items-center justify-between pr-20 pl-20">
+                <SalaryEstimation
+                  salaryMin={job.salaryMin}
+                  salaryMax={job.salaryMax}
+                ></SalaryEstimation>
+                <Level></Level>
+                <NumberOfApplicants 
+                  jobId={job.id}
+                  numberOfApplicants={job.numberOfApplicants}
+                ></NumberOfApplicants>
+              </div>
+            </Timeline>
+            <div className="pl-48">
+              <JobDetailsComponent
+                jobTitle={job.jobTitle}
+                jobDescription={job.jobDescription}
+              ></JobDetailsComponent>
             </div>
+          </div>
+          <div>
+            {job.applications
+              .filter(
+                (application) => application.applicationStatus !== "REFUSED"
+              )
+              .map((application) => (
+                <Card color="transparent" className="w-full max-w-[26rem] p-2">
+                  <CardHeader
+                    color="transparent"
+                    floated={false}
+                    shadow={false}
+                    className="mx-0 flex items-center gap-4 pt-0 pb-8"
+                  >
+                    <Avatar
+                      size="lg"
+                      variant="circular"
+                      src={person}
+                      alt="tania andrew"
+                    />
+                    <div className="flex w-full flex-col gap-0.5">
+                      <div className="flex items-center justify-between">
+                        <Typography variant="h5" color="blue-gray">
+                          {application.employee.user.first_name}{" "}
+                          {application.employee.user.last_name}
+                        </Typography>
+                        <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+                          {application.matchPercentage}
+                          {setRating(application.matchPercentage)}
+                        </div>
+                      </div>
+                      <Typography variant="small" color="blue-gray">
+                        {application.application_date}
+                      </Typography>
+                    </div>
+                  </CardHeader>
+                  <CardBody className="mb-6 p-0">
+                    <div className="flex items-center justify-between ">
+                      <Button
+                        onClick={() => handleAcceptApplication(application.id)}
+                      >
+                        Accept
+                      </Button>
+                      <Button
+                        onClick={() => handleRefuseApplication(application.id)}
+                      >
+                        Refuse{" "}
+                      </Button>
+                      <Button
+                        onClick={() => DownloadResume(application.employee.id)}
+                      >
+                        Download Resume{" "}
+                      </Button>
+                    </div>
+                  </CardBody>
+                </Card>
+              ))}
+          </div>
         </div>
       </div>
 

@@ -16,7 +16,13 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 
-export default function numberOfApplicants() {
+export default function NumberOfApplicants(props) {
+  const navigate = useNavigate();
+
+  const handleClick = (event,jobId) => {
+    event.preventDefault();
+    navigate(`/employer/${jobId}/applicants`);
+  };
   return (
     <Card className="mt-6 w-96">
       <CardBody>
@@ -27,13 +33,13 @@ export default function numberOfApplicants() {
           </Typography>
         </div>
 
-        <Typography variant="h5">12 Candidates</Typography>
+        <Typography variant="h5">{props.numberOfApplicants} Candidates</Typography>
       </CardBody>
       <CardFooter className="justify-between pt-0">
           <div style={{ position: "relative" }}>
             <div className="flex items-center justify-end">
               <b>
-                <a href="">Show All</a>
+                <a href="#" onClick={(event) => handleClick(event,props.jobId)}>Show All</a>
               </b>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

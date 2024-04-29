@@ -16,7 +16,7 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/solid";
 
-export default function SalaryEstimation() {
+export default function SalaryEstimation(props) {
   const navigate = useNavigate();
   const handleChoose = (page) => {
     navigate(page);
@@ -32,7 +32,7 @@ export default function SalaryEstimation() {
         </div>
 
         <div className="flex items-center gap-2">
-            <Typography variant="h5">$70000 - $100000</Typography>
+            <Typography variant="h5">${props.salaryMin} - ${props.salaryMax}</Typography>
             <SparklesIcon width={25}></SparklesIcon>
         </div>
        
