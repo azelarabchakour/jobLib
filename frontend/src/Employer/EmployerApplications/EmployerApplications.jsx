@@ -121,9 +121,10 @@ function ApplicationPage() {
                             <p>Candidate Name: {application.employee.user.username}</p>
                             <p>Contact info: {application.employee.user.email}</p>
                             <p>Application Status: {application.applicationStatus}</p>
+                            <p>Match: {application.matchPercentage}</p>
                             <button onClick={() => handleAcceptApplication(application.id)}>Accept</button>
                             <button onClick={() => handleRefuseApplication(application.id)}>Refuse</button>
-                            <button onClick={() => DownloadResume(application.id)}>Download Cv</button>
+                            <button onClick={() => DownloadResume(application.employee.id)}>Download Cv</button>
                         </li>
                     ))}
                 </ul>
