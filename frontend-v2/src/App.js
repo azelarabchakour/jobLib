@@ -1,4 +1,3 @@
-import HomePage2 from "./HomePage2/HomePage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Jobs from "./Employer/Jobs";
 import MatchedJobs from "./Employee/MatchedJobs";
@@ -10,13 +9,13 @@ import JobPostingDetails from "./Employer/JobPostingDetails";
 import JobDetails from "./Employer/JobDetails";
 import NavbarComponent from "./Components/NavbarComponent";
 import NavbarComponent1 from "./Components/NavBarComponent1"
-
+import HomePage from "./HomePage2/HomePage";
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/test" element={<JobDetails/>} />
-        <Route path="/" element={<HomePage2/>} />
+        <Route path="/" element={<HomePage/>} />
         {/* <Route path="/test" element={<JobDetails/>} /> */}
         <Route path="/test" element={<NavbarComponent1 />} />
         <Route path="/" element={<HomePage/>} />

@@ -15,7 +15,6 @@ import lineicons from "./assets/images/brands/lineicons.svg";
 import graygrids3 from "./assets/images/brands/lineicons-white.svg";
 import uideck from "./assets/images/brands/uideck.svg";
 import graygrids4 from "./assets/images/brands/uideck-white.svg";
-import Swiper from 'swiper';
 import Auth from '../Components/Auth.jsx'
 
 
