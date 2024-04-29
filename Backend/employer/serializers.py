@@ -6,8 +6,9 @@ from authentication.serializers import UserSerializer
 from jobMatch.utils import calculateSalaryEstimation, calculateSalaryEstimationV2
 from jobMatch.models import JobApplication
 from employee.serializers import EmployeeSerializer
-class EmployerSerializer(serializers.ModelSerializer):
 
+
+class EmployerSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     class Meta:
         model = Employer
@@ -17,7 +18,7 @@ class JobApplicationSerializer(serializers.ModelSerializer):
     employee = EmployeeSerializer(read_only=True)
     class Meta:
         model = JobApplication
-        fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting']
+        fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting','matchPercentage']
 
 class JobPostingSerializer(serializers.ModelSerializer):
     applications = JobApplicationSerializer(many=True, read_only=True)
