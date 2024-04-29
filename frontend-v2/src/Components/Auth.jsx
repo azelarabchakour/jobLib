@@ -113,9 +113,9 @@ export default function Auth() {
     <>
       <Button
         variant="gradient"
-        size="sm"
-        className=" transparent-background rounded-md bg-transparent px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-white hover:text-dark"
-        style={{ whiteSpace: 'nowrap' , backgroundColor: 'transparent' }}
+        // size="sm"
+        className=" white-background ml-16 rounded-md bg-white px-6 py-2 text-base font-medium text-black duration-300 ease-in-out hover:bg-white hover:text-dark"
+        style={{ whiteSpace: 'nowrap' , backgroundColor: 'white' }}
         onClick={handleOpen}
       >
     <span style={{ display: 'inline-block' }}>Join Us</span>

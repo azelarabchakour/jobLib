@@ -1,4 +1,4 @@
-import HomePage from "./HomePage/HomePage";
+import HomePage2 from "./HomePage2/HomePage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Jobs from "./Employer/Jobs";
 import MatchedJobs from "./Employee/MatchedJobs";
@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/test" element={<JobDetails/>} />
-        <Route path="/" element={<HomePage/>} />
+        <Route path="/" element={<HomePage2/>} />
         {/* authentication routes  */}
 
         {/* choose the user  */}
