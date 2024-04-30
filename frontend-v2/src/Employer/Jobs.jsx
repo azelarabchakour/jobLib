@@ -107,15 +107,6 @@ export default function Jobs() {
           oldJobs={oldJobs}
           activeJobs={activeJobs}
         ></TabsComponent>
-      {/* {oldJobDescriptions.map((job) => (
-        <JobPostingCard
-          id={job.id}
-          jobTitle={job.jobTitle}
-          jobDescription={job.jobDescription}
-          salary = {job.salaryMin + "$ - " + job.salaryMax + "$"} 
-          numberOfApplicants={job.numberOfApplicants}
-        ></JobPostingCard>
-      ))} */}
       </center>
       <Footer />
     </div>

@@ -30,12 +30,16 @@ export default function JobPostingCard(props) {
     />
   ));
 
-  const handleDetails = (jobId) => {
-    navigate(`/employer/${jobId}/details`);
+  const handleDetails = (jobId, jobStatus) => {
+    if (jobStatus === "POSTED") navigate(`/employer/${jobId}/jobDetails`);
+    else navigate(`/employer/${jobId}/details`);
   };
 
   return (
-    <Card className="mt-6 w-4/5 max-h-48 overflow-hidden" onClick={() => handleDetails(props.id)}>
+    <Card
+      className="mt-6 w-4/5 max-h-48 overflow-hidden"
+      onClick={() => handleDetails(props.id,props.jobStatus)}
+    >
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
           {props.jobTitle}
@@ -51,7 +55,7 @@ export default function JobPostingCard(props) {
           <Button
             variant="text"
             className="flex items-center gap-2"
-            onClick={() => handleDetails(props.id)}
+            onClick={() => handleDetails(props.id,props.jobStatus)}
           >
             Show Details{" "}
             <svg

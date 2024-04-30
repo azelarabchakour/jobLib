@@ -27,6 +27,7 @@ function App() {
         {/* employer  */}
         <Route path="/jobs" element={<Jobs/>} />
         <Route path="/employer/:jobId/details" element={<JobDetails />} />
+        <Route path="/employer/:jobId/jobDetails" element={<JobPostingDetails />} />
         <Route path="/employer/:jobId/applicants" element={<JobApplicants />} />
 
         {/* employee  */}

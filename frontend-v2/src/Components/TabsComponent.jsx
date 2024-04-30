@@ -44,6 +44,7 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
               jobDescription={job.jobDescription}
               salary={job.salaryMin + "$ - " + job.salaryMax + "$"}
               numberOfApplicants={job.numberOfApplicants}
+              jobStatus={job.jobStatus}
             ></JobPostingCard>
           ))}
         </TabPanel>
@@ -55,6 +56,7 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
               jobDescription={job.jobDescription}
               salary={job.salaryMin + "$ - " + job.salaryMax + "$"}
               numberOfApplicants={job.numberOfApplicants}
+              jobStatus={job.jobStatus}
             ></JobPostingCard>
           ))}
         </TabPanel>
