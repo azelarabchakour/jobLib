@@ -19,8 +19,8 @@ import {
 
 export default function Level(props) {
   const navigate = useNavigate();
-  const handleChoose = (page) => {
-    navigate(page);
+  const handleChoose = () => {
+    //navigate(page);
   };
   return (
     <Card className="mt-6 w-96">
@@ -33,7 +33,7 @@ export default function Level(props) {
         </div>
 
         <div className="flex items-center gap-2">
-          <Typography variant="h5">Intermediate level</Typography>
+          <Typography variant="h5">{props.level} level</Typography>
         </div>
       </CardBody>
       {props.jobStatus === "POSTED" && (
@@ -41,7 +41,7 @@ export default function Level(props) {
           <div style={{ position: "relative" }}>
             <div className="flex items-center justify-end">
               <b>
-                <a href="">Modify</a>
+                <a href="#">Modify</a>
               </b>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

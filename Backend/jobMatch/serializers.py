@@ -16,7 +16,7 @@ class CreateJobApplicationSerializer(serializers.ModelSerializer):
     #employee = EmployeeCustomSerializer()
     class Meta:
         model = JobApplication
-        fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting','matchPercentage']
+        fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting','matchPercentage','proposalLetter']
 
 class AnalyticsSerializer(serializers.ModelSerializer):
     #employee = EmployeeSerializer()

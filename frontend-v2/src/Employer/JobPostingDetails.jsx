@@ -28,20 +28,23 @@ import {
   Battery50Icon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
-function setRating(score) {
-  if (score > 90) return <Rating value={5} readonly ratedColor="blue" />;
-  else if (score > 80) return <Rating value={4} readonly ratedColor="blue" />;
-  else if (score > 70) return <Rating value={3} readonly ratedColor="yellow" />;
-  else if (score > 60) return <Rating value={2} readonly ratedColor="blue" />;
-  else if (score > 50) return <Rating value={1} readonly ratedColor="blue" />;
-  else return <Rating value={0} readonly />;
-}
+import { useNavigate } from "react-router-dom";
+
+// function setRating(score) {
+//   if (score > 90) return <Rating value={5} readonly ratedColor="blue" />;
+//   else if (score > 80) return <Rating value={4} readonly ratedColor="blue" />;
+//   else if (score > 70) return <Rating value={3} readonly ratedColor="yellow" />;
+//   else if (score > 60) return <Rating value={2} readonly ratedColor="blue" />;
+//   else if (score > 50) return <Rating value={1} readonly ratedColor="blue" />;
+//   else return <Rating value={0} readonly />;
+// }
 function JobPostingDetails(props) {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { jobId } = useParams(); // Extract jobId from the URL
-
+  const navigate = useNavigate();
+  
   // Function to fetch job details
   const fetchJobDetails = async () => {
     try {
@@ -140,6 +143,7 @@ function JobPostingDetails(props) {
       console.error("Error downloading resume:", error);
     }
   };
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -152,6 +156,9 @@ function JobPostingDetails(props) {
   if (!job) {
     return <div>No job found</div>;
   }
+  const updateJob = (updatedJob) => {
+    setJob(updatedJob);
+  };
 
   return (
     <>
@@ -166,12 +173,14 @@ function JobPostingDetails(props) {
                 salaryMin={job.salaryMin}
                 salaryMax={job.salaryMax}
                 jobStatus={job.jobStatus}
+                salary={job.salary}
               ></SalaryEstimation>
-              <Level jobStatus={job.jobStatus}></Level>
+              <Level jobStatus={job.jobStatus} level={job.level}></Level>
             </div>
           </Timeline>
           <center>
             <JobDetailsComponent
+              jobId={job.id}
               jobTitle={job.jobTitle}
               jobDescription={job.jobDescription}
               jobStatus={job.jobStatus}
@@ -195,15 +204,15 @@ function JobPostingDetails(props) {
                   </Typography>
                 </div>
                 <Typography variant="h5">
-                    {job.numberOfApplicants} Candidates
-                  </Typography>
+                  {job.numberOfApplicants} Candidates
+                </Typography>
               </CardBody>
             </Card>
             <div></div>
           </div>
           <center>
             <div className="">
-              <ListOfApplicants applications={job.applications} />
+              <ListOfApplicants jobId={job.id} updateJob={updateJob} />
             </div>
           </center>
         </div>

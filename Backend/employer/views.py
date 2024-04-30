@@ -67,7 +67,7 @@ class JobPostingViewSet(ModelViewSet):
         jobPosting.jobStatus = 'CANCELED'
         jobPosting.save()
         #mark all the job applications as canceled
-        jobApplications = JobApplication.objects.filter(jobPosting_id=pk)
+        jobApplications = JobApplication.objects.filter(job_posting_id=pk)
         for jobApplication in jobApplications:
             jobApplication.applicationStatus = 'CANCELED'
             jobApplication.save()

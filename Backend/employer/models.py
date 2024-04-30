@@ -21,6 +21,12 @@ class JobPosting(models.Model):
         ('DONE', 'Done'), #when the job is taken
         ('CANCELED', 'Canceled'), #when the employer cancel or delete the job
     ])
+    level = models.CharField(max_length=255, choices=[
+        ('ENTRY', 'Entry'),
+        ('INTERMEDIATE', 'Intermediate'),
+        ('SENIOR', 'Senior'),
+        ('EXPERT', 'Expert'),
+    ],default='ENTRY')
     numberOfApplicants = models.IntegerField(default=0)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='jobPostings')
 

@@ -18,14 +18,14 @@ class JobApplicationSerializer(serializers.ModelSerializer):
     employee = EmployeeSerializer(read_only=True)
     class Meta:
         model = JobApplication
-        fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting','matchPercentage']
+        fields = ['id', 'application_date', 'applicationStatus', 'employee', 'job_posting','matchPercentage','proposalLetter']
 
 class JobPostingSerializer(serializers.ModelSerializer):
     applications = JobApplicationSerializer(many=True, read_only=True)
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants']
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level']
         read_only_fields = ['id', 'employer', 'salaryMin', 'salaryMax', 'jobStatus','numberOfApplicants']
 
 class CreateJobPostingSerializer(serializers.ModelSerializer):
@@ -33,7 +33,7 @@ class CreateJobPostingSerializer(serializers.ModelSerializer):
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants']
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level']
         read_only_fields = ['id', 'employer','salaryMin', 'salaryMax', 'jobStatus','numberOfApplicants']
     
     def create(self, validated_data):

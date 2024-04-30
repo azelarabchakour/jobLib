@@ -14,21 +14,7 @@ import person from "../Assets/person.jpeg";
 
 export default function JobPostingCard(props) {
   const numberOfApplicants = props.numberOfApplicants;
-  const navigate = useNavigate();
-  // Determine the number of avatars to show and the count of remaining applicants
-  const avatarsToShow = Math.min(numberOfApplicants, 5);
-  const remainingApplicants = numberOfApplicants - avatarsToShow;
-
-  // Create an array of JSX elements representing avatars
-  const avatars = Array.from({ length: avatarsToShow }, (_, index) => (
-    <Avatar
-      size="sm"
-      variant="circular"
-      alt={`Applicant ${index + 1}`}
-      src={person}
-      className="border-2 border-white hover:z-10"
-    />
-  ));
+  const navigate = useNavigate();  
 
   const handleDetails = (jobId, jobStatus) => {
     if (jobStatus === "POSTED") navigate(`/employer/${jobId}/jobDetails`);
@@ -48,8 +34,7 @@ export default function JobPostingCard(props) {
       </CardBody>
       <CardFooter className="flex items-center justify-between">
         <div className="flex items-center -space-x-3">
-          {avatars}
-          {remainingApplicants > 0 && `+${remainingApplicants}`}
+          
         </div>
         <div className="flex items-center -space-x-3">
           <Button

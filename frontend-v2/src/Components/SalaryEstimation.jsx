@@ -21,7 +21,7 @@ export default function SalaryEstimation(props) {
 
   const handleModify = () => {
     // Navigate to the modify page
-    navigate("/modify");
+    //navigate("");
   };
 
   return (
@@ -34,11 +34,29 @@ export default function SalaryEstimation(props) {
           </Typography>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <Typography variant="h5">
             ${props.salaryMin} - ${props.salaryMax}
           </Typography>
           <SparklesIcon width={25}></SparklesIcon>
+        </div> */}
+
+        <div className="flex items-center gap-2">
+          {props.salary == null || props.salary === "" || props.salary === 0 ? (
+            <div className="flex items-center gap-2">
+              <Typography variant="h5">
+                {props.salaryMin}$ - {props.salaryMax}$
+              </Typography>
+              <SparklesIcon width={25}></SparklesIcon>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Typography variant="h5">
+                {props.salary}$
+              </Typography>
+              {/* <SparklesIcon width={25}></SparklesIcon> */}
+            </div>
+          )}
         </div>
       </CardBody>
 
