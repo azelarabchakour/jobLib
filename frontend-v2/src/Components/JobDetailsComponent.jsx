@@ -42,26 +42,28 @@ export default function JobDetailsComponent(props) {
         <Typography variant="h5" color="blue-gray" className="mb-2">
           {props.jobTitle}
         </Typography>
-          <Textarea rows={6} disabled>
-            {props.jobDescription}
-          </Textarea>
+        <Textarea rows={6} disabled>
+          {props.jobDescription}
+        </Textarea>
       </CardBody>
       <CardFooter className="flex items-center justify-between">
         <div className="flex items-center -space-x-3">
           {avatars}
           {remainingApplicants > 0 && `+${remainingApplicants}`}
         </div>
-        <div className="flex items-center -space-x-3">
-          <Button color="red" className="flex items-center">
-            {" "}
-            <TrashIcon className="w-4 mr-2"></TrashIcon> Delete
-          </Button>
-          <div className="pr-10"></div>
-          <Button color="orange" className="flex items-center">
-            {" "}
-            <PencilIcon className="w-4 mr-2"></PencilIcon> Modify
-          </Button>
-        </div>
+        {props.jobStatus === "POSTED" && (
+          <div className="flex items-center -space-x-3">
+            <Button color="red" className="flex items-center">
+              {" "}
+              <TrashIcon className="w-4 mr-2"></TrashIcon> Delete
+            </Button>
+            <div className="pr-10"></div>
+            <Button color="orange" className="flex items-center">
+              {" "}
+              <PencilIcon className="w-4 mr-2"></PencilIcon> Modify
+            </Button>
+          </div>
+        )}
       </CardFooter>
     </Card>
   );

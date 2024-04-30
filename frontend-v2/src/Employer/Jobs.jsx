@@ -6,10 +6,15 @@ import { useState, useEffect } from "react";
 import JobPostingCard from "../Components/JobPostingCard";
 import NavBarComponent1 from "../Components/NavBarComponent1";
 import Footer from "../Components/Footer";
+import TabsComponent from "../Components/TabsComponent";
 export default function Jobs() {
   const [oldJobDescriptions, setOldJobDescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [activeJobs, setActiveJobs] = useState([]);
+  const [oldJobs, setOldJobs] = useState([]);
+
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -18,6 +23,8 @@ export default function Jobs() {
     localStorage.removeItem("refreshToken");
     navigate("/"); // Navigate to login page
   };
+
+  
 
   useEffect(() => {
     const authToken = localStorage.getItem("accessToken");
@@ -34,6 +41,8 @@ export default function Jobs() {
         })
         .then((response) => {
           setOldJobDescriptions(response.data);
+          setActiveJobs(response.data.filter(job => job.jobStatus === "POSTED"));
+          setOldJobs(response.data.filter(job => job.jobStatus === "DONE"));
           setLoading(false);
         })
         .catch((error) => {
@@ -88,11 +97,17 @@ export default function Jobs() {
     );
   }
 
+  
+
   return (
     <div>
       <NavBarComponent1 />
       <center>
-      {oldJobDescriptions.map((job) => (
+        <TabsComponent 
+          oldJobs={oldJobs}
+          activeJobs={activeJobs}
+        ></TabsComponent>
+      {/* {oldJobDescriptions.map((job) => (
         <JobPostingCard
           id={job.id}
           jobTitle={job.jobTitle}
@@ -100,7 +115,7 @@ export default function Jobs() {
           salary = {job.salaryMin + "$ - " + job.salaryMax + "$"} 
           numberOfApplicants={job.numberOfApplicants}
         ></JobPostingCard>
-      ))}
+      ))} */}
       </center>
       <Footer />
     </div>

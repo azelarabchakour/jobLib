@@ -19,7 +19,7 @@ import {
 export default function NumberOfApplicants(props) {
   const navigate = useNavigate();
 
-  const handleClick = (event,jobId) => {
+  const handleClick = (event, jobId) => {
     event.preventDefault();
     navigate(`/employer/${jobId}/applicants`);
   };
@@ -32,14 +32,28 @@ export default function NumberOfApplicants(props) {
             Applicants
           </Typography>
         </div>
-
-        <Typography variant="h5">{props.numberOfApplicants} Candidates</Typography>
+        {props.jobStatus === "POSTED" && (
+          <Typography variant="h5">
+            {props.numberOfApplicants} Candidates
+          </Typography>
+        )}
+        {props.jobStatus === "DONE" && (
+          <Typography variant="h5">
+            Job Taken
+          </Typography>
+        )}
       </CardBody>
-      <CardFooter className="justify-between pt-0">
+      {props.jobStatus === "POSTED" && (
+        <CardFooter className="justify-between pt-0">
           <div style={{ position: "relative" }}>
             <div className="flex items-center justify-end">
               <b>
-                <a href="#" onClick={(event) => handleClick(event,props.jobId)}>Show All</a>
+                <a
+                  href="#"
+                  onClick={(event) => handleClick(event, props.jobId)}
+                >
+                  Show All
+                </a>
               </b>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +72,8 @@ export default function NumberOfApplicants(props) {
               </svg>
             </div>
           </div>
-      </CardFooter>
+        </CardFooter>
+      )}
     </Card>
   );
 }

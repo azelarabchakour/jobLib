@@ -6,7 +6,7 @@ import {
   Button,
   Tooltip,
 } from "@material-tailwind/react";
-import { Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   BellIcon,
@@ -18,30 +18,38 @@ import {
 
 export default function SalaryEstimation(props) {
   const navigate = useNavigate();
-  const handleChoose = (page) => {
-    navigate(page);
+
+  const handleModify = () => {
+    // Navigate to the modify page
+    navigate("/modify");
   };
+
   return (
     <Card className="mt-6 w-96">
       <CardBody>
         <div className="flex items-center gap-2">
           <CurrencyDollarIcon className="h-10 w-10" />
           <Typography variant="h4" color="blue-gray" className="mb-2 pt-3">
-             Salary 
+            Salary
           </Typography>
         </div>
 
         <div className="flex items-center gap-2">
-            <Typography variant="h5">${props.salaryMin} - ${props.salaryMax}</Typography>
-            <SparklesIcon width={25}></SparklesIcon>
+          <Typography variant="h5">
+            ${props.salaryMin} - ${props.salaryMax}
+          </Typography>
+          <SparklesIcon width={25}></SparklesIcon>
         </div>
-       
       </CardBody>
-      <CardFooter className="justify-between pt-0">
+
+      {props.jobStatus === "POSTED" && (
+        <CardFooter className="justify-between pt-0">
           <div style={{ position: "relative" }}>
             <div className="flex items-center justify-end">
               <b>
-                <a href="">Modify</a>
+                <a href="#" onClick={handleModify}>
+                  Modify
+                </a>
               </b>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +68,8 @@ export default function SalaryEstimation(props) {
               </svg>
             </div>
           </div>
-      </CardFooter>
+        </CardFooter>
+      )}
     </Card>
   );
 }

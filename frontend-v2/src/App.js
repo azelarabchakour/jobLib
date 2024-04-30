@@ -12,19 +12,18 @@ import NavbarComponent1 from "./Components/NavBarComponent1"
 import HomePage from "./HomePage/HomePage";
 import StepperWithContent from "./Components/StepperWithContent"
 import JobApplicants from "./Employer/JobApplicants";
+import TabsComponent from './Components/TabsComponent';
 
 function App() {
   return (
     <Router>
       {/* <NavbarComponent1></NavbarComponent1> */}
       <Routes>
-        <Route path="/test" element={<StepperWithContent/>} />
+        <Route path="/test" element={<TabsComponent/>} />
         {/* <Route path="/test" element={<HomePage />} /> */}
         <Route path="/" element={<HomePage/>} />
-        {/* authentication routes  */}
+        {/* authentication routes  */}        
 
-        {/* choose the user  */}
-        <Route path="/chooseRole" element={<ChooseRole/>} />
         {/* employer  */}
         <Route path="/jobs" element={<Jobs/>} />
         <Route path="/employer/:jobId/details" element={<JobDetails />} />
@@ -32,7 +31,9 @@ function App() {
 
         {/* employee  */}
         <Route path="/matchedJobs" element={<MatchedJobs/>} />
+
         {/* shared  */}
+        <Route path="/chooseRole" element={<ChooseRole/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/editProfile" element={<EditProfile/>} />
       </Routes>
