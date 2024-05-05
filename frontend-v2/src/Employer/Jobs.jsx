@@ -108,7 +108,7 @@ export default function Jobs() {
           activeJobs={activeJobs}
         ></TabsComponent>
       </center>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
