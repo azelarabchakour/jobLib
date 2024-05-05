@@ -13,4 +13,5 @@ urlpatterns = [
     path('applications/<int:pk>/accept/', views.acceptApplication, name='acceptApplication'),
     path('applications/<int:pk>/refuse/', views.refuseApplication, name='refuseApplication'),
     path('job/<int:pk>/modifyJob/', views.modifyJob, name='modifyJob'),
+    path('getSalaryEstimation/', views.getSalaryEstimation, name='getSalaryEstimation'),
 ]

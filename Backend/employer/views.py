@@ -9,6 +9,8 @@ from django.shortcuts import render
 from .models import Employer, JobPosting
 from .serializers import EmployerSerializer, JobPostingSerializer, CreateJobPostingSerializer
 from jobMatch.models import Analytics
+from jobMatch.utils import calculateSalaryEstimationV2
+
 # ------------------- AI STUFF -------------------
 # ------------------------------------------------
 
@@ -115,6 +117,8 @@ def refuseApplication(request, pk):
     #decrement the number of applications of the jobPosting
     jobPosting = JobPosting.objects.get(pk=jobApplication.job_posting.id)
     jobPosting.numberOfApplicants -= 1
+    if(jobPosting.numberOfApplicants < 0 ) :
+        jobPosting.numberOfApplicants = 0
     jobPosting.save()
     return Response({"message": "Job Application status updated successfully."}, status=status.HTTP_200_OK)
 
@@ -142,6 +146,17 @@ def modifyJob(request, pk):
                 match.delete()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST'])
+def getSalaryEstimation(request):
+    if request.method == 'GET':
+        return Response({'message': 'This endpoint accepts POST requests only'})
+    try:
+        input_text = request.body.decode('utf-8')
+        estimation = calculateSalaryEstimationV2(input_text)
+        return Response({'salary_estimation': estimation})
+    except :
+        return Response({'message': 'Error decoding request body'}, status=status.HTTP_400_BAD_REQUEST)
     
 # @api_view(['GET', 'PUT'])
 # def modifyExperience(request, pk):

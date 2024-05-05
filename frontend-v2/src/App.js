@@ -14,6 +14,7 @@ import StepperWithContent from "./Components/StepperWithContent"
 import JobApplicants from "./Employer/JobApplicants";
 import TabsComponent from './Components/TabsComponent';
 import TestD from './Components/test';
+import CreateJob from './Employer/CreateJob';
 function App() {
   return (
     <Router>
@@ -25,6 +26,7 @@ function App() {
         {/* authentication routes  */}        
 
         {/* employer  */}
+        <Route path='/employer/createJob' element={<CreateJob />} />
         <Route path="/jobs" element={<Jobs/>} />
         <Route path="/employer/:jobId/details" element={<JobDetails />} />
         <Route path="/employer/:jobId/jobDetails" element={<JobPostingDetails />} />
@@ -37,7 +39,7 @@ function App() {
         <Route path="/chooseRole" element={<ChooseRole/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/editProfile" element={<EditProfile/>} />
-        
+
       </Routes>
     </Router>
   );
