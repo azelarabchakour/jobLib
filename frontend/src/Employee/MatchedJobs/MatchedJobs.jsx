@@ -54,7 +54,7 @@ const MatchedJobs = () => {
         };
 
         fetchMatchedJobsAndDetails();
-    }, [refreshTrigger]); // Added refreshTrigger as a dependency to useEffect
+    }, [refreshTrigger]);
 
     const handleApplyButtonClick = async (jobPostingId) => {
         try {
