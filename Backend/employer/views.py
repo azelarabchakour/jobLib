@@ -143,6 +143,30 @@ def modifyJob(request, pk):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+# @api_view(['GET', 'PUT'])
+# def modifyExperience(request, pk):
+#     try:
+#         jobPosting = JobPosting.objects.get(pk=pk)
+#     except JobPosting.DoesNotExist:
+#         return Response({"error": "Job Posting not found."}, status=status.HTTP_404_NOT_FOUND)
+
+#     if request.method == 'GET':
+#         serializer = JobPostingSerializer(jobPosting)
+#         return Response(serializer.data)
+#     elif request.method in ['PUT', 'PATCH']: #Update the job posting
+#         serializer = CreateJobPostingSerializer(jobPosting, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save() 
+#             #After saving the new job posting delete all the job applications and the matches for this jobposting
+#             jobApplications = JobApplication.objects.filter(job_posting=pk)
+#             for jobApplication in jobApplications:
+#                 jobApplication.delete()
+#             analytics = Analytics.objects.filter(jobPosting=pk)
+#             for match in analytics:
+#                 match.delete()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 # @api_view(['GET'])
 # def getNumberOfApplicants(request, pk):
 #     try:

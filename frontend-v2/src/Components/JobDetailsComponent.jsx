@@ -8,15 +8,14 @@ import {
   Tooltip,
   Avatar,
   Textarea,
-} from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
-import {
   Dialog,
   DialogHeader,
   DialogBody,
   DialogFooter,
   Alert,
+  Input,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 import person from "../Assets/person.jpeg";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
@@ -56,8 +55,11 @@ export default function JobDetailsComponent(props) {
   const handleOpenModifyConfirmation = () =>
     setOpenModifyConfirmation(!openModifyConfirmation);
 
-  const [jobDescription, setJobDescription] = useState("");
-  const accessToken = localStorage.getItem('accessToken');
+  const [jobTitleComponent, setJobTitle] = useState(props.jobTitle);
+  const [jobDescription, setJobDescription] = useState(props.jobDescription);
+
+  const accessToken = localStorage.getItem("accessToken");
+
   // Create an array of JSX elements representing avatars
   const avatars = Array.from({ length: avatarsToShow }, (_, index) => (
     <Avatar
@@ -90,13 +92,13 @@ export default function JobDetailsComponent(props) {
   };
 
   const handleModify = (jobId) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
     const authToken = localStorage.getItem("accessToken");
     axios
       .put(
         `http://127.0.0.1:8000/employer/job/${jobId}/modifyJob/`,
         {
-          jobTitle: props.jobTitle,
+          jobTitle: jobTitleComponent,
           jobDescription: jobDescription,
         },
         {
@@ -107,7 +109,8 @@ export default function JobDetailsComponent(props) {
       )
       .then((response) => {
         console.log("Job updated successfully:", response.data);
-        //navigate("/employer/employer-old-jobs"); // Redirect to the old jobs page after successful update
+        navigate(`/employer/${jobId}/jobDetails`);
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error updating job:", error);
@@ -120,10 +123,10 @@ export default function JobDetailsComponent(props) {
       <Card className="mt-6 w-4/5 max-h-80 overflow-hidden">
         <CardBody>
           <Typography variant="h5" color="blue-gray" className="mb-2">
-            {props.jobTitle}
+          {jobTitleComponent}
           </Typography>
           <Textarea rows={6} disabled>
-            {props.jobDescription}
+            {jobDescription}
           </Textarea>
         </CardBody>
         <CardFooter className="flex items-center justify-between">
@@ -194,7 +197,23 @@ export default function JobDetailsComponent(props) {
       <Dialog size="lg" open={openModify} handler={handleOpenModify}>
         <DialogHeader>Modify your Job </DialogHeader>
         <DialogBody>
-          <Textarea rows={6}>{props.jobDescription}</Textarea>
+          <Input
+            label="Title"
+            value={jobTitleComponent}
+            onChange={(e) => setJobTitle(e.target.value)}
+          />
+          <div
+            className="p-2"
+          >
+
+          </div>
+          <Textarea
+            label="Description"
+            rows={6}
+            onChange={(e) => setJobDescription(e.target.value)}
+          >
+            {props.jobDescription}
+          </Textarea>
           <Alert variant="ghost" icon={<IconSolid />}>
             <Typography className="font-medium">
               Please note the following:
@@ -226,10 +245,11 @@ export default function JobDetailsComponent(props) {
             color="green"
             onClick={() => handleModify(props.jobId)}
           >
-            <span>Modify</span>
+            <span>Modify </span>
           </Button>
         </DialogFooter>
       </Dialog>
+      
     </>
   );
 }

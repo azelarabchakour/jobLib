@@ -37,6 +37,7 @@ function App() {
         <Route path="/chooseRole" element={<ChooseRole/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/editProfile" element={<EditProfile/>} />
+        
       </Routes>
     </Router>
   );

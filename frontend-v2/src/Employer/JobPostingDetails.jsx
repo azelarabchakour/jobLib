@@ -44,7 +44,7 @@ function JobPostingDetails(props) {
   const [error, setError] = useState("");
   const { jobId } = useParams(); // Extract jobId from the URL
   const navigate = useNavigate();
-  
+
   // Function to fetch job details
   const fetchJobDetails = async () => {
     try {
@@ -143,7 +143,6 @@ function JobPostingDetails(props) {
       console.error("Error downloading resume:", error);
     }
   };
-  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -156,6 +155,7 @@ function JobPostingDetails(props) {
   if (!job) {
     return <div>No job found</div>;
   }
+
   const updateJob = (updatedJob) => {
     setJob(updatedJob);
   };
@@ -175,7 +175,13 @@ function JobPostingDetails(props) {
                 jobStatus={job.jobStatus}
                 salary={job.salary}
               ></SalaryEstimation>
-              <Level jobStatus={job.jobStatus} level={job.level}></Level>
+              <Level 
+                jobId={job.id}
+                jobStatus={job.jobStatus} 
+                level={job.level}
+                jobTitle={job.jobTitle}
+                jobDescription={job.jobDescription}
+              ></Level>
             </div>
           </Timeline>
           <center>

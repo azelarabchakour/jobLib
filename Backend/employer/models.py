@@ -22,7 +22,7 @@ class JobPosting(models.Model):
         ('CANCELED', 'Canceled'), #when the employer cancel or delete the job
     ])
     level = models.CharField(max_length=255, choices=[
-        ('ENTRY', 'Entry'),
+        ('JUNIOR', 'Entry'),
         ('INTERMEDIATE', 'Intermediate'),
         ('SENIOR', 'Senior'),
         ('EXPERT', 'Expert'),
