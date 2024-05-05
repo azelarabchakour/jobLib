@@ -25,14 +25,40 @@ import {
   CurrencyEuroIcon,
   SparklesIcon,
 } from "@heroicons/react/24/solid";
+import axios from "axios";
 
 export default function SalaryEstimation(props) {
   const navigate = useNavigate();
   const [openModify, setOpenModify] = React.useState(false);
   const handleOpenModify = () => setOpenModify(!openModify);
-  const handleModify = () => {
-    // Navigate to the modify page
-    //navigate("");
+  const [salary, setSalary] = React.useState(props.salary);
+
+  const handleModify = (jobId) => {
+    const accessToken = localStorage.getItem("accessToken");
+    const authToken = localStorage.getItem("accessToken");
+    axios
+      .put(
+        `http://127.0.0.1:8000/employer/job/${jobId}/modifyJob/`,
+        {
+          jobTitle: props.jobTitle,
+          jobDescription: props.jobDescription,
+          salary: salary,
+        },
+        {
+          headers: {
+            Authorization: `JWT ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Job updated successfully:", response.data);
+        navigate(`/employer/${jobId}/jobDetails`);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error updating job:", error);
+        // Handle error
+      });
   };
 
   return (
@@ -113,7 +139,7 @@ export default function SalaryEstimation(props) {
               disabled
               value={props.salaryMin + " $"}
             />
-            
+
             <Typography variant="h5">-</Typography>
 
             <Input
@@ -146,13 +172,16 @@ export default function SalaryEstimation(props) {
 
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
-            <Input label="Job Salary" value={props.salary}/>
-            <CurrencyDollarIcon className="h-9 w-9" />
-            {/* <Typography variant="h6" color="blue-gray" className="">
+              <Input
+                label="Job Salary"
+                value={salary}
+                onChange={(e) => setSalary(e.target.value)}
+              />
+              <CurrencyDollarIcon className="h-9 w-9" />
+              {/* <Typography variant="h6" color="blue-gray" className="">
               $
               </Typography> */}
             </div>
-            
           </div>
           <Typography
             variant="small"
@@ -186,7 +215,7 @@ export default function SalaryEstimation(props) {
           <Button
             variant="gradient"
             color="green"
-            // onClick={() => handleModify(props.jobId)}
+            onClick={() => handleModify(props.jobId)}
           >
             <span>Modify </span>
           </Button>

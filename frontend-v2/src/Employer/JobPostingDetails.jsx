@@ -170,10 +170,13 @@ function JobPostingDetails(props) {
           <Timeline>
             <div className="flex items-center justify-between pr-10  pl-10">
               <SalaryEstimation
+                jobId={job.id}
                 salaryMin={job.salaryMin}
                 salaryMax={job.salaryMax}
                 jobStatus={job.jobStatus}
                 salary={job.salary}
+                jobTitle={job.jobTitle}
+                jobDescription={job.jobDescription}
               ></SalaryEstimation>
               <Level 
                 jobId={job.id}
