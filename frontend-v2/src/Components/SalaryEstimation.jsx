@@ -107,25 +107,53 @@ export default function SalaryEstimation(props) {
         <DialogHeader>Modify The Salary </DialogHeader>
         <DialogBody>
           <div className="flex items-center gap-2">
-          <Input
-            label="Salary Min"
-            icon={<i className="fas fa-heart" />}
-            disabled
-            value={props.salaryMin + " $"}
-          />
-          <Typography variant="h5">
-            -
-          </Typography>
-          
-          <Input
-            label="Salary Max"
-            icon={<i className="fas fa-heart" />}
-            disabled
-            value={props.salaryMax + " $"}
-          />
+            <Input
+              label="Salary Min"
+              icon={<i className="fas fa-heart" />}
+              disabled
+              value={props.salaryMin + " $"}
+            />
+            
+            <Typography variant="h5">-</Typography>
 
+            <Input
+              label="Salary Max"
+              icon={<i className="fas fa-heart" />}
+              disabled
+              value={props.salaryMax + " $"}
+            />
           </div>
-          
+
+          <Typography
+            variant="small"
+            color="gray"
+            className="mt-2 flex items-center gap-1 font-normal mb-6"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="-mt-px h-4 w-4"
+            >
+              <path
+                fillRule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                clipRule="evenodd"
+              />
+            </svg>
+            The salary provided by the AI can't be modified.
+          </Typography>
+
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+            <Input label="Job Salary" value={props.salary}/>
+            <CurrencyDollarIcon className="h-9 w-9" />
+            {/* <Typography variant="h6" color="blue-gray" className="">
+              $
+              </Typography> */}
+            </div>
+            
+          </div>
           <Typography
             variant="small"
             color="gray"
@@ -143,7 +171,7 @@ export default function SalaryEstimation(props) {
                 clipRule="evenodd"
               />
             </svg>
-            The salary provided by the AI can't be modified.
+            If you input a new salary, it will be used instead of the AI one.
           </Typography>
         </DialogBody>
         <DialogFooter>
