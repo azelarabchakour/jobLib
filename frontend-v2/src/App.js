@@ -15,6 +15,7 @@ import JobApplicants from "./Employer/JobApplicants";
 import TabsComponent from './Components/TabsComponent';
 import TestD from './Components/test';
 import CreateJob from './Employer/CreateJob';
+import UploadCv from './Employee/UploadCv.jsx';
 function App() {
   return (
     <Router>
@@ -34,6 +35,7 @@ function App() {
 
         {/* employee  */}
         <Route path="/matchedJobs" element={<MatchedJobs/>} />
+        <Route path="/uploadCv" element={<UploadCv/>} />
 
         {/* shared  */}
         <Route path="/chooseRole" element={<ChooseRole/>} />
