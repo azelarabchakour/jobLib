@@ -10,7 +10,7 @@ import { PricingCard } from "./Components/PricingCard";
 import JobPostingCard from "./Components/JobPostingCard";
 import CreateJobPosting from "./Components/CreateJobPosting";
 import AlertWithList from "./Components/AlertWithList";
-import UploadCv from "./Components/UploadCv";
+// import UploadCv from "./Components/UploadCv";
 import StepperWithContent from "./Components/StepperWithContent";
 import { ThemeProvider } from "@material-tailwind/react";
 import HomePage from "./HomePage/HomePage";
