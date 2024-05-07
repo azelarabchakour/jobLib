@@ -90,9 +90,11 @@ const MatchedJobs = () => {
           <MatchedCard
             key={job.id}
             id={job.id}
+            jobPosting={job.jobPosting}
             jobTitle={job.jobTitle}
             jobDescription={job.jobDescription}
             salary={job.salaryMin + "$ - " + job.salaryMax + "$"}
+            matchingPercentage={job.matchPercentage + "%"}
           />
         ))}
       </center>
