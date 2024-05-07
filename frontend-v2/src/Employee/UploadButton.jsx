@@ -66,32 +66,29 @@ function UploadButton() {
     <>
       <div className="absolute w-full md:w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div
-          className="w-full md:w-1/2 lg:w-2/3 xl:w-1/2 border border-dashed border-myBlue-300 border-2 rounded-md flex justify-center items-center"
-          style={{ maxWidth: "500px", height: "auto" }}
+          className="w-full md:w-1/2 lg:w-2/3 xl:w-1/2 border border-dashed border-myBlue-900 border-2 rounded-md flex justify-center items-center"
+          style={{ width: "800px", height: "300px" }}
         >
           <div
-            className="w-64 h-64"
+            className="w-64 flex flex-col items-center justify-center"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-5 w-5 left-3"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-              />
-            </svg>
-            <p className="text-myBlue-300 mt-24 text-center">
-              choose a file or drag it here
-            </p>
-            <div className="relative w-64 flex justify-center items-center">
+            <div className=" w-64">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={0.75}
+                stroke="currentColor"
+                className="h-20 w-40"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                />
+              </svg>
               <input
                 id="resume-upload"
                 type="file"
@@ -101,10 +98,11 @@ function UploadButton() {
               />
               <label
                 htmlFor="resume-upload"
-                className="cursor-pointer text-myBlue-950 px-4 py-2 rounded-md flex items-center gap-3"
+                className="cursor-pointer text-myBlue-950 px-4 py-2 rounded-md"
               >
                 Upload Your Resume
               </label>
+              <p className="text-myBlue-300">choose a file or drag it here</p>
             </div>
           </div>
           <br />
@@ -116,7 +114,7 @@ function UploadButton() {
         <p
           className={`text-sm ${
             status === "File Uploaded Successfully"
-              ? "text-#262c40"
+              ? "text-myBlue-950"
               : "text-red-600"
           }`}
         >
