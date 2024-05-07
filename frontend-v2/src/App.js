@@ -16,12 +16,13 @@ import TabsComponent from './Components/TabsComponent';
 import TestD from './Components/test';
 import CreateJob from './Employer/CreateJob';
 import UploadCv from './Employee/UploadCv.jsx';
+import FinalNavBar from './Components/FinalNavbar.jsx';
 function App() {
   return (
     <Router>
       {/* <NavbarComponent1></NavbarComponent1> */}
       <Routes>
-        <Route path="/test" element={<TestD/>} />
+        <Route path="/test" element={<FinalNavBar/>} />
         {/* <Route path="/test" element={<HomePage />} /> */}
         <Route path="/" element={<HomePage/>} />
         {/* authentication routes  */}        
