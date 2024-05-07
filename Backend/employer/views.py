@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import render
 from .models import Employer, JobPosting
-from .serializers import EmployerSerializer, JobPostingSerializer, CreateJobPostingSerializer
+from .serializers import CreateJobPostingWithDetailsSerializer, EmployerSerializer, JobPostingSerializer, CreateJobPostingSerializer
 from jobMatch.models import Analytics
 from jobMatch.utils import calculateSalaryEstimationV2
 
@@ -47,6 +47,8 @@ class JobPostingViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'addJob':
             return CreateJobPostingSerializer
+        if self.action == 'addJobWithDetails':
+            return CreateJobPostingWithDetailsSerializer
         return JobPostingSerializer
 
     @action(detail=False, methods=['GET', 'POST'])
@@ -57,6 +59,17 @@ class JobPostingViewSet(ModelViewSet):
             serializer.save(employer=employer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=False, methods=['GET', 'POST'])
+    def addJobWithDetails(self, request):
+        employer = Employer.objects.get(user_id=request.user.id)
+        serializer = CreateJobPostingWithDetailsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(employer=employer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
 
     @action(detail=True, methods=['GET', 'DELETE', 'PUT', 'PATCH'])
     def deleteJob(self, request, pk):
