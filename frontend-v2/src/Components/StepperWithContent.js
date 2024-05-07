@@ -57,10 +57,6 @@ export default function StepperWithContent() {
     }
   };
   
-  
-  
-  
-  
 
   const handleNext = () => {
     if (activeStep === 0 && jobDescription.trim() === "") {
