@@ -14,12 +14,3 @@ function UploadCv() {
 }
 
 export default UploadCv;
-
-{
-  /* <>
-      <input type="file" onChange={handleFileChange} accept=".pdf,.doc,.docx" />
-      <p>{file && `Selected File: ${file.name}`}</p>
-      <button onClick={saveFile}>Upload</button>
-      <p>{status}</p>
-    </> */
-}
