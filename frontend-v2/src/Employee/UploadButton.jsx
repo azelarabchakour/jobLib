@@ -16,9 +16,13 @@ function UploadButton() {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const selectedFile = e.dataTransfer.files[0];
-    setFile(selectedFile);
-    saveFile(selectedFile);
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile && droppedFile.type === "application/pdf") {
+      setFile(droppedFile);
+      saveFile(droppedFile);
+    } else {
+      setStatus("Please drop a PDF file");
+    }
   };
 
   const saveFile = (selectedFile) => {
