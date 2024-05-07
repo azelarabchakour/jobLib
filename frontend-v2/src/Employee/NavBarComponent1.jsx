@@ -31,19 +31,19 @@ import {
 } from "@heroicons/react/24/solid";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import Auth from "../Components/Auth";
+import person from "./../Assets/person.jpeg";
 
 function ProfileMenu() {
-
   const navigate = useNavigate();
 
-const handleLogout = () => {
-  // Clear any stored authentication token or user data
-  localStorage.removeItem("accessToken"); // the token is stored in localStorage
-  localStorage.removeItem("refreshToken");
-  navigate("/"); // Navigate to login page
-};
+  const handleLogout = () => {
+    // Clear any stored authentication token or user data
+    localStorage.removeItem("accessToken"); // the token is stored in localStorage
+    localStorage.removeItem("refreshToken");
+    navigate("/"); // Navigate to login page
+  };
 
-const profileMenuItems = [
+  const profileMenuItems = [
     {
       label: "My Profile",
       icon: UserCircleIcon,
@@ -75,7 +75,7 @@ const profileMenuItems = [
             size="sm"
             alt="tania andrew"
             className="border border-gray-900 p-0.5"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+            src={person}
           />
           <ChevronDownIcon
             strokeWidth={2.5}
@@ -135,8 +135,8 @@ export default function HomePageNavBarComponent1() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          <b>Pages</b>
+        <a href="/matchedJobs" className="flex items-center">
+          <b>Jobs</b>
         </a>
       </Typography>
       <Typography
@@ -192,8 +192,6 @@ export default function HomePageNavBarComponent1() {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
-              
-              
               <ProfileMenu />
             </div>
             <IconButton

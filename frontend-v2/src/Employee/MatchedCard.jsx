@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -19,14 +20,33 @@ import {
 import person from "../Assets/person.jpeg";
 
 export default function MatchedCard(props) {
+  console.log("Props received:", props);
   const numberOfApplicants = props.numberOfApplicants;
   const navigate = useNavigate();
   const [openModify, setOpenModify] = React.useState(false);
   const handleOpenModify = () => setOpenModify(!openModify);
+  const [refreshTrigger, setRefreshTrigger] = useState(false); // Added state variable for refresh
 
-  const handleDetails = (jobId, jobStatus) => {
-    if (jobStatus === "POSTED") navigate(`/employer/${jobId}/jobDetails`);
-    else navigate(`/employer/${jobId}/details`);
+  const handleApply = async (jobPostingId) => {
+    try {
+      const authToken = localStorage.getItem("accessToken");
+      await axios.post(
+        `http://127.0.0.1:8000/employee/jobs/${jobPostingId}/apply/`,
+        {},
+        {
+          headers: {
+            Authorization: `JWT ${authToken}`,
+          },
+        }
+      );
+      alert("You have successfully applied to this job!");
+      setRefreshTrigger(!refreshTrigger);
+      handleOpenModify(); // Close the dialog
+      window.location.reload(); // Refresh the page
+    } catch (error) {
+      console.error("Error applying to job:", error);
+      alert("Error applying to job. Please try again later.");
+    }
   };
 
   return (
@@ -70,73 +90,45 @@ export default function MatchedCard(props) {
       </Card>
 
       {/* MODIFY Dialog */}
-      <Dialog size="sm" open={openModify} handler={handleOpenModify}>
+      <Dialog size="lg" open={openModify} handler={handleOpenModify}>
         <DialogHeader>Job Details</DialogHeader>
         <DialogBody>
-          <div className="flex items-center gap-2">
-            <Input
-              label="Salary Min"
-              icon={<i className="fas fa-heart" />}
-              disabled
-              value={props.salaryMin + " $"}
-            />
-
-            <Typography variant="h5">-</Typography>
-
-            <Input
-              label="Salary Max"
-              icon={<i className="fas fa-heart" />}
-              disabled
-              value={props.salaryMax + " $"}
-            />
-          </div>
-
-          <Typography
-            variant="small"
-            color="gray"
-            className="mt-2 flex items-center gap-1 font-normal mb-6"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="-mt-px h-4 w-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                clipRule="evenodd"
-              />
-            </svg>
-            The salary provided by the AI can't be modified.
+          <Typography variant="h5" color="blue-gray" className="mb-2">
+            {props.jobTitle}
           </Typography>
-
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2">
-              <Input label="Job Salary" />
-              {/* <Typography variant="h6" color="blue-gray" className="">
-              $
-              </Typography> */}
-            </div>
+          <div className="overflow-auto max-h-64">
+            <Typography>{props.jobDescription}</Typography>
           </div>
-          <Typography
-            variant="small"
-            color="gray"
-            className="mt-2 flex items-center gap-1 font-normal"
-          >
+          <Typography variant="h5" color="blue-gray" className="mb-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="-mt-px h-4 w-4"
+              class="w-10 h-15 inline m-1"
             >
+              <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 0 1-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004ZM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 0 1-.921.42Z" />
               <path
-                fillRule="evenodd"
-                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                clipRule="evenodd"
+                fill-rule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v.816a3.836 3.836 0 0 0-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 0 1-.921-.421l-.879-.66a.75.75 0 0 0-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 0 0 1.5 0v-.81a4.124 4.124 0 0 0 1.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 0 0-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 0 0 .933-1.175l-.415-.33a3.836 3.836 0 0 0-1.719-.755V6Z"
+                clip-rule="evenodd"
               />
             </svg>
-            If you input a new salary, it will be used instead of the AI one.
+            {props.salary}
+          </Typography>
+          <Typography variant="h5" color="blue-gray" className="mb-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="w-8 h-13 inline m-1"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            {props.matchingPercentage}
           </Typography>
         </DialogBody>
         <DialogFooter>
@@ -151,7 +143,7 @@ export default function MatchedCard(props) {
           <Button
             variant="gradient"
             color="green"
-            // onClick={() => handleModify(props.jobId)}
+            onClick={() => handleApply(props.jobPosting)}
           >
             <span>Apply</span>
           </Button>
