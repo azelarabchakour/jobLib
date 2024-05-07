@@ -102,7 +102,7 @@ function UploadButton() {
               >
                 Upload Your Resume
               </label>
-              <p className="text-myBlue-300">choose a file or drag it here</p>
+              <p className="text-myBlue-400">choose a file or drag it here</p>
             </div>
           </div>
           <br />

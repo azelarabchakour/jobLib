@@ -5,7 +5,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import { Router, useNavigate } from 'react-router-dom';
+import { Router, useNavigate } from "react-router-dom";
 import {
   BellIcon,
   ArchiveBoxIcon,
@@ -22,14 +22,12 @@ export default function EmployeeRole() {
     navigate(page);
   };
   return (
-
-   
     <Card className="mt-6 w-96">
       <CardBody>
-       <div className="mb-4 h-12 w-12 text-gray-900">
-        <UserIcon></UserIcon>
-       </div>
-       
+        <div className="mb-4 h-12 w-12 text-gray-900">
+          <UserIcon></UserIcon>
+        </div>
+
         <Typography variant="h5" color="blue-gray" className="mb-2">
           Employee
         </Typography>
@@ -37,7 +35,12 @@ export default function EmployeeRole() {
       </CardBody>
       <CardFooter className="pt-0">
         <a href="#" className="inline-block">
-          <Button size="sm" variant="text" className="flex items-center gap-2" onClick={() => handleChoose("/matchedJobs")}>
+          <Button
+            size="sm"
+            variant="text"
+            className="flex items-center gap-2"
+            onClick={() => handleChoose("/uploadCv")}
+          >
             Apply as a Freelancer
             <svg
               xmlns="http://www.w3.org/2000/svg"
