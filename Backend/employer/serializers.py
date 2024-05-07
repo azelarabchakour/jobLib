@@ -66,5 +66,24 @@ class CreateJobPostingSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
     
 
+class CreateJobPostingWithDetailsSerializer(serializers.ModelSerializer):
+    applications = JobApplicationSerializer(many=True, read_only=True)
+    employer = EmployerSerializer(read_only=True)
+    class Meta:
+        model = JobPosting
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level']
+        read_only_fields = ['id', 'employer', 'jobStatus','numberOfApplicants']
     
+    # def create(self, validated_data):
+    #     job_description = validated_data.pop('jobDescription', '')  # Extract job description
+    #     salary_estimation = calculateSalaryEstimationV2(job_description)
+
+    #     validated_data['jobDescription'] = job_description
+    #     validated_data['jobStatus'] = 'POSTED'
+    #     # Add salary estimation to validated data
+    #     validated_data['salaryMin'] = salary_estimation['min_salary']
+    #     validated_data['salaryMax'] = salary_estimation['max_salary']
+    #     # Call the parent class's create method to save the instance
+    #     return super().create(validated_data)   
+
     

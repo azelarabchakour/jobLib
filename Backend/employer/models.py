@@ -20,7 +20,7 @@ class JobPosting(models.Model):
         ('POSTED', 'Posted'), #default status when the employer post the job
         ('DONE', 'Done'), #when the job is taken
         ('CANCELED', 'Canceled'), #when the employer cancel or delete the job
-    ])
+    ],default='POSTED')
     level = models.CharField(max_length=255, choices=[
         ('JUNIOR', 'Entry'),
         ('INTERMEDIATE', 'Intermediate'),
