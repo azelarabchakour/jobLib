@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import NavBarComponent1 from "./NavBarComponent1";
+import ApplicationsCard from "./ApplicationsCard";
+import { UnderlineTabs } from "./UnderlineTabs"; // Import the UnderlineTabs component
 
-function ApplicationPage() {
+function Application() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [activeTab, setActiveTab] = useState("APPLIED"); // State variable to manage the active tab
+  const [filteredJobs, setFilteredJobs] = useState([]); // State variable to store filtered jobs
 
   useEffect(() => {
     const authToken = localStorage.getItem("accessToken");
@@ -41,43 +46,48 @@ function ApplicationPage() {
       });
   }, []);
 
+  // Filter jobs based on the active tab
+  useEffect(() => {
+    if (activeTab === "APPLIED") {
+      setFilteredJobs(
+        jobs.filter((job) => job.applicationStatus === "APPLIED")
+      );
+    } else if (activeTab === "ACCEPTED") {
+      setFilteredJobs(
+        jobs.filter((job) => job.applicationStatus === "ACCEPTED")
+      );
+    } else if (activeTab === "REFUSED") {
+      setFilteredJobs(
+        jobs.filter((job) => job.applicationStatus === "REFUSED")
+      );
+    } else if (activeTab === "CANCELED") {
+      setFilteredJobs(
+        jobs.filter((job) => job.applicationStatus === "CANCELED")
+      );
+    }
+  }, [jobs, activeTab]);
+
   return (
     <>
-      <div className="card-old-job-descriptions">
-        <h1>Jobs Applied</h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <ul>
-            {jobs.map((job) => (
-              <li key={job.id} className="job-card">
-                <div className="job-card-content">
-                  <h2 className="job-title">{job.jobTitle}</h2>
-                  <p className="job-description">{job.jobDescription}</p>
-                  <p className="job-description">
-                    Application Date: {job.applicationDate}
-                  </p>
-                  <p className="job-description">
-                    Application Status: {job.applicationStatus}
-                  </p>
-                  <p className="job-description">Employer: {job.employer}</p>
-                  <p className="job-description">
-                    Salary Range: {job.salaryMin} - {job.salaryMax}
-                  </p>
-                  <p className="job-description">
-                    Match Percentage: {job.matchPercentage}%
-                  </p>
-                </div>
-                <div className="job-actions">{/* Add your buttons here */}</div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <NavBarComponent1 />
+      <UnderlineTabs setActiveTab={setActiveTab} />{" "}
+      {/* Render the tabs component */}
+      <center>
+        {filteredJobs.map((job) => (
+          <ApplicationsCard
+            key={job.id}
+            id={job.id}
+            jobPosting={job.jobPosting}
+            jobTitle={job.jobTitle}
+            jobDescription={job.jobDescription}
+            salary={job.salaryMin + "$ - " + job.salaryMax + "$"}
+            matchingPercentage={job.matchPercentage + "%"}
+            applicationStatus={job.applicationStatus}
+          />
+        ))}
+      </center>
     </>
   );
 }
 
-export default ApplicationPage;
+export default Application;

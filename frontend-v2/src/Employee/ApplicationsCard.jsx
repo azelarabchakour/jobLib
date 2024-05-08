@@ -19,34 +19,13 @@ import {
 } from "@material-tailwind/react";
 import person from "../Assets/person.jpeg";
 
-export default function MatchedCard(props) {
-  console.log("Props received:", props);
+export default function ApplicationsCard(props) {
+  //tets props in the console
+  // console.log("Props received:", props);
   const navigate = useNavigate();
   const [openModify, setOpenModify] = React.useState(false);
   const handleOpenModify = () => setOpenModify(!openModify);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
-
-  const handleApply = async (jobPostingId) => {
-    try {
-      const authToken = localStorage.getItem("accessToken");
-      await axios.post(
-        `http://127.0.0.1:8000/employee/jobs/${jobPostingId}/apply/`,
-        {},
-        {
-          headers: {
-            Authorization: `JWT ${authToken}`,
-          },
-        }
-      );
-      alert("You have successfully applied to this job!");
-      setRefreshTrigger(!refreshTrigger);
-      handleOpenModify(); // Close the dialog
-      window.location.reload(); // Refresh the page
-    } catch (error) {
-      console.error("Error applying to job:", error);
-      alert("Error applying to job. Please try again later.");
-    }
-  };
 
   return (
     <>
@@ -88,7 +67,7 @@ export default function MatchedCard(props) {
         </CardFooter>
       </Card>
 
-      {/* Job details Dialog */}
+      {/* Applications Dialog */}
       <Dialog size="lg" open={openModify} handler={handleOpenModify}>
         <DialogHeader>Job Details</DialogHeader>
         <DialogBody>
@@ -103,7 +82,7 @@ export default function MatchedCard(props) {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              class="w-10 h-15 inline m-1"
+              class="w-10 h-15 inline mr-1"
             >
               <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 0 1-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004ZM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 0 1-.921.42Z" />
               <path
@@ -119,7 +98,7 @@ export default function MatchedCard(props) {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              class="w-8 h-13 inline m-1"
+              class="w-8 h-13 inline mr-1"
             >
               <path
                 fill-rule="evenodd"
@@ -129,24 +108,24 @@ export default function MatchedCard(props) {
             </svg>
             {props.matchingPercentage}
           </Typography>
+          <Typography variant="h5" color="blue-gray" className="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-8 h-13 inline mr-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+              />
+            </svg>
+            {props.applicationStatus}
+          </Typography>
         </DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            className="mr-1"
-            onClick={() => handleOpenModify()}
-          >
-            <span>Cancel</span>
-          </Button>
-          <Button
-            variant="gradient"
-            color="green"
-            onClick={() => handleApply(props.jobPosting)}
-          >
-            <span>Apply</span>
-          </Button>
-        </DialogFooter>
       </Dialog>
     </>
   );
