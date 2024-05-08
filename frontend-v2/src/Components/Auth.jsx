@@ -129,18 +129,18 @@ export default function Auth() {
       >
         <Card className="mx-auto w-full max-w-[24rem] ">
           <CardHeader
-            color="gray" //header card color
+            color="red" //header card color
             floated={false}
             shadow={false}
-            className="m-0 grid place-items-center px-4 py-8 text-center"
+            className="m-0 grid place-items-center px-4 py-8 text-center bg-gradient-to-b from-myBlue-400 to-myBlue-700"
           >
             <div className="mb-4 h-1 p-6 text-white">
               {type === "card" ? (
-                <Typography variant="h5" color="white">
+                <Typography variant="h5" className="text-myBlue-50">
                   SIGN IN
                 </Typography>
               ) : (
-                <Typography variant="h5" color="white">
+                <Typography variant="h5" className="text-myBlue-50">
                   SIGN UP
                 </Typography>
               )}
@@ -175,20 +175,22 @@ export default function Auth() {
                   <TabPanel value="card" className="p-0">
                     <Card className="mx-auto w-full max-w-[24rem]">
                       <CardBody className="flex flex-col gap-4">
-                        <Typography className="-mb-2" variant="h6">
+                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
                           Your Username
                         </Typography>
                         <Input
                           label="Username"
+                          color="blue-gray"
                           size="lg"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
-                        <Typography className="-mb-2" variant="h6">
+                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
                           Your Password
                         </Typography>
                         <Input
                           label="Password"
+                          color="blue-gray"
                           size="lg"
                           type="password"
                           value={password}
@@ -200,25 +202,13 @@ export default function Auth() {
                       </CardBody>
                       <CardFooter className="pt-0 flex flex-col items-center gap-4">
                         <Button
-                          variant="gradient"
+                          // variant="gradient"
                           onClick={handleOpen}
                           fullWidth
                           type="submit"
+                          className="bg-myBlue-700 text-myBlue-50"
                         >
                           Sign In
-                        </Button>
-                        <Button
-                          size="lg"
-                          variant="outlined"
-                          color="blue-gray"
-                          className="flex items-center gap-3"
-                        >
-                          <img
-                            src="https://docs.material-tailwind.com/icons/google.svg"
-                            alt="metamask"
-                            className="h-6 w-6"
-                          />
-                          Continue with Google
                         </Button>
                         <Typography
                           variant="small"
@@ -230,7 +220,7 @@ export default function Auth() {
                             href="#signup"
                             variant="small"
                             color="blue-gray"
-                            className="ml-1 font-bold"
+                            className="ml-1 font-bold text-myBlue-950"
                             onClick={handleOpen}
                           >
                             Sign up
@@ -245,30 +235,33 @@ export default function Auth() {
                   <TabPanel value="paypal" className="p-0">
                     <Card className="mx-auto w-full max-w-[24rem]">
                       <CardBody className="flex flex-col gap-4">
-                        <Typography className="-mb-2" variant="h6">
+                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
                           Your Username
                         </Typography>
                         <Input
                           label="Username"
+                          color="blue-gray"
                           size="lg"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
-                        <Typography className="-mb-2" variant="h6">
+                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
                           Your Email
                         </Typography>
                         <Input
                           label="Email"
+                          color="blue-gray"
                           size="lg"
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
-                        <Typography className="-mb-2" variant="h6">
+                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
                           Your Password
                         </Typography>
                         <Input
                           label="Password"
+                          color="blue-gray"
                           size="lg"
                           type="password"
                           value={password}
@@ -277,14 +270,14 @@ export default function Auth() {
                         <div className="my-4 flex items-center gap-4">
                           <div>
                             <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="mb-2 font-medium"
+                              variant="h6"
+                              className="mb-2 text-myBlue-800"
                             >
                               First Name
                             </Typography>
                             <Input
                               label="First Name"
+                              color="blue-gray"
                               containerProps={{ className: "min-w-[72px]" }}
                               value={first_name}
                               onChange={(e) => setFirstName(e.target.value)}
@@ -292,14 +285,14 @@ export default function Auth() {
                           </div>
                           <div>
                             <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="mb-2 font-medium"
+                              variant="h6"
+                              className="mb-2 text-myBlue-800"
                             >
                               Last Name
                             </Typography>
                             <Input
                               label="Last Name"
+                              color="blue-gray"
                               containerProps={{ className: "min-w-[72px]" }}
                               value={last_name}
                               onChange={(e) => setLastName(e.target.value)}
@@ -309,25 +302,12 @@ export default function Auth() {
                       </CardBody>
                       <CardFooter className="pt-0 flex flex-col items-center gap-4">
                         <Button
-                          variant="gradient"
                           onClick={handleOpen}
                           fullWidth
                           type="submit"
+                          className="bg-myBlue-700 text-myBlue-50"
                         >
                           Sign Up
-                        </Button>
-                        <Button
-                          size="lg"
-                          variant="outlined"
-                          color="blue-gray"
-                          className="flex items-center gap-3"
-                        >
-                          <img
-                            src="https://docs.material-tailwind.com/icons/google.svg"
-                            alt="metamask"
-                            className="h-6 w-6"
-                          />
-                          Continue with Google
                         </Button>
                         <Typography
                           variant="small"
@@ -339,7 +319,7 @@ export default function Auth() {
                             href="#signup"
                             variant="small"
                             color="blue-gray"
-                            className="ml-1 font-bold"
+                            className="ml-1 font-bold text-myBlue-950"
                             onClick={handleOpen}
                           >
                             Sign in

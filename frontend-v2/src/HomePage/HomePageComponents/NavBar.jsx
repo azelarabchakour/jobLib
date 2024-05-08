@@ -36,7 +36,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <header className={` ud-header absolute left-0 top-0 z-40 flex w-full items-center ${isSticky ? 'bg-gray-800' : 'bg-transparent'} ${isSticky ? 'sticky' : ''}` }>
+        <header className={`pt-4 ud-header absolute left-0 top-0 z-40 flex w-full items-center ${isSticky ? 'bg-gray-800' : 'bg-transparent'} ${isSticky ? 'sticky' : ''}` }>
             <div className="container">
                 <div className="relative -mx-4 flex items-center justify-between">
                     <div className="w-60 max-w-full px-4">
