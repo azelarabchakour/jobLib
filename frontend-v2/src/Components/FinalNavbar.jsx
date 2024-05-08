@@ -39,15 +39,18 @@ export default function FinalNavBar() {
   const [openNav, setOpenNav] = useState(false);
   const [switchState, setSwitchState] = useState(false); // State for the switch
 
-  const navItems = switchState
-    ? [
-        { label: "Jobs", link: "#" },
-        { label: "Account", link: "#" },
-      ]
-    : [
-        { label: "Blocks", link: "#" },
-        { label: "Docs", link: "#" },
-      ];
+  
+
+  const [navItems, setNavItems] = useState([
+    { label: "Jobs", link: "/jobs" },
+    { label: "Account", link: "#" },
+  ]);
+
+  const handleNavItemClicked = (link) => {
+    // Handle navigation here, e.g., using React Router
+    //console.log("Navigating to:", link);
+    navigate(link);
+  };
 
   const handleSwitchToggle = () => {
     setSwitchState((prevState) => !prevState);
@@ -55,9 +58,19 @@ export default function FinalNavBar() {
 
   const handleSwitchClick = (option) => {
     setActiveOption(option);
-    handleSwitchToggle();
+    if (option === SwitchOptions.OPTION1) {
+      setNavItems([
+        { label: "Jobs", link: "/jobs" },
+        { label: "Account", link: "#" },
+      ]);
+    } else if (option === SwitchOptions.OPTION2) {
+      setNavItems([
+        { label: "Blocks", link: "#" },
+        { label: "Docs", link: "#" },
+      ]);
+    }
   };
-
+  
   const navigate = useNavigate();
 
 
@@ -248,7 +261,11 @@ export default function FinalNavBar() {
               </div>
             </Typography>
             <div className="flex items-center gap-4">
-              <div className="mr-4 hidden lg:block">{navList}</div>
+              <div className="mr-4 hidden lg:block">{navItems.map((item, index) => (
+                <a key={index} href={item.link} className="mr-4" onClick={() => handleNavItemClicked(item.link)}>
+                  {item.label}
+                </a>
+              ))}</div>
               {/* ---------------------------------------------------- */}
               <Switch checked={switchState} onclick={handleSwitchToggle} />{" "}
               {/* Render the Switch component with props */}
