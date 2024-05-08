@@ -8,7 +8,7 @@ export default function ChooseRole() {
     <>
       <NavbarComponent1 />
       <center>
-      <Typography variant="h1" className="pb-20">Choose your role</Typography>
+      <Typography variant="h1" className="pb-20 text-myBlue-900">Choose your role</Typography>
         <div className="flex items-center justify-center"> 
           <EmployeeRole/>
           <div className="pl-10"></div>

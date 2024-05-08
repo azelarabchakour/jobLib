@@ -23,9 +23,9 @@ const EmployerRole = () => {
     <Card className="mt-6 w-96">
       <CardBody>
         <div className="mb-4 h-12 w-12 text-gray-900">
-          <BriefcaseIcon></BriefcaseIcon>
+          <BriefcaseIcon className="text-myBlue-600"></BriefcaseIcon>
         </div>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
+        <Typography variant="h5" className="mb-2 text-myBlue-900">
           Employer
         </Typography>
         <Typography>I'm a client, hiring for a project</Typography>
@@ -35,7 +35,7 @@ const EmployerRole = () => {
           <Button
             size="sm"
             variant="text"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 hover:bg-myBlue-700 hover:text-myBlue-50"
             onClick={() => handleChoose("/jobs")}
           >
             Join as a Client

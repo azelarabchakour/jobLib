@@ -25,10 +25,10 @@ export default function EmployeeRole() {
     <Card className="mt-6 w-96">
       <CardBody>
         <div className="mb-4 h-12 w-12 text-gray-900">
-          <UserIcon></UserIcon>
+          <UserIcon className="text-myBlue-600"></UserIcon>
         </div>
 
-        <Typography variant="h5" color="blue-gray" className="mb-2">
+        <Typography variant="h5" className="mb-2 text-myBlue-900">
           Employee
         </Typography>
         <Typography>I'm a freelancer, looking for a job</Typography>
@@ -38,7 +38,7 @@ export default function EmployeeRole() {
           <Button
             size="sm"
             variant="text"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 hover:bg-myBlue-700 hover:text-myBlue-50"
             onClick={() => handleChoose("/uploadCv")}
           >
             Apply as a Freelancer
