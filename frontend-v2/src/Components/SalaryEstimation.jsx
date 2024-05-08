@@ -66,18 +66,11 @@ export default function SalaryEstimation(props) {
       <Card className="mt-6 w-96">
         <CardBody>
           <div className="flex items-center gap-2">
-            <CurrencyDollarIcon className="h-10 w-10" />
+            <CurrencyDollarIcon className="h-10 w-10 text-myBlue-700" />
             <Typography variant="h4" color="blue-gray" className="mb-2 pt-3">
               Salary
             </Typography>
           </div>
-
-          {/* <div className="flex items-center gap-2">
-          <Typography variant="h5">
-            ${props.salaryMin} - ${props.salaryMax}
-          </Typography>
-          <SparklesIcon width={25}></SparklesIcon>
-        </div> */}
 
           <div className="flex items-center gap-2">
             {props.salary == null ||

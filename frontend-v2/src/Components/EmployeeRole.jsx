@@ -22,13 +22,13 @@ export default function EmployeeRole() {
     navigate(page);
   };
   return (
-    <Card className="mt-6 w-96">
+    <Card className="mt-6 w-96 hover:bg-mantis-50">
       <CardBody>
         <div className="mb-4 h-12 w-12 text-gray-900">
-          <UserIcon className="text-myBlue-600"></UserIcon>
+          <UserIcon className="text-mantis-600"></UserIcon>
         </div>
 
-        <Typography variant="h5" className="mb-2 text-myBlue-900">
+        <Typography variant="h5" className="mb-2 text-mantis-900">
           Employee
         </Typography>
         <Typography>I'm a freelancer, looking for a job</Typography>
@@ -38,7 +38,7 @@ export default function EmployeeRole() {
           <Button
             size="sm"
             variant="text"
-            className="flex items-center gap-2 hover:bg-myBlue-700 hover:text-myBlue-50"
+            className="flex items-center gap-2 hover:bg-mantis-700 hover:text-mantis-50"
             onClick={() => handleChoose("/uploadCv")}
           >
             Apply as a Freelancer

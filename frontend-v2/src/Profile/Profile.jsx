@@ -10,6 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ModifyPassword from "../Components/ModifyPassword";
 import EditProfile from "../Components/EditProfile";
+import FinalNavBar from "../Components/FinalNavbar";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState(null);
@@ -53,6 +54,9 @@ export default function Profile() {
   }
 
   return (
+    <>
+    
+   <FinalNavBar/>
     <Card className="mt-6 w-96">
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
@@ -79,5 +83,6 @@ export default function Profile() {
       </CardBody>
       <CardFooter className="pt-0"></CardFooter>
     </Card>
+    </>
   );
 }

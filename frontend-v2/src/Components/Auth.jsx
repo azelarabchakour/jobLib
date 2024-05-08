@@ -132,15 +132,15 @@ export default function Auth() {
             color="red" //header card color
             floated={false}
             shadow={false}
-            className="m-0 grid place-items-center px-4 py-8 text-center bg-gradient-to-b from-myBlue-400 to-myBlue-700"
+            className="m-0 grid place-items-center px-4 py-8 text-center bg-gradient-to-b from-mantis-400 to-mantis-700"
           >
             <div className="mb-4 h-1 p-6 text-white">
               {type === "card" ? (
-                <Typography variant="h5" className="text-myBlue-50">
+                <Typography variant="h5" className="text-mantis-50">
                   SIGN IN
                 </Typography>
               ) : (
-                <Typography variant="h5" className="text-myBlue-50">
+                <Typography variant="h5" className="text-mantis-50">
                   SIGN UP
                 </Typography>
               )}
@@ -175,22 +175,22 @@ export default function Auth() {
                   <TabPanel value="card" className="p-0">
                     <Card className="mx-auto w-full max-w-[24rem]">
                       <CardBody className="flex flex-col gap-4">
-                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
+                        <Typography className="-mb-2 text-mantis-900" variant="h6">
                           Your Username
                         </Typography>
                         <Input
                           label="Username"
-                          color="blue-gray"
+                          color="teal"
                           size="lg"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
-                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
+                        <Typography className="-mb-2 text-mantis-900" variant="h6">
                           Your Password
                         </Typography>
                         <Input
                           label="Password"
-                          color="blue-gray"
+                          color="teal"
                           size="lg"
                           type="password"
                           value={password}
@@ -206,7 +206,7 @@ export default function Auth() {
                           onClick={handleOpen}
                           fullWidth
                           type="submit"
-                          className="bg-myBlue-700 text-myBlue-50"
+                          className="bg-mantis-600 text-mantis-50"
                         >
                           Sign In
                         </Button>
@@ -220,7 +220,7 @@ export default function Auth() {
                             href="#signup"
                             variant="small"
                             color="blue-gray"
-                            className="ml-1 font-bold text-myBlue-950"
+                            className="ml-1 font-bold text-mantis-950"
                             onClick={handleOpen}
                           >
                             Sign up
@@ -235,33 +235,33 @@ export default function Auth() {
                   <TabPanel value="paypal" className="p-0">
                     <Card className="mx-auto w-full max-w-[24rem]">
                       <CardBody className="flex flex-col gap-4">
-                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
+                        <Typography className="-mb-2 text-mantis-900" variant="h6">
                           Your Username
                         </Typography>
                         <Input
                           label="Username"
-                          color="blue-gray"
+                          color="teal"
                           size="lg"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
-                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
+                        <Typography className="-mb-2 text-mantis-900" variant="h6">
                           Your Email
                         </Typography>
                         <Input
                           label="Email"
-                          color="blue-gray"
+                          color="teal"
                           size="lg"
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
-                        <Typography className="-mb-2 text-myBlue-800" variant="h6">
+                        <Typography className="-mb-2 text-mantis-900" variant="h6">
                           Your Password
                         </Typography>
                         <Input
                           label="Password"
-                          color="blue-gray"
+                          color="teal"
                           size="lg"
                           type="password"
                           value={password}
@@ -271,13 +271,13 @@ export default function Auth() {
                           <div>
                             <Typography
                               variant="h6"
-                              className="mb-2 text-myBlue-800"
+                              className="mb-2 text-mantis-900"
                             >
                               First Name
                             </Typography>
                             <Input
                               label="First Name"
-                              color="blue-gray"
+                              color="teal"
                               containerProps={{ className: "min-w-[72px]" }}
                               value={first_name}
                               onChange={(e) => setFirstName(e.target.value)}
@@ -286,13 +286,13 @@ export default function Auth() {
                           <div>
                             <Typography
                               variant="h6"
-                              className="mb-2 text-myBlue-800"
+                              className="mb-2 text-mantis-900"
                             >
                               Last Name
                             </Typography>
                             <Input
                               label="Last Name"
-                              color="blue-gray"
+                              color="teal"
                               containerProps={{ className: "min-w-[72px]" }}
                               value={last_name}
                               onChange={(e) => setLastName(e.target.value)}
@@ -305,7 +305,7 @@ export default function Auth() {
                           onClick={handleOpen}
                           fullWidth
                           type="submit"
-                          className="bg-myBlue-700 text-myBlue-50"
+                          className="bg-mantis-600 text-mantis-50"
                         >
                           Sign Up
                         </Button>
@@ -319,7 +319,7 @@ export default function Auth() {
                             href="#signup"
                             variant="small"
                             color="blue-gray"
-                            className="ml-1 font-bold text-myBlue-950"
+                            className="ml-1 font-bold text-mantis-950"
                             onClick={handleOpen}
                           >
                             Sign in

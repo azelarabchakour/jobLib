@@ -23,7 +23,7 @@ export default function JobPostingCard(props) {
 
   return (
     <Card
-      className="mt-6 w-4/5 max-h-48 overflow-hidden"
+      className="mt-6 w-4/5 max-h-48 overflow-hidden bg-myBlue-50"
       onClick={() => handleDetails(props.id,props.jobStatus)}
     >
       <CardBody>

@@ -24,7 +24,6 @@ function App() {
       {/* <NavbarComponent1></NavbarComponent1> */}
       <Routes>
         <Route path="/test" element={<FinalNavBar/>} />
-        {/* <Route path="/test" element={<HomePage />} /> */}
         <Route path="/" element={<HomePage/>} />
         {/* authentication routes  */}        
 
