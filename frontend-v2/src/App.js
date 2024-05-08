@@ -16,6 +16,7 @@ import TabsComponent from './Components/TabsComponent';
 import TestD from './Components/test';
 import CreateJob from './Employer/CreateJob';
 import UploadCv from './Employee/UploadCv.jsx';
+import Application from './Employee/application.jsx';
 import FinalNavBar from './Components/FinalNavbar.jsx';
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         {/* employee  */}
         <Route path="/matchedJobs" element={<MatchedJobs/>} />
         <Route path="/uploadCv" element={<UploadCv/>} />
+        <Route path="/application" element={<Application/>} />
 
         {/* shared  */}
         <Route path="/chooseRole" element={<ChooseRole/>} />

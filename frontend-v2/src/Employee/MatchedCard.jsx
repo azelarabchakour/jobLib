@@ -25,7 +25,7 @@ export default function MatchedCard(props) {
   const navigate = useNavigate();
   const [openModify, setOpenModify] = React.useState(false);
   const handleOpenModify = () => setOpenModify(!openModify);
-  const [refreshTrigger, setRefreshTrigger] = useState(false); // Added state variable for refresh
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
 
   const handleApply = async (jobPostingId) => {
     try {
