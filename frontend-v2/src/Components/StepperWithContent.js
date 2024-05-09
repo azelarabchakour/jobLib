@@ -281,24 +281,26 @@ export default function StepperWithContent() {
             isLastStep={setIsLastStep}
             isFirstStep={setIsFirstStep}
             className="mt-8"
+            activeLineClassName="bg-mantis-600"
           >
-            <Step onClick={() => setActiveStep(0)}>
-              <UserIcon className="h-5 w-5 " />
+            <Step onClick={() => setActiveStep(0)}
+              activeClassName="bg-mantis-700"
+              completedClassName="bg-mantis-800"
+            >
+              <UserIcon className="h-5 w-5" />
               <div className="absolute -bottom-[4.5rem] w-max text-center">
                 <Typography
                   variant="h6"
                   color={activeStep === 0 ? "blue-gray" : "gray"}
-                  className={
-                    activeStep === 0 ? "text-mantis-600" : "text-black"
-                  }
+                  
                 >
                   Step 1
                 </Typography>
                 <Typography
                   color={activeStep === 0 ? "blue-gray" : "gray"}
                   className={
-                    activeStep === 0
-                      ? "text-mantis-600 font-normal"
+                    activeStep === 1
+                      ? "text-mantis-700 font-normal"
                       : "text-black font-normal"
                   }
                 >
@@ -306,7 +308,9 @@ export default function StepperWithContent() {
                 </Typography>
               </div>
             </Step>
-            <Step onClick={() => setActiveStep(1)}>
+            <Step onClick={() => setActiveStep(1)}
+            activeClassName="bg-mantis-700"
+            completedClassName="bg-mantis-800">
               <SparklesIcon className="h-5 w-5" />
               <div className="absolute -bottom-[4.5rem] w-max text-center">
                 <Typography
@@ -317,13 +321,19 @@ export default function StepperWithContent() {
                 </Typography>
                 <Typography
                   color={activeStep === 1 ? "blue-gray" : "gray"}
-                  className="font-normal"
+                  className={
+                    activeStep === 1
+                      ? "text-mantis-700 font-normal"
+                      : "text-black font-normal"
+                  }
                 >
                   Salary Estimation.
                 </Typography>
               </div>
             </Step>
-            <Step onClick={() => setActiveStep(2)}>
+            <Step onClick={() => setActiveStep(2)}
+            activeClassName="bg-mantis-700"
+            completedClassName="bg-mantis-800">
               <BuildingLibraryIcon className="h-5 w-5" />
               <div className="absolute -bottom-[4.5rem] w-max text-center">
                 <Typography
@@ -334,7 +344,11 @@ export default function StepperWithContent() {
                 </Typography>
                 <Typography
                   color={activeStep === 2 ? "blue-gray" : "gray"}
-                  className="font-normal"
+                  className={
+                    activeStep === 2
+                      ? "text-mantis-700 font-normal"
+                      : "text-black font-normal"
+                  }
                 >
                   Post Job.
                 </Typography>
@@ -343,10 +357,13 @@ export default function StepperWithContent() {
           </Stepper>
 
           <div className="mt-32 flex justify-between">
-            <Button onClick={handlePrev} disabled={isFirstStep}>
+            <Button onClick={handlePrev} disabled={isFirstStep}
+              className={`${isFirstStep ? 'bg-gray-700' : 'bg-mantis-700 hover:bg-mantis-800'} text-mantis-50`}
+            >
               Prev
             </Button>
-            <Button onClick={handleNext} disabled={isLastStep}>
+            <Button onClick={handleNext} disabled={isLastStep}
+            className={`${isLastStep ? 'bg-gray-700' : 'bg-mantis-700 hover:bg-mantis-800'} text-mantis-50`}>
               Next
             </Button>
           </div>
