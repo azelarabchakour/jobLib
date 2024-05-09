@@ -9,7 +9,7 @@ import JobPostingDetails from "./Employer/JobPostingDetails";
 import JobDetails from "./Employer/JobDetails";
 import NavbarComponent from "./Components/NavbarComponent";
 import NavbarComponent1 from "./Components/NavBarComponent1"
-import HomePage from "./HomePage/HomePage";
+import HomePage from "./Home/home.jsx";
 import StepperWithContent from "./Components/StepperWithContent"
 import JobApplicants from "./Employer/JobApplicants";
 import TabsComponent from './Components/TabsComponent';

@@ -13,6 +13,9 @@ npm install react-scripts
 npm install axios
 npm install react-router-dom
 
+npm install aos
+
+
 #----NEW ONES-------
 npm i @material-tailwind/react
 npm i @heroicons/react
