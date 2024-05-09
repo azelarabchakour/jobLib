@@ -24,10 +24,10 @@ export default function NumberOfApplicants(props) {
     navigate(`/employer/${jobId}/applicants`);
   };
   return (
-    <Card className="mt-6 w-96">
+    <Card className="mt-6 w-96 hover:bg-mantis-50">
       <CardBody>
         <div className="flex items-center gap-2">
-          <UserGroupIcon className="h-10 w-10" />
+          <UserGroupIcon className="h-10 w-10 text-mantis-600" />
           <Typography variant="h4" color="blue-gray" className="mb-2 pt-3">
             Applicants
           </Typography>

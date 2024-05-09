@@ -155,30 +155,47 @@ export default function ListOfApplicants(props) {
             )
             .map((application) => (
               <ListItem
+                className="hover:bg-mantis-50"
                 onClick={() => handleOpenApplicationDialog(application)}
               >
-                <ListItemPrefix>
-                  <Avatar variant="circular" alt="candice" src={person} />
-                </ListItemPrefix>
+               
 
                 <div>
+
                   <div className="flex items-center justify-between">
-                    <div className="">
-                      <Typography variant="h6" color="blue-gray">
-                        {application.employee.user.first_name}{" "}
+                    
+
+                    <div className="flex items-center gap-3">
+                      <Avatar
+                        size="sm"
+                        variant="circular"
+                        alt="tania andrew"
+                        src={person}
+                      />
+                      <div className="-mt-px flex flex-col">
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-medium font-bold text-mantis-950"
+                        >
+                          {application.employee.user.first_name}{" "}
                         {application.employee.user.last_name}
-                      </Typography>
-                      <Typography
-                        variant="small"
-                        color="gray"
-                        className="font-normal"
-                      >
-                        {application.application_date}
-                      </Typography>
+                        </Typography>
+                        <Typography
+                          variant="small"
+                          color="gray"
+                          className="text-xs font-normal"
+                        >
+                          {application.application_date}
+                        </Typography>
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between pl-24">
-                      <SparklesIcon width={25}></SparklesIcon>
+                      <SparklesIcon
+                        width={25}
+                        className="text-mantis-600"
+                      ></SparklesIcon>
                       <Tooltip
                         content="Match Percentage"
                         animate={{
@@ -189,8 +206,7 @@ export default function ListOfApplicants(props) {
                       >
                         <Typography
                           variant="h6"
-                          color="blue-gray"
-                          className="pl-2"
+                          className="pl-2 text-mantis-600"
                         >
                           {application.matchPercentage}%
                         </Typography>
@@ -222,7 +238,7 @@ export default function ListOfApplicants(props) {
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-medium"
+                    className="font-medium font-bold text-mantis-950"
                   >
                     {selectedApplication.employee.user.first_name}{" "}
                     {selectedApplication.employee.user.last_name}
@@ -262,21 +278,7 @@ export default function ListOfApplicants(props) {
               </Button>
             </DialogHeader>
             <DialogBody>
-              <Typography>
-                {selectedApplication.application_date}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea,
-                consequuntur architecto? Iure, est? Asperiores repudiandae nisi,
-                excepturi sapiente fugiat repellendus quidem impedit deserunt,
-                sunt temporibus vel quam explicabo doloremque maiores. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Ea,
-                consequuntur architecto? Iure, est? Asperiores repudiandae nisi,
-                excepturi sapiente fugiat repellendus quidem impedit deserunt,
-                sunt temporibus vel quam explicabo doloremque maiores. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Ea,
-                consequuntur architecto? Iure, est? Asperiores repudiandae nisi,
-                excepturi sapiente fugiat repellendus quidem impedit deserunt,
-                sunt temporibus vel quam explicabo doloremque maiores.
-              </Typography>
+              <Typography>{selectedApplication.proposalLetter}</Typography>
             </DialogBody>
             <DialogFooter>
               <Button
@@ -288,8 +290,8 @@ export default function ListOfApplicants(props) {
                 <span>Refuse</span>
               </Button>
               <Button
-                variant="gradient"
-                color="green"
+                
+                className="bg-mantis-600 hover:bg-mantis-700 text-mantis-50"
                 onClick={() => handleOpenAcceptApplicationDialog()}
               >
                 <span>Accept</span>
@@ -313,7 +315,7 @@ export default function ListOfApplicants(props) {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="h-6 w-6"
+                className="h-6 w-6 text-mantis-600"
               >
                 <path
                   fillRule="evenodd"
@@ -340,10 +342,18 @@ export default function ListOfApplicants(props) {
           </Alert>
         </DialogBody>
         <DialogFooter>
-          <Button variant="text" color="red" className="mr-1" onClick={() => handleOpenAcceptApplicationDialog()}>
+          <Button
+            variant="text"
+            color="red"
+            className="mr-1"
+            onClick={() => handleOpenAcceptApplicationDialog()}
+          >
             <span>Cancel</span>
           </Button>
-          <Button variant="gradient" color="green" onClick={() => handleAcceptApplication(selectedApplication.id)}>
+          <Button
+            className="bg-mantis-600 hover:bg-mantis-700 text-mantis-50"
+            onClick={() => handleAcceptApplication(selectedApplication.id)}
+          >
             <span>Confirm</span>
           </Button>
         </DialogFooter>

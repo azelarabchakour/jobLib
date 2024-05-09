@@ -67,43 +67,48 @@ export default function Level(props) {
 
   return (
     <>
-      <Card className="mt-6 w-96">
+      <Card className="mt-6 w-96 hover:bg-mantis-50">
         <CardBody>
           <div className="flex items-center gap-2">
-            <CommandLineIcon className="h-10 w-10" />
-            <Typography variant="h4" color="blue-gray" className="mb-2 pt-3">
+            <CommandLineIcon className="h-10 w-10 text-mantis-600" />
+            <Typography variant="h4" className="mb-2 pt-3 text-mantis-950">
               Experience Level
             </Typography>
           </div>
 
           <div className="flex items-center gap-2">
-            <Typography variant="h5">{props.level} level</Typography>
+            <Typography variant="h5" className="text-gray">{props.level} level</Typography>
           </div>
         </CardBody>
         {props.jobStatus === "POSTED" && (
           <CardFooter className="justify-between pt-0">
             <div style={{ position: "relative" }}>
               <div className="flex items-center justify-end">
-                <b>
-                  <a href="#" onClick={() => handleOpenModify()}>
+
+                <a href="#" className="inline-block">
+                  <Button
+                    size="sm"
+                    variant="text"
+                    className="flex items-center gap-2 hover:bg-mantis-700 hover:text-mantis-50 font-bold text-mantis-950"
+                    onClick={() => handleOpenModify()}
+                  >
                     Modify
-                  </a>
-                </b>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="h-5 w-5"
-                  style={{ marginLeft: "5px" }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </Button>
+                </a>
               </div>
             </div>
           </CardFooter>
@@ -117,6 +122,7 @@ export default function Level(props) {
           <div className="p-2"></div>
           <Select
             label="Select Level"
+            color="teal"
             value={value}
             onChange={(val) => setValue(val)}
           >
@@ -136,8 +142,7 @@ export default function Level(props) {
             <span>Cancel</span>
           </Button>
           <Button
-            variant="gradient"
-            color="green"
+            className="bg-mantis-600 hover:bg-mantis-700 text-mantis-50"
             onClick={() => handleModify(props.jobId)}
           >
             <span>Modify </span>

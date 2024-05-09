@@ -203,16 +203,15 @@ function JobPostingDetails(props) {
             <Card className="mt-6 w-96" shadow={false}>
               <CardBody>
                 <div className="flex items-center gap-2">
-                  <UserGroupIcon className="h-10 w-10" />
+                  <UserGroupIcon className="h-10 w-10 text-mantis-600" />
                   <Typography
                     variant="h4"
-                    color="blue-gray"
-                    className="mb-2 pt-3"
+                    className="mb-2 pt-3 text-mantis-950"
                   >
                     Applicants
                   </Typography>
                 </div>
-                <Typography variant="h5">
+                <Typography variant="h5" className="text-grey">
                   {job.numberOfApplicants} Candidates
                 </Typography>
               </CardBody>
@@ -221,7 +220,7 @@ function JobPostingDetails(props) {
           </div>
           <center>
             <div className="">
-              <ListOfApplicants jobId={job.id} updateJob={updateJob} />
+              <ListOfApplicants jobId={job.id} updateJob={updateJob} proposalLetter={job.proposalLetter}/>
             </div>
           </center>
         </div>

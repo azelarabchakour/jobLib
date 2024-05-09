@@ -27,7 +27,7 @@ function IconSolid() {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="h-6 w-6"
+      className="h-6 w-6 text-mantis-600"
     >
       <path
         fillRule="evenodd"
@@ -120,9 +120,9 @@ export default function JobDetailsComponent(props) {
 
   return (
     <>
-      <Card className="mt-6 w-4/5 max-h-80 overflow-hidden">
+      <Card className="mt-6 w-4/5 max-h-80 overflow-hidden hover:bg-mantis-50">
         <CardBody>
-          <Typography variant="h5" color="blue-gray" className="mb-2">
+          <Typography variant="h4" className="mb-2 pt-3 text-mantis-950">
           {jobTitleComponent}
           </Typography>
           <Textarea rows={6} disabled>
@@ -178,7 +178,7 @@ export default function JobDetailsComponent(props) {
         <DialogFooter>
           <Button
             variant="text"
-            color="red"
+            color="green"
             className="mr-1"
             onClick={() => handleOpen()}
           >
@@ -186,10 +186,10 @@ export default function JobDetailsComponent(props) {
           </Button>
           <Button
             variant="gradient"
-            color="green"
+            color="red"
             onClick={() => handleDelete(props.jobId)}
           >
-            <span>Confirm</span>
+            <span>Delete</span>
           </Button>
         </DialogFooter>
       </Dialog>
@@ -199,6 +199,7 @@ export default function JobDetailsComponent(props) {
         <DialogBody>
           <Input
             label="Title"
+            color="teal"
             value={jobTitleComponent}
             onChange={(e) => setJobTitle(e.target.value)}
           />
@@ -209,12 +210,13 @@ export default function JobDetailsComponent(props) {
           </div>
           <Textarea
             label="Description"
+            color="teal"
             rows={6}
             onChange={(e) => setJobDescription(e.target.value)}
           >
             {props.jobDescription}
           </Textarea>
-          <Alert variant="ghost" icon={<IconSolid />}>
+          <Alert variant="ghost" icon={<IconSolid/>}>
             <Typography className="font-medium">
               Please note the following:
             </Typography>
@@ -241,8 +243,7 @@ export default function JobDetailsComponent(props) {
             <span>Cancel</span>
           </Button>
           <Button
-            variant="gradient"
-            color="green"
+            className="bg-mantis-600 hover:bg-mantis-700 text-mantis-50"
             onClick={() => handleModify(props.jobId)}
           >
             <span>Modify </span>

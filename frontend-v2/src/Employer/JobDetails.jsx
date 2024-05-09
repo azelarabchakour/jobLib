@@ -157,7 +157,13 @@ function JobDetails() {
                   salaryMax={job.salaryMax}
                   jobStatus={job.jobStatus}
                 ></SalaryEstimation>
-                <Level jobStatus={job.jobStatus}></Level>
+                <Level
+                  jobId={job.id}
+                  jobStatus={job.jobStatus}
+                  level={job.level}
+                  jobTitle={job.jobTitle}
+                  jobDescription={job.jobDescription}
+                ></Level>
                 <NumberOfApplicants
                   jobId={job.id}
                   numberOfApplicants={job.numberOfApplicants}

@@ -17,20 +17,20 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
         className="rounded-none border-b border-blue-gray-50 bg-transparent p-0 w-96"
         indicatorProps={{
           className:
-            "bg-transparent border-b-2 border-myBlue-700 shadow-none rounded-none",
+            "bg-transparent border-b-2 border-mantis-700 shadow-none rounded-none",
         }}
       >
         <Tab
           value="activeJobs"
           onClick={() => setActiveTab("activeJobs")}
-          className={activeTab === "activeJobs" ? "text-myBlue-900 font-bold" : "text-myBlue-950"}
+          className={activeTab === "activeJobs" ? "text-mantis-900 font-bold" : "text-mantis-950"}
         >
           Active Jobs
         </Tab>
         <Tab
           value="oldJobs"
           onClick={() => setActiveTab("oldJobs")}
-          className={activeTab === "oldJobs" ? "text-myBlue-900 font-bold" : "text-myBlue-950"}
+          className={activeTab === "oldJobs" ? "text-mantis-900 font-bold" : "text-mantis-950"}
         >
           Old Jobs
         </Tab>

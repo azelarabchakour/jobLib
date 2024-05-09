@@ -23,14 +23,14 @@ export default function JobPostingCard(props) {
 
   return (
     <Card
-      className="mt-6 w-4/5 max-h-48 overflow-hidden bg-myBlue-50"
+      className="mt-6 w-4/5 max-h-48 overflow-hidden bg-mantis-50 hover:bg-mantis-100"
       onClick={() => handleDetails(props.id,props.jobStatus)}
     >
       <CardBody>
-        <Typography variant="h4" className="mb-2 font-bold text-myBlue-900">
+        <Typography variant="h4" className="mb-2 font-bold text-mantis-900">
           {props.jobTitle}
         </Typography>
-        <Typography className="truncate text-myBlue-950">{props.jobDescription}</Typography>
+        <Typography className="truncate text-mantis-950">{props.jobDescription}</Typography>
       </CardBody>
       <CardFooter className="flex items-center justify-between">
         <div className="flex items-center -space-x-3">
@@ -39,7 +39,7 @@ export default function JobPostingCard(props) {
         <div className="flex items-center -space-x-3">
           <Button
             variant="text"
-            className="flex items-center gap-2 hover:bg-myBlue-600 hover:text-myBlue-50"
+            className="flex items-center gap-2 text-mantis-950 hover:bg-mantis-700 hover:text-mantis-50"
             onClick={() => handleDetails(props.id,props.jobStatus)}
           >
             Show Details{" "}
