@@ -16,8 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import {useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 export default function StepperWithContent() {
   const [activeStep, setActiveStep] = useState(0);
@@ -36,7 +35,7 @@ export default function StepperWithContent() {
   const [jobTitleError, setJobTitleError] = useState("");
   const [levelError, setLevelError] = useState("");
   const navigate = useNavigate();
-  
+
   const toggleInput = () => {
     setShowInput(!showInput);
     // Reset error when hiding the input
@@ -112,7 +111,6 @@ export default function StepperWithContent() {
       setSalary(0);
     }
 
-
     if (isValid) {
       // Create a new job posting object
       const newPost = {
@@ -137,7 +135,7 @@ export default function StepperWithContent() {
         .then((response) => {
           console.log("Job posting created successfully:", response.data);
           // Navigate to the jobs page or perform any other action
-          navigate('/jobs');
+          navigate("/jobs");
         })
         .catch((error) => {
           console.error("Error creating job posting:", error);
@@ -179,130 +177,181 @@ export default function StepperWithContent() {
   };
 
   return (
-    <div className="w-2/3 px-24 py-4">
-      <div className="">
-        {activeStep === 0 && (
-          <div>
-            <Typography variant="h5">
-              Step 1 : Import Job Description
-            </Typography>
-            <Typography>Import Job Description</Typography>
-            <Input
-              label="Job Description"
-              value={jobDescription}
-              onChange={(e) => setJobDescription(e.target.value)}
-              error={error}
-            />
-            {error && <Typography color="red">{error}</Typography>}
-          </div>
-        )}
-        {activeStep === 1 && (
-          <div>
-            <Typography variant="h5">Step 2 Content</Typography>
-            <Typography>Salary Estimation: {salaryEstimation}</Typography>
-            <Typography>
-              This is the salary suggested by AI, wanna enter yours
-            </Typography>
-            <Button onClick={handleButtonClick}> Enter yours</Button>
-            {showInput && (
-              <Input type="text" error={error} onChange={handleSalaryChange} />
-            )}
-            {error && <Typography color="red">{error}</Typography>}
-          </div>
-        )}
-        {activeStep === 2 && (
-          <div>
-            <Typography variant="h5">Step 3 Content</Typography>
-            <Typography>Post Job</Typography>
-            <Input label="Job Title" 
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}/>
-            {jobTitleError && (
-              <Typography color="red">{jobTitleError}</Typography>
-            )}
-            <Select
-              label="Select Level"
-              value={level}
-              onChange={(value) => setLevel(value)}
-              error={levelError}
-            >
-              <Option value="JUNIOR">Junior Level</Option>
-              <Option value="INTERMEDIATE">Intermediate Level</Option>
-              <Option value="SENIOR">Senior Level</Option>
-              <Option value="EXPERT">Expert Level</Option>
-            </Select>
-            {levelError && <Typography color="red">{levelError}</Typography>}
-            <Button onClick={(e) => handlePostJobClick(e)}>Post Job</Button>
-          </div>
-        )}
-      </div>
+    <>
+      <div className="flex justify-center items-center mt-20">
+        <div className="w-2/3 px-24 py-4 ">
+          <div className="flex justify-center items-center">
+            {activeStep === 0 && (
+              <div>
+                <Typography variant="h3" className="text-mantis-800 mb-8">
+                  Step 1 : Import Job Description
+                </Typography>
+                <Typography className="font-bold mb-4">
+                  Import Job Description
+                </Typography>
 
-      <Stepper
-        activeStep={activeStep}
-        isLastStep={setIsLastStep}
-        isFirstStep={setIsFirstStep}
-      >
-        <Step onClick={() => setActiveStep(0)}>
-          <UserIcon className="h-5 w-5" />
-          <div className="absolute -bottom-[4.5rem] w-max text-center">
-            <Typography
-              variant="h6"
-              color={activeStep === 0 ? "blue-gray" : "gray"}
-            >
-              Step 1
-            </Typography>
-            <Typography
-              color={activeStep === 0 ? "blue-gray" : "gray"}
-              className="font-normal"
-            >
-              Import Job Description.
-            </Typography>
-          </div>
-        </Step>
-        <Step onClick={() => setActiveStep(1)}>
-          <SparklesIcon className="h-5 w-5" />
-          <div className="absolute -bottom-[4.5rem] w-max text-center">
-            <Typography
-              variant="h6"
-              color={activeStep === 1 ? "blue-gray" : "gray"}
-            >
-              Step 2
-            </Typography>
-            <Typography
-              color={activeStep === 1 ? "blue-gray" : "gray"}
-              className="font-normal"
-            >
-              Salary Estimation.
-            </Typography>
-          </div>
-        </Step>
-        <Step onClick={() => setActiveStep(2)}>
-          <BuildingLibraryIcon className="h-5 w-5" />
-          <div className="absolute -bottom-[4.5rem] w-max text-center">
-            <Typography
-              variant="h6"
-              color={activeStep === 2 ? "blue-gray" : "gray"}
-            >
-              Step 3
-            </Typography>
-            <Typography
-              color={activeStep === 2 ? "blue-gray" : "gray"}
-              className="font-normal"
-            >
-              Post Job.
-            </Typography>
-          </div>
-        </Step>
-      </Stepper>
+                <Textarea
+                  color="teal"
+                  className=""
+                  label="Job Description"
+                  rows={7}
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                  error={error}
+                />
 
-      <div className="mt-32 flex justify-between">
-        <Button onClick={handlePrev} disabled={isFirstStep}>
-          Prev
-        </Button>
-        <Button onClick={handleNext} disabled={isLastStep}>
-          Next
-        </Button>
+                {error && <Typography color="red">{error}</Typography>}
+              </div>
+            )}
+            {activeStep === 1 && (
+              <div>
+                <Typography variant="h3" className="text-mantis-800 mb-8">
+                  Step 2 : Salary Estimation
+                </Typography>
+                <div className="flex mb-2">
+                  <Typography>Salary Estimation : </Typography>
+                  <Typography className="font-bold text-mantis-600">
+                    {salaryEstimation}
+                  </Typography>
+                  <SparklesIcon className="h-5 w-5 text-mantis-600 ml-1"></SparklesIcon>
+                </div>
+
+                <Typography className="mb-2">
+                  This is the salary suggested by AI, wanna enter yours
+                </Typography>
+
+
+                <Button onClick={handleButtonClick} className="bg-mantis-700 hover:bg-mantis-800 text-mantis-50 mb-4"> Enter yours</Button>
+                {showInput && (
+                  <Input
+                  label="Job Salary"
+                  color="teal"
+                    type="text"
+                    error={error}
+                    onChange={handleSalaryChange}
+                  />
+                )}
+                {error && <Typography color="red">{error}</Typography>}
+              </div>
+            )}
+            {activeStep === 2 && (
+              <div className="flex flex-col justify-between">
+              <Typography variant="h3" className="text-mantis-800 mb-4">
+                Step 3 : Post Job
+              </Typography>
+              <div className="mb-4"> {/* Added a wrapping div with margin bottom */}
+                <Input
+                  label="Job Title"
+                  color="teal"
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
+                />
+                {jobTitleError && (
+                  <Typography color="red">{jobTitleError}</Typography>
+                )}
+              </div>
+              <div className="mb-4"> {/* Added a wrapping div with margin bottom */}
+                <Select
+                  label="Select Level"
+                  color="teal"
+                  value={level}
+                  onChange={(value) => setLevel(value)}
+                  error={levelError}
+                >
+                  <Option value="JUNIOR">Junior Level</Option>
+                  <Option value="INTERMEDIATE">Intermediate Level</Option>
+                  <Option value="SENIOR">Senior Level</Option>
+                  <Option value="EXPERT">Expert Level</Option>
+                </Select>
+                {levelError && (
+                  <Typography color="red">{levelError}</Typography>
+                )}
+              </div>
+              <Button onClick={(e) => handlePostJobClick(e)} className="bg-mantis-700 hover:bg-mantis-800 text-mantis-50 mt-4">
+                Post Job
+              </Button>
+            </div>
+            
+            
+            )}
+          </div>
+
+          <Stepper
+            activeStep={activeStep}
+            isLastStep={setIsLastStep}
+            isFirstStep={setIsFirstStep}
+            className="mt-8"
+          >
+            <Step onClick={() => setActiveStep(0)}>
+              <UserIcon className="h-5 w-5 " />
+              <div className="absolute -bottom-[4.5rem] w-max text-center">
+                <Typography
+                  variant="h6"
+                  color={activeStep === 0 ? "blue-gray" : "gray"}
+                  className={
+                    activeStep === 0 ? "text-mantis-600" : "text-black"
+                  }
+                >
+                  Step 1
+                </Typography>
+                <Typography
+                  color={activeStep === 0 ? "blue-gray" : "gray"}
+                  className={
+                    activeStep === 0
+                      ? "text-mantis-600 font-normal"
+                      : "text-black font-normal"
+                  }
+                >
+                  Import Job Description.
+                </Typography>
+              </div>
+            </Step>
+            <Step onClick={() => setActiveStep(1)}>
+              <SparklesIcon className="h-5 w-5" />
+              <div className="absolute -bottom-[4.5rem] w-max text-center">
+                <Typography
+                  variant="h6"
+                  color={activeStep === 1 ? "blue-gray" : "gray"}
+                >
+                  Step 2
+                </Typography>
+                <Typography
+                  color={activeStep === 1 ? "blue-gray" : "gray"}
+                  className="font-normal"
+                >
+                  Salary Estimation.
+                </Typography>
+              </div>
+            </Step>
+            <Step onClick={() => setActiveStep(2)}>
+              <BuildingLibraryIcon className="h-5 w-5" />
+              <div className="absolute -bottom-[4.5rem] w-max text-center">
+                <Typography
+                  variant="h6"
+                  color={activeStep === 2 ? "blue-gray" : "gray"}
+                >
+                  Step 3
+                </Typography>
+                <Typography
+                  color={activeStep === 2 ? "blue-gray" : "gray"}
+                  className="font-normal"
+                >
+                  Post Job.
+                </Typography>
+              </div>
+            </Step>
+          </Stepper>
+
+          <div className="mt-32 flex justify-between">
+            <Button onClick={handlePrev} disabled={isFirstStep}>
+              Prev
+            </Button>
+            <Button onClick={handleNext} disabled={isLastStep}>
+              Next
+            </Button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
