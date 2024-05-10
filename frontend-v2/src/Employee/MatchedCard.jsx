@@ -18,7 +18,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import person from "../Assets/person.jpeg";
-
+import "../Components/line.css";
 export default function MatchedCard(props) {
   console.log("Props received:", props);
   const navigate = useNavigate();
@@ -50,15 +50,16 @@ export default function MatchedCard(props) {
 
   return (
     <>
+    
       <Card
-        className="mt-6 w-4/5 max-h-48 overflow-hidden"
+        className="mt-6 w-4/5 overflow-hidden"
         onClick={() => handleOpenModify()}
       >
         <CardBody>
           <Typography variant="h5" color="blue-gray" className="mb-2">
             {props.jobTitle}
           </Typography>
-          <Typography className="truncate">{props.jobDescription}</Typography>
+          <Typography className="truncate-3-lines">{props.jobDescription}</Typography>
         </CardBody>
         <CardFooter className="flex items-center justify-between">
           <div className="flex items-center -space-x-3"></div>

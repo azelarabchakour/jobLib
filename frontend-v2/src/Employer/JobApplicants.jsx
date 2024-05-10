@@ -13,6 +13,7 @@ import person from "../Assets/person.jpeg";
 import { Rating } from "@material-tailwind/react";
 import NavbarComponent1 from "../Components/NavBarComponent1";
 import FooterComponent from "../Components/Footer";
+import FinalNavBar from "../Components/FinalNavbar";
 export default function JobApplicants() {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -141,7 +142,8 @@ export default function JobApplicants() {
 
   return (
     <>
-    <NavbarComponent1></NavbarComponent1>
+    {/* <NavbarComponent1></NavbarComponent1> */}
+    <FinalNavBar/>
     <center>
       {job.applications
         .filter((application) => application.applicationStatus !== "REFUSED")

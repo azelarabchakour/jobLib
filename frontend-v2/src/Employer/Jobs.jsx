@@ -7,6 +7,7 @@ import JobPostingCard from "../Components/JobPostingCard";
 import NavBarComponent1 from "../Components/NavBarComponent1";
 import Footer from "../Components/Footer";
 import TabsComponent from "../Components/TabsComponent";
+import FinalNavBar from "../Components/FinalNavbar";
 export default function Jobs() {
   const [oldJobDescriptions, setOldJobDescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,7 +102,8 @@ export default function Jobs() {
 
   return (
     <div>
-      <NavBarComponent1 />
+      {/* <NavBarComponent1 /> */}
+      <FinalNavBar/>
       <center>
         <TabsComponent 
           oldJobs={oldJobs}

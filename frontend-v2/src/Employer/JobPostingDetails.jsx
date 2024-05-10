@@ -29,6 +29,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
+import FinalNavBar from "../Components/FinalNavbar";
 
 // function setRating(score) {
 //   if (score > 90) return <Rating value={5} readonly ratedColor="blue" />;
@@ -162,8 +163,8 @@ function JobPostingDetails(props) {
 
   return (
     <>
-      <NavBarComponent1 />
-
+      {/* <NavBarComponent1 /> */}
+      <FinalNavBar/>
       <div className="flex flex-row">
         {/* left section */}
         <div className="basis-2/3 border-r border-gray-300">

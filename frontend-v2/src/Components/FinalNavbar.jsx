@@ -42,8 +42,8 @@ export default function FinalNavBar() {
   
 
   const [navItems, setNavItems] = useState([
-    { label: "Jobs", link: "/jobs" },
-    { label: "Account", link: "#" },
+    { label: "Matched Jobs", link: "/jobs" },
+    { label: "Applications", link: "#" },
   ]);
 
   const handleNavItemClicked = (link) => {
@@ -58,15 +58,15 @@ export default function FinalNavBar() {
 
   const handleSwitchClick = (option) => {
     setActiveOption(option);
-    if (option === SwitchOptions.OPTION1) {
+    if (option === SwitchOptions.OPTION2) {
       setNavItems([
         { label: "Jobs", link: "/jobs" },
-        { label: "Account", link: "#" },
+        { label: "Create", link: "/employer/createJob" },
       ]);
-    } else if (option === SwitchOptions.OPTION2) {
+    } else if (option === SwitchOptions.OPTION1) {
       setNavItems([
-        { label: "Blocks", link: "#" },
-        { label: "Docs", link: "#" },
+        { label: "Matched Jobs", link: "#" },
+        { label: "Applications", link: "#" },
       ]);
     }
   };
