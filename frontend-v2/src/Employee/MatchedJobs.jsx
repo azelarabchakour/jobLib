@@ -108,6 +108,7 @@ export default function MatchedJobs() {
                   salaryMax: jobDetails.salaryMax,
                   salaryMin: jobDetails.salaryMin,
                   matchPercentage: job.matchPercentage,
+                  level: jobDetails.level,
                 };
               } catch (error) {
                 console.error("Error fetching job details:", error);
@@ -300,8 +301,10 @@ export default function MatchedJobs() {
               jobPosting={job.jobPosting}
               jobTitle={job.jobTitle}
               jobDescription={job.jobDescription}
-              salary={job.salaryMin + "$ - " + job.salaryMax + "$"}
+              salary={"$" + job.salaryMin + " - $" + job.salaryMax}
               matchingPercentage={job.matchPercentage + "%"}
+              numberOfApplicants={job.numberOfApplicants}
+              level={job.level}
             />
           ))}
         </div>

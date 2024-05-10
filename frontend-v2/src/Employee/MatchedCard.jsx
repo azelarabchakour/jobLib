@@ -19,6 +19,7 @@ import {
 } from "@material-tailwind/react";
 import person from "../Assets/person.jpeg";
 import "../Components/line.css";
+import { ClockIcon, CommandLineIcon } from "@heroicons/react/24/solid";
 export default function MatchedCard(props) {
   console.log("Props received:", props);
   const navigate = useNavigate();
@@ -50,7 +51,6 @@ export default function MatchedCard(props) {
 
   return (
     <>
-    
       <Card
         className="mt-6 w-4/5 overflow-hidden"
         onClick={() => handleOpenModify()}
@@ -59,10 +59,44 @@ export default function MatchedCard(props) {
           <Typography variant="h5" color="blue-gray" className="mb-2">
             {props.jobTitle}
           </Typography>
-          <Typography className="truncate-3-lines">{props.jobDescription}</Typography>
+          <div className="flex flex-row">
+            <CommandLineIcon className="w-6 h-4 mt-1 text-mantis-600 "/>
+          <Typography className="font-bold text-mantis-600 ">
+            {props.level} Level
+          </Typography>
+          </div>
+          
+          <Typography className="truncate-3-lines">
+            {props.jobDescription}
+          </Typography>
         </CardBody>
         <CardFooter className="flex items-center justify-between">
-          <div className="flex items-center -space-x-3"></div>
+
+          <div className="flex flex-col">
+            <div className="flex flex-row">
+            <ClockIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600"/>
+              <Typography className="text-mantis-600 font-bold">
+              Full Time
+              </Typography>
+              
+            </div>
+
+            <Tooltip
+              placement="right"
+              content="AI Salary Estimation"
+              className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
+              animate={{
+                mount: { scale: 1, y: 0 },
+                unmount: { scale: 0, y: 25 },
+              }}
+            >
+              <Typography variant="paragraph" className="font-bold text-mantis-900">
+              {props.salary}
+              </Typography>
+              
+              
+            </Tooltip>
+          </div>
           <div className="flex items-center -space-x-3">
             <Button
               variant="text"
