@@ -104,12 +104,10 @@ export default function Jobs() {
     <div>
       {/* <NavBarComponent1 /> */}
       <FinalNavBar/>
-      <center>
         <TabsComponent 
           oldJobs={oldJobs}
           activeJobs={activeJobs}
         ></TabsComponent>
-      </center>
       {/* <Footer /> */}
     </div>
   );

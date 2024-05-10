@@ -255,9 +255,8 @@ export default function ListOfApplicants(props) {
 
               <Button
                 variant="text"
-                color="blue"
                 onClick={() => DownloadResume(selectedApplication.employee.id)}
-                className="flex items-center gap-3 w-30"
+                className="flex items-center gap-3 w-30 hover:bg-mantis-200 hover:text-mantis-950"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

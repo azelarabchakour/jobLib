@@ -67,100 +67,11 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
   return (
     <>
       <div className="flex w-full">
-        <div className="w-1/4">
-          <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
-            <div className="mb-2 p-4 flex place-content-center">
-              <AdjustmentsHorizontalIcon className="h-7 w-7 mr-1 pt-1" />
-
-              <Typography variant="h4" color="blue-gray">
-                Filters
-              </Typography>
-            </div>
-            <List>
-              <Accordion
-                open={openAccordions[1]}
-                icon={<Icon id={1} open={openAccordions[1]} />}
-              >
-                <AccordionHeader onClick={() => handleAccordionToggle(1)}>
-                  Experience Level
-                </AccordionHeader>
-                <AccordionBody className="flex flex-col">
-                  <Checkbox
-                    ripple={false}
-                    defaultUnchecked
-                    color="teal"
-                    label="Junior Level"
-                    className="h-5 w-5 rounded-full border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Intermediate Level"
-                    className="h-5 w-5 rounded-full border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Senior Level"
-                    className="h-5 w-5 rounded-full border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Expert Level"
-                    className="h-5 w-5 rounded-full border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                </AccordionBody>
-              </Accordion>
-              <Accordion
-                open={openAccordions[2]}
-                icon={<Icon id={2} open={openAccordions[2]} />}
-              >
-                <AccordionHeader onClick={() => handleAccordionToggle(2)}>
-                  <SparklesIcon className="h-5 w-5" />
-                  AI Salary Estimation
-                </AccordionHeader>
-                <AccordionBody className="flex flex-col">
-                  <Checkbox
-                    ripple={false}
-                    defaultUnchecked
-                    color="teal"
-                    label="Entry Level"
-                    className="h-5 w-5 rounded-full border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Material Tailwind"
-                    className="h-5 w-5 rounded-full border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Material Tailwind"
-                    className="h-5 w-5 rounded-full border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                </AccordionBody>
-              </Accordion>
-              <Accordion
-                open={openAccordions[3]}
-                icon={<Icon id={3} open={openAccordions[3]} />}
-              >
-                <AccordionHeader onClick={() => handleAccordionToggle(3)}>
-                  What can I do with Material Tailwind?
-                </AccordionHeader>
-                <AccordionBody>{/* Content */}</AccordionBody>
-              </Accordion>
-            </List>
-          </Card>
-        </div>
-        <div className="w-3/4">
+        
           <Tabs value={activeTab}>
+            <center>
+
+            
             <TabsHeader
               className="rounded-none border-b border-blue-gray-50 bg-transparent p-0 w-96"
               indicatorProps={{
@@ -191,7 +102,8 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
                 Old Jobs
               </Tab>
             </TabsHeader>
-
+            </center>
+            
             <TabsBody>
               <TabPanel value="activeJobs">
                 {activeJobs.map((job) => (
@@ -222,7 +134,6 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
             </TabsBody>
           </Tabs>
         </div>
-      </div>
     </>
   );
 }

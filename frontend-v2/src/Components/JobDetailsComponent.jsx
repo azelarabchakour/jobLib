@@ -137,8 +137,7 @@ export default function JobDetailsComponent(props) {
           {props.jobStatus === "POSTED" && (
             <div className="flex items-center -space-x-3">
               <Button
-                color="red"
-                className="flex items-center"
+                className="flex items-center bg-gray-700 hover:bg-gray-900 "
                 onClick={() => handleOpen()}
               >
                 {" "}
@@ -146,8 +145,7 @@ export default function JobDetailsComponent(props) {
               </Button>
               <div className="pr-10"></div>
               <Button
-                color="orange"
-                className="flex items-center"
+                className="flex items-center bg-mantis-600 hover:bg-mantis-800"
                 onClick={() => handleOpenModify()}
               >
                 {" "}
@@ -185,8 +183,7 @@ export default function JobDetailsComponent(props) {
             <span>Cancel</span>
           </Button>
           <Button
-            variant="gradient"
-            color="red"
+            className="bg-gray-700 hover:bg-gray-900"
             onClick={() => handleDelete(props.jobId)}
           >
             <span>Delete</span>
