@@ -19,7 +19,7 @@ import {
 } from "@material-tailwind/react";
 import person from "../Assets/person.jpeg";
 import "../Components/line.css";
-import { ClockIcon, CommandLineIcon } from "@heroicons/react/24/solid";
+import { ClockIcon, CommandLineIcon, SparklesIcon } from "@heroicons/react/24/solid";
 export default function MatchedCard(props) {
   console.log("Props received:", props);
   const navigate = useNavigate();
@@ -74,11 +74,20 @@ export default function MatchedCard(props) {
 
           <div className="flex flex-col">
             <div className="flex flex-row">
-            <ClockIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600"/>
+            <SparklesIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600"/>
+            <Tooltip
+              placement="top"
+              content="AI Match Percentage"
+              className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
+              animate={{
+                mount: { scale: 1, y: 0 },
+                unmount: { scale: 0, y: 25 },
+              }}
+            >
               <Typography className="text-mantis-600 font-bold">
-              Full Time
+              {props.matchingPercentage}
               </Typography>
-              
+              </Tooltip>
             </div>
 
             <Tooltip

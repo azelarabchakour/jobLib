@@ -166,40 +166,40 @@ export default function MatchedJobs() {
               </Typography>
             </div>
             <List>
-              <Accordion
-                open={openAccordions[1]}
-                icon={<Icon id={1} open={openAccordions[1]} />}
+            <Accordion
+                open={openAccordions[3]}
+                icon={<Icon id={3} open={openAccordions[3]} />}
               >
-                <AccordionHeader onClick={() => handleAccordionToggle(1)}>
-                  Experience Level
+                <AccordionHeader onClick={() => handleAccordionToggle(3)}>
+                  AI Match Percentage
                 </AccordionHeader>
                 <AccordionBody className="flex flex-col">
-                  <Checkbox
+                <Checkbox
                     ripple={false}
                     defaultUnchecked
                     color="teal"
-                    label="Junior Level"
+                    label="90% - 100%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Intermediate Level"
+                    label="80% - 90%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Senior Level"
+                    label="70% - 80%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Expert Level"
+                    label="60% - 70%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                 </AccordionBody>
@@ -260,36 +260,45 @@ export default function MatchedJobs() {
                 </AccordionBody>
               </Accordion>
               <Accordion
-                open={openAccordions[3]}
-                icon={<Icon id={3} open={openAccordions[3]} />}
+                open={openAccordions[1]}
+                icon={<Icon id={1} open={openAccordions[1]} />}
               >
-                <AccordionHeader onClick={() => handleAccordionToggle(3)}>
-                  Job Types
+                <AccordionHeader onClick={() => handleAccordionToggle(1)}>
+                  Experience Level
                 </AccordionHeader>
                 <AccordionBody className="flex flex-col">
-                <Checkbox
+                  <Checkbox
                     ripple={false}
                     defaultUnchecked
                     color="teal"
-                    label="Full Time"
+                    label="Junior Level"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Part Time"
+                    label="Intermediate Level"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Hybride / Remote"
+                    label="Senior Level"
+                    className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                  />
+                  <Checkbox
+                    defaultUnchecked
+                    ripple={false}
+                    color="teal"
+                    label="Expert Level"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                 </AccordionBody>
               </Accordion>
+              
+              
             </List>
           </div>
         </div>
