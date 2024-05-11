@@ -109,6 +109,7 @@ export default function MatchedJobs() {
                   salaryMin: jobDetails.salaryMin,
                   matchPercentage: job.matchPercentage,
                   level: jobDetails.level,
+                  
                 };
               } catch (error) {
                 console.error("Error fetching job details:", error);
