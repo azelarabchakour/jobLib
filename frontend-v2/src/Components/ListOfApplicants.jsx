@@ -29,6 +29,7 @@ export default function ListOfApplicants(props) {
   const [selectedApplication, setSelectedApplication] = React.useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  
   const handleOpenApplicationDialog = (application) => {
     setSelectedApplication(application);
     setOpenApplicationDialog(!openApplicationDialog);

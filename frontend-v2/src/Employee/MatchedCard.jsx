@@ -25,28 +25,31 @@ import {
   CurrencyDollarIcon,
   SparklesIcon,
 } from "@heroicons/react/24/solid";
+
+
 export default function MatchedCard(props) {
-  console.log("Props received:", props);
   const navigate = useNavigate();
+
+
   const [openModify, setOpenModify] = React.useState(false);
   const handleOpenModify = () => setOpenModify(!openModify);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
 
 
-  const [showToast, setShowToast] = useState(false);
+  // const [showToast, setShowToast] = useState(false);
 
-  useEffect(() => {
-    if (showToast) {
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
+  // useEffect(() => {
+  //   if (showToast) {
+  //     const timer = setTimeout(() => {
+  //       setShowToast(false);
+  //     }, 3000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [showToast]);
-  const handleShowToast = () => {
-    setShowToast(true);
-  };
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [showToast]);
+  // const handleShowToast = () => {
+  //   setShowToast(true);
+  // };
 
   function formatDate(date) {
     const diffInMilliseconds = Math.abs(new Date() - date);
@@ -73,10 +76,12 @@ export default function MatchedCard(props) {
           },
         }
       );
-      alert("You have successfully applied to this job!");
-      setRefreshTrigger(!refreshTrigger);
+      // alert("You have successfully applied to this job!");
+      props.setRefreshTrigger(!props.refreshTrigger);
       handleOpenModify(); // Close the dialog
-      window.location.reload(); // Refresh the page
+      props.handleShowToast();
+      // window.location.reload(); // Refresh the page
+
     } catch (error) {
       console.error("Error applying to job:", error);
       alert("Error applying to job. Please try again later.");
@@ -85,6 +90,7 @@ export default function MatchedCard(props) {
 
   return (
     <>
+    <div>
       <Card
         className="mt-6 w-4/5 overflow-hidden"
         onClick={() => handleOpenModify()}
@@ -126,22 +132,43 @@ export default function MatchedCard(props) {
               </Tooltip>
             </div>
 
-            <Tooltip
-              placement="right"
-              content="AI Salary Estimation"
-              className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
-              animate={{
-                mount: { scale: 1, y: 0 },
-                unmount: { scale: 0, y: 25 },
-              }}
-            >
-              <Typography
-                variant="paragraph"
-                className="font-bold text-mantis-900"
-              >
-                {props.salary}
-              </Typography>
-            </Tooltip>
+            <Typography
+                        variant="paragraph"
+                        className="font-bold text-mantis-900"
+                      >
+                        <pre>
+                          <div className="flex flex-row">
+                            <SparklesIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600" />
+                            <Tooltip
+                              placement="bottom"
+                              content="AI Salary Estimation"
+                              className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
+                              animate={{
+                                mount: { scale: 1, y: 0 },
+                                unmount: { scale: 0, y: 25 },
+                              }}
+                            >
+                              {props.salary}
+                            </Tooltip>
+
+                            {props.jobSalary !== null && props.jobSalary !== 0 && (
+                              <Tooltip
+                                placement="right"
+                                content="Job Salary"
+                                className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
+                                animate={{
+                                  mount: { scale: 1, y: 0 },
+                                  unmount: { scale: 0, y: 25 },
+                                }}
+                              >
+                                <span>{"           $" + props.jobSalary}</span>
+                              </Tooltip>
+                            )}
+                          </div>
+                        </pre>
+                      </Typography>
+
+
           </div>
           <div className="flex items-center -space-x-3">
             <Button
@@ -206,22 +233,41 @@ export default function MatchedCard(props) {
             </div>
 
             <div className="flex flex-row">
-              <Tooltip
-                placement="right"
-                content="AI Salary Estimation"
-                className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
-                animate={{
-                  mount: { scale: 1, y: 0 },
-                  unmount: { scale: 0, y: 25 },
-                }}
-              >
-                <Typography
-                  variant="paragraph"
-                  className="font-bold text-mantis-900"
-                >
-                  {props.salary}
-                </Typography>
-              </Tooltip>
+            <Typography
+                        variant="paragraph"
+                        className="font-bold text-mantis-900"
+                      >
+                        <pre>
+                          <div className="flex flex-row">
+                            <SparklesIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600" />
+                            <Tooltip
+                              placement="bottom"
+                              content="AI Salary Estimation"
+                              className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
+                              animate={{
+                                mount: { scale: 1, y: 0 },
+                                unmount: { scale: 0, y: 25 },
+                              }}
+                            >
+                              {props.salary}
+                            </Tooltip>
+
+                            {props.jobSalary !== null && props.jobSalary !== 0 && (
+                              <Tooltip
+                                placement="right"
+                                content="Job Salary"
+                                className="border border-blue-gray-50 bg-white  shadow-xl shadow-black/10 text-black"
+                                animate={{
+                                  mount: { scale: 1, y: 0 },
+                                  unmount: { scale: 0, y: 25 },
+                                }}
+                              >
+                                <span>{"           $" + props.jobSalary}</span>
+                              </Tooltip>
+                            )}
+                          </div>
+                        </pre>
+                      </Typography>
             </div>
           </div>
           <div>
@@ -243,7 +289,7 @@ export default function MatchedCard(props) {
           </div>
         </DialogFooter>
       </Dialog>
-      {showToast && (
+      {/* {showToast && (
       <div
         id="toast-bottom-right"
         class="fixed flex items-center w-full max-w-xs p-4 space-x-4  divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg  right-5 bottom-5 space-x"
@@ -291,7 +337,8 @@ export default function MatchedCard(props) {
             </svg>
           </button>
         </div>
-      </div>)}
+      </div>)} */}
+      </div>
     </>
   );
 }
