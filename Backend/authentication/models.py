@@ -5,6 +5,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractUser, Permission
 
 class User(AbstractUser):
 	email = models.EmailField(unique=True)
+	role = models.IntegerField(blank=False, null=False, choices=[(0, 'Employee'), (1, 'Employer')])
 	#first_name = None
 	#last_name = None
 

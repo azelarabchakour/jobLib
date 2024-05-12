@@ -35,13 +35,12 @@ export default function Auth() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       // navigate to the profile if accessToken is already present
-      navigate('/chooseRole');
+      navigate("/chooseRole");
     }
   }, []);
 
@@ -59,16 +58,39 @@ export default function Auth() {
 
       const { access, refresh } = response.data;
 
-      // Storing access token and refresh token in local storage
-      localStorage.setItem("accessToken", access);
-      localStorage.setItem("refreshToken", refresh);
+      const headers = {
+        Authorization: `JWT ${access}`,
+      };
 
-      // Setting axios default headers with access token
-      axios.defaults.headers.common["Authorization"] = `JWT ${access}`;
+      axios
+        .get("http://127.0.0.1:8000/auth/users/me/", {
+          headers: headers,
+        })
+        .then((response) => {
+          // Set user info state
+          const { username, email, first_name, last_name, role } =
+            response.data;
 
-      console.log("Login successful:", response.data);
+          // Storing access token and refresh token in local storage
+          localStorage.setItem("accessToken", access);
+          localStorage.setItem("refreshToken", refresh);
 
-      navigate("/chooseRole"); //EDIT NAVIGATION
+          // Setting axios default headers with access token
+          axios.defaults.headers.common["Authorization"] = `JWT ${access}`;
+          console.log("Login successful:", response.data);
+
+          if (role == 0) {
+            navigate("/matchedJobs");
+          } else {
+            navigate("/jobs");
+          }
+        })
+        .catch((error) => {
+          setError(error);
+          setError(
+            "Login failed. Please check your credentials and try again."
+          );
+        });
 
       setUsername("");
       setPassword("");
@@ -86,8 +108,6 @@ export default function Auth() {
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
-
-
     try {
       const response = await axios.post("http://localhost:8000/auth/users/", {
         username,
@@ -100,7 +120,7 @@ export default function Auth() {
       // Registration successful
       console.log("Registration successful:", response.data);
       // Redirect the user to the profile page
-      navigate('/chooseRole');
+      navigate("/chooseRole");
     } catch (error) {
       console.error("Registration failed:", error);
       setError("Registration failed. Please try again.");
@@ -115,11 +135,11 @@ export default function Auth() {
         variant="gradient"
         size="sm"
         className=" transparent-background rounded-md bg-transparent px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-white hover:text-dark"
-        style={{ whiteSpace: 'nowrap' , backgroundColor: 'transparent' }}
+        style={{ whiteSpace: "nowrap", backgroundColor: "transparent" }}
         onClick={handleOpen}
       >
-    <span style={{ display: 'inline-block' }}>Join Us</span>
-</Button>
+        <span style={{ display: "inline-block" }}>Join Us</span>
+      </Button>
 
       <Dialog
         size="sm"
@@ -175,7 +195,10 @@ export default function Auth() {
                   <TabPanel value="card" className="p-0">
                     <Card className="mx-auto w-full max-w-[24rem]">
                       <CardBody className="flex flex-col gap-4">
-                        <Typography className="-mb-2 text-mantis-900" variant="h6">
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
                           Your Username
                         </Typography>
                         <Input
@@ -185,7 +208,10 @@ export default function Auth() {
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
-                        <Typography className="-mb-2 text-mantis-900" variant="h6">
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
                           Your Password
                         </Typography>
                         <Input
@@ -235,7 +261,10 @@ export default function Auth() {
                   <TabPanel value="paypal" className="p-0">
                     <Card className="mx-auto w-full max-w-[24rem]">
                       <CardBody className="flex flex-col gap-4">
-                        <Typography className="-mb-2 text-mantis-900" variant="h6">
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
                           Your Username
                         </Typography>
                         <Input
@@ -245,7 +274,10 @@ export default function Auth() {
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />
-                        <Typography className="-mb-2 text-mantis-900" variant="h6">
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
                           Your Email
                         </Typography>
                         <Input
@@ -256,7 +288,10 @@ export default function Auth() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
-                        <Typography className="-mb-2 text-mantis-900" variant="h6">
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
                           Your Password
                         </Typography>
                         <Input

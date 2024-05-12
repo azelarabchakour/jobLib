@@ -18,12 +18,14 @@ import CreateJob from './Employer/CreateJob';
 import UploadCv from './Employee/UploadCv.jsx';
 import Application from './Employee/application.jsx';
 import FinalNavBar from './Components/FinalNavbar.jsx';
+import SignIn from './Components/SignIn.jsx'; 
+import SignInDialog from './Components/SignIn.js';
 function App() {
   return (
     <Router>
       {/* <NavbarComponent1></NavbarComponent1> */}
       <Routes>
-        <Route path="/test" element={<FinalNavBar/>} />
+        <Route path="/test" element={<SignIn/>} />
         <Route path="/" element={<HomePage/>} />
         {/* authentication routes  */}        
 

@@ -6,7 +6,9 @@ from django.conf import settings
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_EmployeeAndEmployer_for_new_user(sender, **kwargs):
-    if kwargs['created']:
-        Employee.objects.create(user=kwargs['instance'])
-        Employer.objects.create(user=kwargs['instance'])
+def create_EmployeeOrEmployer_for_new_user(sender, instance, created, **kwargs):
+    if created:
+        if instance.role == 0:  # Check if user role is Employee
+            Employee.objects.create(user=instance)
+        elif instance.role == 1:  # Check if user role is Employer
+            Employer.objects.create(user=instance)
