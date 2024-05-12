@@ -155,6 +155,8 @@ export default function MatchedJobs() {
                   salary: jobDetails.salary,
                   matchPercentage: job.matchPercentage,
                   level: jobDetails.level,
+                  companyName: jobDetails.companyName,
+                  jobDate: jobDetails.jobDate,
                 };
               } catch (error) {
                 console.error("Error fetching job details:", error);
@@ -231,7 +233,7 @@ export default function MatchedJobs() {
                 open={openAccordions[3]}
                 icon={<Icon id={3} open={openAccordions[3]} />}
               >
-                <AccordionHeader onClick={() => handleAccordionToggle(3)}>
+                <AccordionHeader onClick={() => handleAccordionToggle(3)} className="text-mantis-700 hover:text-mantis-600">
                   AI Match Percentage
                 </AccordionHeader>
                 <AccordionBody className="flex flex-col">
@@ -271,7 +273,7 @@ export default function MatchedJobs() {
               >
                 <AccordionHeader
                   onClick={() => handleAccordionToggle(2)}
-                  className="flex"
+                  className="flex text-mantis-700 hover:text-mantis-600"
                 >
                   <Typography variant="h5">AI Salary Estimation</Typography>
                 </AccordionHeader>
@@ -324,36 +326,36 @@ export default function MatchedJobs() {
                 open={openAccordions[1]}
                 icon={<Icon id={1} open={openAccordions[1]} />}
               >
-                <AccordionHeader onClick={() => handleAccordionToggle(1)}>
-                  Experience Level
+                <AccordionHeader onClick={() => handleAccordionToggle(1)} className="text-mantis-700 hover:text-mantis-600">
+                  Creation Date
                 </AccordionHeader>
                 <AccordionBody className="flex flex-col">
                   <Checkbox
                     ripple={false}
                     defaultUnchecked
                     color="teal"
-                    label="Junior Level"
+                    label="Created Today"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Intermediate Level"
+                    label="Created This Week"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Senior Level"
+                    label="Created This Month"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                   <Checkbox
                     defaultUnchecked
                     ripple={false}
                     color="teal"
-                    label="Expert Level"
+                    label="Created Last Month"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
                   />
                 </AccordionBody>
@@ -375,6 +377,8 @@ export default function MatchedJobs() {
                 matchingPercentage={job.matchPercentage + "%"}
                 numberOfApplicants={job.numberOfApplicants}
                 level={job.level}
+                jobDate={job.jobDate}
+                companyName={job.companyName}
                 setRefreshTrigger={setRefreshTrigger}
                 refreshTrigger={refreshTrigger}
                 handleShowToast={handleShowToast}

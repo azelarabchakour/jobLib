@@ -9,9 +9,9 @@ import {
   Input,
   Checkbox,
 } from "@material-tailwind/react";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function ModifyPassword() {
   const [open, setOpen] = React.useState(false);
@@ -19,8 +19,10 @@ export default function ModifyPassword() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
+  const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -32,6 +34,13 @@ export default function ModifyPassword() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
+      setOpen(true);
+      return;
+    }
+    
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       console.error("Access token not found");
@@ -52,11 +61,12 @@ export default function ModifyPassword() {
       );
       console.log("Password updated successfully");
       // Redirect back to user info page
-      navigate("/profile");
+      setOpen(false);
     } catch (error) {
       // Handle errors
       console.error(error);
-      setError(error);
+      setOpen(true);
+      setError("Error updating password");
     }
   };
 
@@ -70,46 +80,71 @@ export default function ModifyPassword() {
         className="bg-transparent shadow-none"
       >
         <form onSubmit={handleSubmit}>
-        <Card className="mx-auto w-full max-w-[24rem]">
-          <CardBody className="flex flex-col gap-4">
-            
-            <Typography variant="h4" color="blue-gray">
-              Modify Password
-            </Typography>
-            <Typography className="-mb-2" variant="h6">
-              Old Password
-            </Typography>
-            <Input
-              label="Old Password"
-              size="lg"
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            <Typography className="-mb-2" variant="h6">
-              New Password
-            </Typography>
-            <Input
-              label="New Password"
-              size="lg"
-              type="password"
-              value={newPassword}
-              onChange={handleNewPasswordChange}
-            />
-          </CardBody>
-          <CardFooter className="pt-0">
-            <Button
-              variant="gradient"
-              type="submit"
-              onClick={handleOpen}
-              fullWidth
+          <Card className="mx-auto w-full max-w-[24rem]">
+            <CardHeader
+              color="red" //header card color
+              floated={false}
+              shadow={false}
+              className="m-0 grid place-items-center px-4 py-8 text-center bg-gradient-to-b from-mantis-400 to-mantis-700"
             >
-              Change
-            </Button>
-            
-          </CardFooter>
-          
-        </Card>
+              <div className="mb-4 h-1 p-6 text-white">
+                <Typography variant="h4" className="text-mantis-50">
+                  Modify Password
+                </Typography>
+              </div>
+            </CardHeader>
+            <CardBody className="flex flex-col gap-4">
+              <Typography className="-mb-2 text-mantis-900" variant="h6">
+                Old Password
+              </Typography>
+              <Input
+                label="Old Password"
+                color="teal"
+                size="lg"
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <Typography className="-mb-2 text-mantis-900" variant="h6">
+                New Password
+              </Typography>
+              <Input
+                label="New Password"
+                color="teal"
+                size="lg"
+                type="password"
+                value={newPassword}
+                onChange={handleNewPasswordChange}
+              />
+
+              <Typography className="-mb-2 text-mantis-900" variant="h6">
+                Confirm New Password
+              </Typography>
+              <Input
+                label="Confirm New Password"
+                color="teal"
+                size="lg"
+                type="password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+              />
+              {error && (
+                <Typography variant="small" color="red">
+                  {error}
+                </Typography>
+              )}
+            </CardBody>
+            <CardFooter className="pt-0">
+              <Button
+                className="bg-mantis-600 text-mantis-50"
+                type="submit"
+                onClick={handleOpen}
+                fullWidth
+              >
+                Save Changes
+              </Button>
+            </CardFooter>
+          </Card>
         </form>
       </Dialog>
     </>

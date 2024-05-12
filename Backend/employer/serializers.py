@@ -25,7 +25,7 @@ class JobPostingSerializer(serializers.ModelSerializer):
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level']
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level','companyName','jobDate']
         read_only_fields = ['id', 'employer', 'salaryMin', 'salaryMax', 'jobStatus','numberOfApplicants']
 
 class CreateJobPostingSerializer(serializers.ModelSerializer):
@@ -33,7 +33,7 @@ class CreateJobPostingSerializer(serializers.ModelSerializer):
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level']
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level','companyName','jobDate']
         read_only_fields = ['id', 'employer','salaryMin', 'salaryMax', 'jobStatus','numberOfApplicants']
     
     def create(self, validated_data):
@@ -71,7 +71,7 @@ class CreateJobPostingWithDetailsSerializer(serializers.ModelSerializer):
     employer = EmployerSerializer(read_only=True)
     class Meta:
         model = JobPosting
-        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level']
+        fields = ['id', 'jobTitle', 'jobDescription','salary', 'salaryMin', 'salaryMax', 'jobStatus', 'employer','applications','numberOfApplicants','level','companyName','jobDate']
         read_only_fields = ['id', 'employer', 'jobStatus','numberOfApplicants']
     
     # def create(self, validated_data):

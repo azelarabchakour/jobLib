@@ -18,17 +18,24 @@ import CreateJob from './Employer/CreateJob';
 import UploadCv from './Employee/UploadCv.jsx';
 import Application from './Employee/application.jsx';
 import FinalNavBar from './Components/FinalNavbar.jsx';
-import SignIn from './Components/SignIn.jsx'; 
 import SignInDialog from './Components/SignIn.js';
+import AuthEmployee from './Authentication/AuthEmployee.jsx';
+import AuthEmployer from './Authentication/AuthEmployer.jsx';
+import SignIn from './Authentication/SignIn.jsx';
 function App() {
   return (
     <Router>
       {/* <NavbarComponent1></NavbarComponent1> */}
       <Routes>
-        <Route path="/test" element={<SignIn/>} />
-        <Route path="/" element={<HomePage/>} />
-        {/* authentication routes  */}        
 
+        {/* shared  */}
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/test" element={<SignIn/>} />
+
+        <Route path="/chooseRole" element={<ChooseRole/>} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/editProfile" element={<EditProfile/>} />
+        
         {/* employer  */}
         <Route path='/employer/createJob' element={<CreateJob />} />
         <Route path="/jobs" element={<Jobs/>} />
@@ -41,10 +48,7 @@ function App() {
         <Route path="/uploadCv" element={<UploadCv/>} />
         <Route path="/application" element={<Application/>} />
 
-        {/* shared  */}
-        <Route path="/chooseRole" element={<ChooseRole/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/editProfile" element={<EditProfile/>} />
+        
 
       </Routes>
     </Router>

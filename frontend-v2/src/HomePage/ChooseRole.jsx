@@ -7,8 +7,7 @@ import FinalNavBar from "../Components/FinalNavbar";
 export default function ChooseRole() {
   return (
     <>
-      <FinalNavBar/>
-      <center>
+      <center className="pt-20">
       <Typography variant="h1" className="pb-20 text-mantis-950">Choose your role</Typography>
         <div className="flex items-center justify-center"> 
           <EmployeeRole/>

@@ -153,7 +153,6 @@ export default function JobPostingCard(props) {
         </Button>
       </CardFooter>
     </Card> */}
-    
     <Card
       className="mt-6 w-4/5  overflow-hidden bg-mantis-50 hover:bg-mantis-100"
       onClick={() => handleDetails(props.id, props.jobStatus)}

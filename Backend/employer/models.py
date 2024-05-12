@@ -1,5 +1,7 @@
+import datetime
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 
 # Create your models here.
 
@@ -29,6 +31,9 @@ class JobPosting(models.Model):
     ],default='ENTRY')
     numberOfApplicants = models.IntegerField(default=0)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='jobPostings')
+    companyName = models.CharField(max_length=255, null=False, blank=False)
+
+    jobDate = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.jobTitle

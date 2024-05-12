@@ -27,7 +27,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import parser_classes
 
 from django.http import FileResponse
-
+from jobMatch.models import JobApplication
 # --------- AI Imports---------------
 import PyPDF2
 from gensim.models.doc2vec import Doc2Vec
@@ -115,10 +115,12 @@ def matchCvWithJd(resume, jobDescription):
 
 
 def getAllJobPostings(userId):
-    employer_profile = Employer.objects.get(user_id=userId)
+    #employer_profile = Employer.objects.get(user_id=userId)
     job_postings = JobPosting.objects.filter(
         jobStatus='POSTED',
-    ).exclude(employer=employer_profile)  # Exclude job postings created by the connected user's employer profile
+    )
+    # we removed the exclude because an employee cannot be and employer
+    # ).exclude(employer=employer_profile)  # Exclude job postings created by the connected user's employer profile
     serializer = JobPostingSerializer(job_postings, many=True)
     # print(serializer.data)
     return serializer.data
@@ -201,12 +203,37 @@ class EmployeeViewSet(ModelViewSet):
                 employee, data=request.data, partial=True)  # Use partial=True for PATCH
             serializer.is_valid(raise_exception=True)
             serializer.save()
+            # After updating the cv, delete all applications and matches
+            applications = JobApplication.objects.filter(
+                employee_id=employee.id
+            )
+            for application in applications:
+                application.delete()
+            
+            matches = Analytics.objects.filter(
+                employee_id=employee.id
+            )
+            for match in matches:
+                match.delete()
+
             return Response(serializer.data)
         elif request.method in ['POST']:
             serializer = EmployeeSerializer(
                 employee, data=request.data, partial=True)  # Use partial=True for PATCH
             serializer.is_valid(raise_exception=True)
             serializer.save()
+            # After updating the cv, delete all applications and matches
+            applications = JobApplication.objects.filter(
+                employee_id=employee.id
+            )
+            for application in applications:
+                application.delete()
+            
+            matches = Analytics.objects.filter(
+                employee_id=employee.id
+            )
+            for match in matches:
+                match.delete()
             return Response(serializer.data)
 
     def testCv(self, request):

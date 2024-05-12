@@ -66,74 +66,75 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
 
   return (
     <>
-      <div className="flex w-full">
-        
-          <Tabs value={activeTab}>
-            <center>
+      <div className="">
+      <center>
 
-            
-            <TabsHeader
-              className="rounded-none border-b border-blue-gray-50 bg-transparent p-0 w-96"
-              indicatorProps={{
-                className:
-                  "bg-transparent border-b-2 border-mantis-700 shadow-none rounded-none",
-              }}
+        <Tabs value={activeTab}>
+          <TabsHeader
+            className="rounded-none border-b border-blue-gray-50 bg-transparent p-0 w-96"
+            indicatorProps={{
+              className:
+                "bg-transparent border-b-2 border-mantis-700 shadow-none rounded-none",
+            }}
+          >
+            <Tab
+              value="activeJobs"
+              onClick={() => setActiveTab("activeJobs")}
+              className={
+                activeTab === "activeJobs"
+                  ? "text-mantis-900 font-bold"
+                  : "text-mantis-950"
+              }
             >
-              <Tab
-                value="activeJobs"
-                onClick={() => setActiveTab("activeJobs")}
-                className={
-                  activeTab === "activeJobs"
-                    ? "text-mantis-900 font-bold"
-                    : "text-mantis-950"
-                }
-              >
-                Active Jobs
-              </Tab>
-              <Tab
-                value="oldJobs"
-                onClick={() => setActiveTab("oldJobs")}
-                className={
-                  activeTab === "oldJobs"
-                    ? "text-mantis-900 font-bold"
-                    : "text-mantis-950"
-                }
-              >
-                Old Jobs
-              </Tab>
-            </TabsHeader>
-            </center>
-            
+              Active Jobs
+            </Tab>
+            <Tab
+              value="oldJobs"
+              onClick={() => setActiveTab("oldJobs")}
+              className={
+                activeTab === "oldJobs"
+                  ? "text-mantis-900 font-bold"
+                  : "text-mantis-950"
+              }
+            >
+              Old Jobs
+            </Tab>
+          </TabsHeader>
+          
+          <div className=""> {/* Center the content horizontally */}
             <TabsBody>
               <TabPanel value="activeJobs">
                 {activeJobs.map((job) => (
                   <JobPostingCard
+                    key={job.id}
                     id={job.id}
                     jobTitle={job.jobTitle}
                     jobDescription={job.jobDescription}
-                    salary={job.salaryMin + "$ - " + job.salaryMax + "$"}
+                    salary={`${job.salaryMin}$ - ${job.salaryMax}$`}
                     numberOfApplicants={job.numberOfApplicants}
                     jobStatus={job.jobStatus}
                     level={job.level}
-                  ></JobPostingCard>
+                  />
                 ))}
               </TabPanel>
-
               <TabPanel value="oldJobs">
                 {oldJobs.map((job) => (
                   <JobPostingCard
+                    key={job.id}
                     id={job.id}
                     jobTitle={job.jobTitle}
                     jobDescription={job.jobDescription}
-                    salary={job.salaryMin + "$ - " + job.salaryMax + "$"}
+                    salary={`${job.salaryMin}$ - ${job.salaryMax}$`}
                     numberOfApplicants={job.numberOfApplicants}
                     jobStatus={job.jobStatus}
-                  ></JobPostingCard>
+                  />
                 ))}
               </TabPanel>
             </TabsBody>
-          </Tabs>
-        </div>
+          </div>
+        </Tabs>
+        </center>
+      </div>
     </>
   );
 }

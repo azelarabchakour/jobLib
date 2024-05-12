@@ -13,7 +13,7 @@ import {
   CurrencyEuroIcon,
   BriefcaseIcon,
 } from "@heroicons/react/24/solid";
-
+import AuthEmployer from "../Authentication/AuthEmployer";
 const EmployerRole = () => {
   const navigate = useNavigate();
   const handleChoose = (page) => {
@@ -28,33 +28,10 @@ const EmployerRole = () => {
         <Typography variant="h5" className="mb-2 text-mantis-900">
           Employer
         </Typography>
-        <Typography>I'm a client, hiring for a project</Typography>
+        <Typography>I'm a project manager, recruiting for a position.</Typography>
       </CardBody>
       <CardFooter className="pt-0">
-        <a href="#" className="inline-block">
-          <Button
-            size="sm"
-            variant="text"
-            className="flex items-center gap-2 hover:bg-mantis-700 hover:text-myBlue-50"
-            onClick={() => handleChoose("/jobs")}
-          >
-            Join as a Client
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-4 w-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
-          </Button>
-        </a>
+       <AuthEmployer />
       </CardFooter>
     </Card>
   );

@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ModifyPassword from "../Components/ModifyPassword";
-import EditProfile from "../Components/EditProfile";
+import EditProfile from "./EditProfile";
 import FinalNavBar from "../Components/FinalNavbar";
 
 export default function Profile() {
@@ -76,6 +76,7 @@ export default function Profile() {
             <Typography>
               Email :<span>{userInfo.email}</span>
             </Typography>
+            
             <EditProfile />
             <ModifyPassword />
           </>
