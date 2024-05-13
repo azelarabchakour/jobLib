@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@material-tailwind/react";
+import { Button, ThemeProvider } from "@material-tailwind/react";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -75,20 +75,6 @@ function UploadButton() {
             onDragOver={handleDragOver}
           >
             <div className=" w-64">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={0.75}
-                stroke="currentColor"
-                className="h-20 w-40"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                />
-              </svg>
               <input
                 id="resume-upload"
                 type="file"
@@ -100,9 +86,40 @@ function UploadButton() {
                 htmlFor="resume-upload"
                 className="cursor-pointer text-myBlue-950 px-4 py-2 rounded-md"
               >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={0.75}
+                  stroke="currentColor"
+                  className="h-20 w-40"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                  />
+                </svg>
                 Upload Your Resume
+                <p className="text-myBlue-400">choose a file or drag it here</p>
               </label>
-              <p className="text-myBlue-400">choose a file or drag it here</p>
+              {/* <Button variant="gradient" className="flex items-center gap-3" onClick={saveFile}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="h-5 w-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                  />
+                </svg>
+                Upload Files
+              </Button> */}
             </div>
           </div>
           <br />

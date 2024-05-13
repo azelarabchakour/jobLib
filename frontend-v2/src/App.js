@@ -22,6 +22,7 @@ import SignInDialog from './Components/SignIn.js';
 import AuthEmployee from './Authentication/AuthEmployee.jsx';
 import AuthEmployer from './Authentication/AuthEmployer.jsx';
 import SignIn from './Authentication/SignIn.jsx';
+import Applications from './Employee/Applications.jsx';
 function App() {
   return (
     <Router>
@@ -46,7 +47,7 @@ function App() {
         {/* employee  */}
         <Route path="/matchedJobs" element={<MatchedJobs/>} />
         <Route path="/uploadCv" element={<UploadCv/>} />
-        <Route path="/application" element={<Application/>} />
+        <Route path="/applications" element={<Applications/>} />
 
         
 

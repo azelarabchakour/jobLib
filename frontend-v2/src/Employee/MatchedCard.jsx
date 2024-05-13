@@ -57,19 +57,6 @@ export default function MatchedCard(props) {
   // Function to format the date
   function formatDate(dateString) {
     const date = parseDate(dateString);
-    const diffInMilliseconds = Math.abs(new Date() - date);
-    const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
-
-    if (diffInDays === 0) {
-      return "Posted today";
-    } else if (diffInDays === 1) {
-      return "Posted yesterday";
-    } else {
-      return `Posted ${diffInDays} days ago`;
-    }
-  }
-  function formatDate(dateString) {
-    const date = parseDate(dateString);
     const currentDate = new Date();
     const diffInMilliseconds = Math.abs(currentDate - date);
     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
