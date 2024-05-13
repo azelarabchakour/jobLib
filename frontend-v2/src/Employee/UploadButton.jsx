@@ -1,17 +1,20 @@
 import { Button, ThemeProvider } from "@material-tailwind/react";
 import React, { useState } from "react";
 import axios from "axios";
+import { Alert, Typography } from "@material-tailwind/react";
 
 function UploadButton() {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
+  const [buttonSave, setButtonSave] = useState(false);
 
   const api = "http://127.0.0.1:8000/employee/employee/me/";
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
-    saveFile(selectedFile);
+    setButtonSave(true);
+    // saveFile(selectedFile);
   };
 
   const handleDrop = (e) => {
@@ -19,14 +22,15 @@ function UploadButton() {
     const droppedFile = e.dataTransfer.files[0];
     if (droppedFile && droppedFile.type === "application/pdf") {
       setFile(droppedFile);
-      saveFile(droppedFile);
+      // saveFile(droppedFile);
+      setButtonSave(true);
     } else {
       setStatus("Please drop a PDF file");
     }
   };
 
-  const saveFile = (selectedFile) => {
-    if (!selectedFile) {
+  const saveFile = () => {
+    if (!file) {
       setStatus("Please select a file");
       return;
     }
@@ -39,7 +43,7 @@ function UploadButton() {
     }
 
     const formData = new FormData();
-    formData.append("resume", selectedFile);
+    formData.append("resume", file);
 
     axios
       .post(api, formData, {
@@ -51,6 +55,7 @@ function UploadButton() {
       .then((response) => {
         console.log(response);
         setStatus("File Uploaded Successfully");
+        setButtonSave(false);
       })
       .catch((error) => {
         console.log(error);
@@ -124,6 +129,9 @@ function UploadButton() {
           </div>
           <br />
         </div>
+
+       
+
         <p className="text-sm text-gray-600">
           {file && `Selected File: ${file.name}`}
         </p>
@@ -138,6 +146,16 @@ function UploadButton() {
           {status}
         </p>
       </div>
+
+      {buttonSave && (
+        <Button
+          onClick={saveFile}
+          variant="gradient"
+          className="flex items-center gap-3"
+        >
+          Save
+        </Button>
+      )}
     </>
   );
 }
