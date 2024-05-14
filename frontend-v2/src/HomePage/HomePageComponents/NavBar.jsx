@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Dialog } from '@material-tailwind/react'; 
 import Auth from '../../Components/Auth';
+import SignIn from '../../Authentication/SignIn';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -224,7 +225,7 @@ const NavBar = () => {
                             </span>
                         </label>
                         <div className="hidden sm:flex">
-                            <Auth />
+                            <SignIn/>
                         </div>
                     </div>
                 </div>

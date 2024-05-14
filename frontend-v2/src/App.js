@@ -23,6 +23,8 @@ import AuthEmployee from './Authentication/AuthEmployee.jsx';
 import AuthEmployer from './Authentication/AuthEmployer.jsx';
 import SignIn from './Authentication/SignIn.jsx';
 import Applications from './Employee/Applications.jsx';
+import TestJD from './Employee/TestJD.jsx';
+import EmployeeNavbar from './Employee/EmployeeNavbar.jsx';
 function App() {
   return (
     <Router>
@@ -39,16 +41,16 @@ function App() {
         
         {/* employer  */}
         <Route path='/employer/createJob' element={<CreateJob />} />
-        <Route path="/jobs" element={<Jobs/>} />
+        <Route path="/employer/jobs" element={<Jobs/>} />
         <Route path="/employer/:jobId/details" element={<JobDetails />} />
         <Route path="/employer/:jobId/jobDetails" element={<JobPostingDetails />} />
         <Route path="/employer/:jobId/applicants" element={<JobApplicants />} />
 
         {/* employee  */}
-        <Route path="/matchedJobs" element={<MatchedJobs/>} />
-        <Route path="/uploadCv" element={<UploadCv/>} />
-        <Route path="/applications" element={<Applications/>} />
-
+        <Route path="/employee/matchedJobs" element={<MatchedJobs/>} />
+        <Route path="/employee/uploadCv" element={<UploadCv/>} />
+        <Route path="/employee/applications" element={<Applications/>} />
+        <Route path="/employee/testJD" element={<TestJD/>} />
         
 
       </Routes>

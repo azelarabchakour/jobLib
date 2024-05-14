@@ -27,6 +27,7 @@ import {
   CurrencyDollarIcon,
   SparklesIcon,
 } from "@heroicons/react/24/solid";
+import EmployeeNavbar from "./EmployeeNavbar";
 
 export default function Applications() {
   const [jobs, setJobs] = useState([]);
@@ -146,7 +147,8 @@ export default function Applications() {
 
   return (
     <>
-      <Card className="h-full w-3/4 mx-auto">
+    <EmployeeNavbar selectedItem={1} />
+      <Card className="h-full w-3/4 mx-auto mt-16 p-2">
         <CardHeader floated={false} shadow={false} className="rounded-none">
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
             <div className="">
@@ -205,7 +207,7 @@ export default function Applications() {
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-normal max-w-40"
                           >
                             {company}
                           </Typography>
@@ -216,7 +218,7 @@ export default function Applications() {
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-normal max-w-40"
                           >
                             {title}
                           </Typography>
@@ -306,12 +308,6 @@ export default function Applications() {
 
               {/* INFOOOOOs */}
               <div className="flex flex-row justify-between pt-1 pb-1">
-                {/* <div className="flex flex-row">
-                <CommandLineIcon className="w-6 h-4 mt-1 text-mantis-600 " />
-                <Typography className="font-bold text-mantis-600 ">
-                  {props.level} Level
-                </Typography>
-              </div> */}
                 <div className="flex flex-row">
                   <SparklesIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600" />
                   <Typography className="font-bold text-mantis-600 ">
@@ -329,26 +325,6 @@ export default function Applications() {
                     </Typography>
                   )}
                 </div>
-                {/* <div className="flex flex-row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-4 mt-1"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />
-                </svg>
-
-                <Typography variant="normal" color="blue-gray" className="mb-2">
-                  {formatDate(props.jobDate)}
-                </Typography>
-              </div> */}
                 <div className="flex flex-row">
                   <SparklesIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600" />
                   <Tooltip

@@ -4,6 +4,11 @@ module.exports = withMT({
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        'inconsolata': ['Inconsolata', 'sans-serif'],
+        'poetsen': ['Poetsen One', 'cursive'],
+        // Add other font families as needed
+      },
       colors: {
         myBlue: {
           50: '#f2f7fb',

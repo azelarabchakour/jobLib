@@ -80,9 +80,9 @@ export default function SignIn() {
           console.log("Login successful:", response.data);
 
           if (role == 0) {
-            navigate("/matchedJobs");
+            navigate("/employee/matchedJobs");
           } else {
-            navigate("/jobs");
+            navigate("/employer/jobs");
           }
         })
         .catch((error) => {

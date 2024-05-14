@@ -3,6 +3,7 @@ import axios from "axios";
 import UploadButton from "./UploadButton.jsx";
 import Navbar from "./NavBarComponent1.jsx";
 import { Alert, Typography } from "@material-tailwind/react";
+import EmployeeNavbar from "./EmployeeNavbar.jsx";
 
 function IconSolid() {
   return (
@@ -24,9 +25,8 @@ function IconSolid() {
 function UploadCv() {
   return (
     <>
-      <Navbar />
-
-      <div className="grid place-content-center">
+      <EmployeeNavbar  selectedItem={2} />
+      <div className="grid place-content-center mt-20">
         <div className="">
           <UploadButton />
         </div>
@@ -37,9 +37,9 @@ function UploadCv() {
               Please note the following:
             </Typography>
             <ul className="mt-2 ml-2 list-inside list-disc">
-              <li>Changing your CV will reset all your job applications.</li>
+              <li>Changing your resume will reset all your job applications.</li>
               <li>
-                All existing matches based on your current CV will be deleted.
+                All existing matches based on your current resume will be deleted.
               </li>
               <li>
                 Ensure that you have saved any important information before

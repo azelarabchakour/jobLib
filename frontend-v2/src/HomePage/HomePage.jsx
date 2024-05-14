@@ -5,7 +5,7 @@ import HeroSection from "./HomePageComponents/HeroSection.jsx";
 import FeatureSection from "./HomePageComponents/FeatureSection.jsx";
 import Footer from "./HomePageComponents/FooterSection.jsx";
 
-export default function HomePage() {
+export default function EmployeeNavbarHomePage() {
     return (
       <>
         <Navbar/>

@@ -2,7 +2,7 @@ import { Button, ThemeProvider } from "@material-tailwind/react";
 import React, { useState } from "react";
 import axios from "axios";
 import { Alert, Typography } from "@material-tailwind/react";
-
+import toast, { Toaster } from 'react-hot-toast';
 function UploadButton() {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
@@ -55,11 +55,14 @@ function UploadButton() {
       .then((response) => {
         console.log(response);
         setStatus("File Uploaded Successfully");
+        toast.success('Resume Uploaded Successfully.');
         setButtonSave(false);
+        setFile(null);
       })
       .catch((error) => {
         console.log(error);
         setStatus("Error uploading file");
+        toast.error('Error Uploading Resume.');
       });
   };
 
@@ -139,21 +142,20 @@ function UploadButton() {
           </div>
           <br />
         </div>
+              <center>
 
-        <p className="text-sm text-gray-600">
+            
+        <p className="text-sm text-mantis-700">
           {file && `Selected File: ${file.name}`}
         </p>
+        </center>
         <br />
-        <p
-          className={`text-sm ${
-            status === "File Uploaded Successfully"
-              ? "text-myBlue-950"
-              : "text-red-600"
-          }`}
-        >
-          {status}
-        </p>
+        
       </div>
+
+      <Toaster position="bottom-right" 
+      reverseOrder={false}
+      />
     </>
   );
 }
