@@ -69,9 +69,9 @@ function UploadButton() {
 
   return (
     <>
-      <div className="absolute w-full md:w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <div className="grid place-content-center">
         <div
-          className="w-full md:w-1/2 lg:w-2/3 xl:w-1/2 border border-dashed border-myBlue-900 border-2 rounded-md flex justify-center items-center"
+          className="w-full md:w-1/2 lg:w-2/3 xl:w-1/2 border border-dashed border-mantis-600 border-2 rounded-md flex justify-center items-center"
           style={{ width: "800px", height: "300px" }}
         >
           <div
@@ -79,7 +79,7 @@ function UploadButton() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <div className=" w-64">
+            <div className=" w-64 grid place-content-center">
               <input
                 id="resume-upload"
                 type="file"
@@ -87,50 +87,58 @@ function UploadButton() {
                 accept=".pdf"
                 onChange={handleFileChange}
               />
-              <label
-                htmlFor="resume-upload"
-                className="cursor-pointer text-myBlue-950 px-4 py-2 rounded-md"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={0.75}
-                  stroke="currentColor"
-                  className="h-20 w-40"
+              <center>
+                <label
+                  htmlFor="resume-upload"
+                  className="cursor-pointer text-myBlue-950 px-4 py-2 rounded-md"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                  />
-                </svg>
-                Upload Your Resume
-                <p className="text-myBlue-400">choose a file or drag it here</p>
-              </label>
-              {/* <Button variant="gradient" className="flex items-center gap-3" onClick={saveFile}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-                  />
-                </svg>
-                Upload Files
-              </Button> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={0.75}
+                    stroke="currentColor"
+                    className="h-20 w-40 text-mantis-600"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                    />
+                  </svg>
+                  <Typography className="font-bold text-mantis-600"> Upload Your Resume</Typography>
+                 
+                  <p className="text-mantis-800">
+                    choose a file or drag it here
+                  </p>
+                </label>
+
+                {buttonSave && (
+                  
+                  <Button  className="flex items-center gap-3 bg-mantis-600 text-mantis-50" onClick={saveFile}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                    />
+                  </svg>
+                  Upload Resume
+                </Button>
+                )}
+              </center>
+
             </div>
           </div>
           <br />
         </div>
-
-       
 
         <p className="text-sm text-gray-600">
           {file && `Selected File: ${file.name}`}
@@ -146,16 +154,6 @@ function UploadButton() {
           {status}
         </p>
       </div>
-
-      {buttonSave && (
-        <Button
-          onClick={saveFile}
-          variant="gradient"
-          className="flex items-center gap-3"
-        >
-          Save
-        </Button>
-      )}
     </>
   );
 }

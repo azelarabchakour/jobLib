@@ -25,20 +25,30 @@ function UploadCv() {
   return (
     <>
       <Navbar />
-      <center>
-        <UploadButton />
-      </center>
 
-      <Alert variant="ghost" icon={<IconSolid />} className="w-1/3">
-          <Typography className="font-medium">
-            Ensure that these requirements are met:
-          </Typography>
-          <ul className="mt-2 ml-2 list-inside list-disc">
-            <li>At least 10 characters (and up to 100 characters)</li>
-            <li>At least one lowercase character</li>
-            <li>Inclusion of at least one special character, e.g., ! @ # ?</li>
-          </ul>
-        </Alert>
+      <div className="grid place-content-center">
+        <div className="">
+          <UploadButton />
+        </div>
+
+        <div className="">
+          <Alert variant="ghost" icon={<IconSolid />}>
+            <Typography className="font-medium">
+              Please note the following:
+            </Typography>
+            <ul className="mt-2 ml-2 list-inside list-disc">
+              <li>Changing your CV will reset all your job applications.</li>
+              <li>
+                All existing matches based on your current CV will be deleted.
+              </li>
+              <li>
+                Ensure that you have saved any important information before
+                proceeding.
+              </li>
+            </ul>
+          </Alert>
+        </div>
+      </div>
     </>
   );
 }
