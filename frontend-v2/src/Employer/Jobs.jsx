@@ -8,6 +8,7 @@ import NavBarComponent1 from "../Components/NavBarComponent1";
 import Footer from "../Components/Footer";
 import TabsComponent from "../Components/TabsComponent";
 import FinalNavBar from "../Components/FinalNavbar";
+import EmployerNavbar from "./EmployerNavbar";
 export default function Jobs() {
   const [oldJobDescriptions, setOldJobDescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,6 @@ export default function Jobs() {
   const [activeJobs, setActiveJobs] = useState([]);
   const [oldJobs, setOldJobs] = useState([]);
 
-
   const navigate = useNavigate();
   const handleLogout = () => {
     // Clear any stored authentication token or user data
@@ -24,8 +24,6 @@ export default function Jobs() {
     localStorage.removeItem("refreshToken");
     navigate("/"); // Navigate to login page
   };
-
-  
 
   useEffect(() => {
     const authToken = localStorage.getItem("accessToken");
@@ -42,8 +40,10 @@ export default function Jobs() {
         })
         .then((response) => {
           setOldJobDescriptions(response.data);
-          setActiveJobs(response.data.filter(job => job.jobStatus === "POSTED"));
-          setOldJobs(response.data.filter(job => job.jobStatus === "DONE"));
+          setActiveJobs(
+            response.data.filter((job) => job.jobStatus === "POSTED")
+          );
+          setOldJobs(response.data.filter((job) => job.jobStatus === "DONE"));
           setLoading(false);
         })
         .catch((error) => {
@@ -98,21 +98,13 @@ export default function Jobs() {
     );
   }
 
-  
-
   return (
     <>
-    <FinalNavBar/>
-    
-    <div className="">
-      {/* <NavBarComponent1 /> */}
-      
-        <TabsComponent 
-          oldJobs={oldJobs}
-          activeJobs={activeJobs}
-        ></TabsComponent>
+      <EmployerNavbar selectedItem={1} />
+      <div className="mt-8">
+      <TabsComponent oldJobs={oldJobs} activeJobs={activeJobs}></TabsComponent>
+      </div>
       {/* <Footer /> */}
-    </div>
     </>
   );
 }

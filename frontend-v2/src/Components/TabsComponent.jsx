@@ -28,7 +28,7 @@ import {
   AdjustmentsHorizontalIcon,
   SparklesIcon,
 } from "@heroicons/react/24/solid";
-import JobPostingCard from "../Components/JobPostingCard";
+import JobPostingCard from "./JobPostingCard";
 
 function Icon({ id, open }) {
   return (
@@ -67,9 +67,9 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
   return (
     <>
       <div className="">
-      <center>
 
-        <Tabs value={activeTab}>
+        <Tabs value={activeTab} className="">
+          <center>
           <TabsHeader
             className="rounded-none border-b border-blue-gray-50 bg-transparent p-0 w-96"
             indicatorProps={{
@@ -100,9 +100,9 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
               Old Jobs
             </Tab>
           </TabsHeader>
-          
-          <div className=""> {/* Center the content horizontally */}
-            <TabsBody>
+          </center>
+          <div className=" ml-60"> {/* Center the content horizontally */}
+            <TabsBody >
               <TabPanel value="activeJobs">
                 {activeJobs.map((job) => (
                   <JobPostingCard
@@ -114,6 +114,9 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
                     numberOfApplicants={job.numberOfApplicants}
                     jobStatus={job.jobStatus}
                     level={job.level}
+                    jobDate={job.jobDate}
+                    companyName = {job.companyName}
+                    jobSalary={job.salary}
                   />
                 ))}
               </TabPanel>
@@ -127,13 +130,14 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
                     salary={`${job.salaryMin}$ - ${job.salaryMax}$`}
                     numberOfApplicants={job.numberOfApplicants}
                     jobStatus={job.jobStatus}
+                    jobDate={job.jobDate}
+                    companyName = {job.companyName}
                   />
                 ))}
               </TabPanel>
             </TabsBody>
           </div>
         </Tabs>
-        </center>
       </div>
     </>
   );

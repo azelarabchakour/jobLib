@@ -25,6 +25,7 @@ import SignIn from './Authentication/SignIn.jsx';
 import Applications from './Employee/Applications.jsx';
 import TestJD from './Employee/TestJD.jsx';
 import EmployeeNavbar from './Employee/EmployeeNavbar.jsx';
+import TestJob from './Employer/TestJob.jsx';
 function App() {
   return (
     <Router>
@@ -44,7 +45,7 @@ function App() {
         <Route path="/employer/jobs" element={<Jobs/>} />
         <Route path="/employer/:jobId/details" element={<JobDetails />} />
         <Route path="/employer/:jobId/jobDetails" element={<JobPostingDetails />} />
-        <Route path="/employer/:jobId/applicants" element={<JobApplicants />} />
+        <Route path="/employer/testJob" element={<TestJob />} />
 
         {/* employee  */}
         <Route path="/employee/matchedJobs" element={<MatchedJobs/>} />

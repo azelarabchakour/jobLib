@@ -20,6 +20,7 @@ import NumberOfApplicants from "../Components/NumberOfApplicants";
 import Level from "../Components/Level";
 import JobDetailsComponent from "../Components/JobDetailsComponent";
 import FinalNavBar from "../Components/FinalNavbar";
+import EmployerNavbar from "./EmployerNavbar";
 function setRating(score) {
   if (score > 90) return <Rating value={5} readonly ratedColor="blue" />;
   else if (score > 80) return <Rating value={4} readonly ratedColor="blue" />;
@@ -148,8 +149,8 @@ function JobDetails() {
   return (
     <>
       {/* <NavBarComponent1 /> */}
-      <FinalNavBar/>
-      <div className="card-old-job-descriptions">
+      <EmployerNavbar selectedItem={1} />
+      <div className="card-old-job-descriptions mt-8">
         <div className="">
           <div>
             <Timeline>
@@ -184,7 +185,6 @@ function JobDetails() {
         </div>
       </div>
 
-      <Footer />
     </>
   );
 }

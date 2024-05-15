@@ -30,6 +30,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import FinalNavBar from "../Components/FinalNavbar";
+import EmployerNavbar from "./EmployerNavbar";
 
 // function setRating(score) {
 //   if (score > 90) return <Rating value={5} readonly ratedColor="blue" />;
@@ -164,8 +165,9 @@ function JobPostingDetails(props) {
   return (
     <>
       {/* <NavBarComponent1 /> */}
-      <FinalNavBar/>
-      <div className="flex flex-row">
+    <EmployerNavbar selectedItem={1} />
+
+      <div className="flex flex-row mt-8">
         {/* left section */}
         <div className="basis-2/3 border-r border-gray-300">
           <Timeline>
