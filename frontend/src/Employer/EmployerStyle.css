@@ -1,0 +1,138 @@
+.employer-body-container {
+  background-color: white;
+  min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.employer-container {
+  width: 600px; /* Same as max-width */
+  max-width: 600px;
+  margin: 0 auto; /* Center horizontally */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.employer-container h2 {
+  color: #333;
+}
+
+.employer-container form {
+  margin-bottom: 20px;
+}
+
+.employer-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.employer-container input[type="text"],
+.employer-container textarea {
+  width: calc(100% - 22px); /* Adjusted width to account for padding and border */
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.employer-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.employer-container button:hover {
+  background-color: #0056b3;
+}
+
+.employer-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.employer-container li {
+  margin-bottom: 20px;
+}
+
+.employer-container li strong {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.employer-container li p {
+  margin-top: 5px;
+  color: #666;
+}
+
+/*  §§§§§§§§§§§§§§§*/
+.employer-body-container {
+  padding: 20px;
+}
+
+.loading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.employer-error-message {
+  color: red;
+}
+
+.job-list-heading {
+  font-size: 24px;
+  color: #333;
+}
+
+.job-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.job-item {
+  margin-bottom: 20px;
+}
+
+.job-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.job-description {
+  font-size: 16px;
+  color: #666;
+}
+
+
+/* EmployerStyle.css */
+
+.employer-body-container {
+  display: flex;
+  flex-direction: column;
+  align-items:flex-end; /* Align items to the start of the container */
+  padding-right: 20px;
+}
+
+.employer-old-jobs-link {
+  position: absolute; /* Position the link absolutely */
+  top: 0; /* Align to the top of the container */
+  right: 20px; /* Align to the right side with some spacing */
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+}
+
+.employer-old-jobs-link:hover {
+  background-color: #333;
+  color: #fff;
+}

@@ -1,0 +1,421 @@
+import React from "react";
+import {
+  Button,
+  Dialog,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Input,
+  Checkbox,
+} from "@material-tailwind/react";
+
+import {
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+export default function AuthEmployee() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen((cur) => !cur);
+
+  //---------------------------
+  const [type, setType] = useState("paypal");
+
+  //AUTH LOGIC_______LOGIN______________________
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [errorSignUp, setErrorSignUp] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      // navigate to the profile if accessToken is already present
+      navigate("/chooseRole");
+    }
+  }, []);
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/auth/jwt/create/",
+        {
+          username,
+          password,
+        }
+      );
+
+      const { access, refresh } = response.data;
+
+      const headers = {
+        Authorization: `JWT ${access}`,
+      };
+
+      axios
+        .get("http://127.0.0.1:8000/auth/users/me/", {
+          headers: headers,
+        })
+        .then((response) => {
+          // Set user info state
+          const { username, email, first_name, last_name, role } =
+            response.data;
+
+          if (role == 0) {
+            // Storing access token and refresh token in local storage
+            localStorage.setItem("accessToken", access);
+            localStorage.setItem("refreshToken", refresh);
+
+            // Setting axios default headers with access token
+            axios.defaults.headers.common["Authorization"] = `JWT ${access}`;
+            console.log("Login successful:", response.data);
+            navigate("/matchedJobs");
+          } else {
+            setError(
+              "Login failed. If you are an employer, please sign in as a employer."
+            );
+            setOpen(true);
+          }
+        })
+        .catch((error) => {
+          setError(error);
+          setError(
+            "Login failed. Please check your credentials and try again."
+          );
+          setOpen(true);
+        });
+
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      console.error("Login failed:", error);
+      setError("Login failed. Please check your credentials and try again.");
+      setOpen(true);
+    }
+  };
+
+  //_______________________________________________
+  //AUTH LOGIC_______SIGN UP______________________
+  const [email, setEmail] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8000/auth/users/", {
+        username,
+        email,
+        password,
+        first_name,
+        last_name,
+        role: 0,
+      });
+
+      // Registration successful
+      console.log("Registration successful:", response.data);
+      // Redirect the user to the profile page
+      navigate("/chooseRole");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      setErrorSignUp("Registration failed. Please try again.");
+      setOpen(true);
+    }
+  };
+
+  //_______________________________________________
+
+  return (
+    <>
+      {/* <Button
+        variant="gradient"
+        size="sm"
+        className=" transparent-background rounded-md bg-transparent px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-white hover:text-dark"
+        style={{ whiteSpace: "nowrap", backgroundColor: "transparent" }}
+        onClick={handleOpen}
+      >
+        <span style={{ display: "inline-block" }}>Join Us</span>
+      </Button> */}
+
+      <a href="#" className="inline-block">
+          <Button
+            size="sm"
+            variant="text"
+            className="flex items-center gap-2 hover:bg-mantis-700 hover:text-mantis-50"
+            onClick={handleOpen}
+          >
+            Apply as an Employee
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-4 w-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </Button>
+        </a>
+
+      <Dialog
+        size="sm"
+        open={open}
+        handler={handleOpen}
+        className="bg-transparent shadow-none"
+      >
+        <Card className="mx-auto w-full max-w-[24rem] ">
+          <CardHeader
+            color="red" //header card color
+            floated={false}
+            shadow={false}
+            className="m-0 grid place-items-center px-4 py-8 text-center bg-gradient-to-b from-mantis-400 to-mantis-700"
+          >
+            <div className="mb-4 h-1 p-6 text-white">
+              {type === "card" ? (
+                <Typography variant="h5" className="text-mantis-50">
+                  SIGN IN
+                </Typography>
+              ) : (
+                <Typography variant="h5" className="text-mantis-50">
+                  SIGN UP
+                </Typography>
+              )}
+            </div>
+          </CardHeader>
+          <CardBody>
+            <Tabs value={type} className="overflow-visible">
+              <TabsHeader className="relative z-0 ">
+                <Tab value="card" onClick={() => setType("card")}>
+                  SIGN IN
+                </Tab>
+                <Tab value="paypal" onClick={() => setType("paypal")}>
+                  SIGN UP
+                </Tab>
+              </TabsHeader>
+              <TabsBody
+                className="!overflow-x-hidden !overflow-y-visible"
+                animate={{
+                  initial: {
+                    x: type === "card" ? 400 : -400,
+                  },
+                  mount: {
+                    x: 0,
+                  },
+                  unmount: {
+                    x: type === "card" ? 400 : -400,
+                  },
+                }}
+              >
+                {/* Sign in form */}
+                <form onSubmit={handleLoginSubmit}>
+                  <TabPanel value="card" className="p-0">
+                    <Card className="mx-auto w-full max-w-[24rem]">
+                      <CardBody className="flex flex-col gap-4">
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
+                          Your Username
+                        </Typography>
+                        <Input
+                          label="Username"
+                          color="teal"
+                          size="lg"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
+                          Your Password
+                        </Typography>
+                        <Input
+                          label="Password"
+                          color="teal"
+                          size="lg"
+                          type="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                        {error && (
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="flex justify-center"
+                          >
+                            {error}
+                          </Typography>
+                        )}
+                      </CardBody>
+                      <CardFooter className="pt-0 flex flex-col items-center gap-4">
+                        <Button
+                          // variant="gradient"
+                          onClick={handleOpen}
+                          fullWidth
+                          type="submit"
+                          className="bg-mantis-600 text-mantis-50"
+                        >
+                          Sign In
+                        </Button>
+                        {/* <Typography
+                          variant="small"
+                          className="flex justify-center"
+                        >
+                          Don&apos;t have an account?
+                          <Typography
+                            as="a"
+                            href="#signup"
+                            variant="small"
+                            color="blue-gray"
+                            className="ml-1 font-bold text-mantis-950"
+                            onClick={() => setType("paypal")}
+                          >
+                            Sign up
+                          </Typography>
+                        </Typography> */}
+                      </CardFooter>
+                    </Card>
+                  </TabPanel>
+                </form>
+                {/* Sign up Form */}
+                <form onSubmit={handleSignUpSubmit}>
+                  <TabPanel value="paypal" className="p-0">
+                    <Card className="mx-auto w-full max-w-[24rem]">
+                      <CardBody className="flex flex-col gap-4">
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
+                          Your Username
+                        </Typography>
+                        <Input
+                          label="Username"
+                          color="teal"
+                          size="lg"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
+                          Your Email
+                        </Typography>
+                        <Input
+                          label="Email"
+                          color="teal"
+                          size="lg"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <Typography
+                          className="-mb-2 text-mantis-900"
+                          variant="h6"
+                        >
+                          Your Password
+                        </Typography>
+                        <Input
+                          label="Password"
+                          color="teal"
+                          size="lg"
+                          type="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <div className="my-4 flex items-center gap-4">
+                          <div>
+                            <Typography
+                              variant="h6"
+                              className="mb-2 text-mantis-900"
+                            >
+                              First Name
+                            </Typography>
+                            <Input
+                              label="First Name"
+                              color="teal"
+                              containerProps={{ className: "min-w-[72px]" }}
+                              value={first_name}
+                              onChange={(e) => setFirstName(e.target.value)}
+                            />
+                          </div>
+                          <div>
+                            <Typography
+                              variant="h6"
+                              className="mb-2 text-mantis-900"
+                            >
+                              Last Name
+                            </Typography>
+                            <Input
+                              label="Last Name"
+                              color="teal"
+                              containerProps={{ className: "min-w-[72px]" }}
+                              value={last_name}
+                              onChange={(e) => setLastName(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        {errorSignUp && (
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="flex justify-center"
+                          >
+                            {errorSignUp}
+                          </Typography>
+                        )}
+                      </CardBody>
+                      <CardFooter className="pt-0 flex flex-col items-center gap-4">
+                        <Button
+                          onClick={handleOpen}
+                          fullWidth
+                          type="submit"
+                          className="bg-mantis-600 text-mantis-50"
+                        >
+                          Sign Up
+                        </Button>
+                        {/* <Typography
+                          variant="small"
+                          className="flex justify-center"
+                        >
+                          You already have an account?
+                          <Typography
+                            as="a"
+                            href="#signup"
+                            variant="small"
+                            color="blue-gray"
+                            className="ml-1 font-bold text-mantis-950"
+                            onClick={() => setType("card")}
+                          >
+                            Sign in
+                          </Typography>
+                        </Typography> */}
+                      </CardFooter>
+                    </Card>
+                  </TabPanel>
+                </form>
+              </TabsBody>
+            </Tabs>
+          </CardBody>
+        </Card>
+      </Dialog>
+    </>
+  );
+}
