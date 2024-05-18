@@ -80,7 +80,7 @@ export default function AuthEmployee() {
             // Setting axios default headers with access token
             axios.defaults.headers.common["Authorization"] = `JWT ${access}`;
             console.log("Login successful:", response.data);
-            navigate("/jobs");
+            navigate("/Employer/jobs");
           } else {
             setError(
               "Login failed. If you are an employee, please sign in as a employee."

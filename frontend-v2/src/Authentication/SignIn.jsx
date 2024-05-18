@@ -104,10 +104,9 @@ export default function SignIn() {
   return (
     <>
       <Button
-        variant="gradient"
         size="sm"
-        className=" transparent-background rounded-md bg-transparent px-6 py-2 text-base font-medium text-white duration-300 ease-in-out hover:bg-white hover:text-dark"
-        style={{ whiteSpace: "nowrap", backgroundColor: "transparent" }}
+        className="bg-mantis-50 hover:bg-mantis-700 hover:text-mantis-50 px-7 py-[14px] text-base font-bold text-mantis-950"
+        style={{ whiteSpace: "nowrap" }}
         onClick={handleOpen}
       >
         <span style={{ display: "inline-block" }}>Sign In</span>

@@ -75,6 +75,8 @@ def match(request, resume, jd):
     v2 = model.infer_vector(input_JD.split())
     similarity = 100*(np.dot(np.array(v1), np.array(v2))) / \
         (norm(np.array(v1)) * norm(np.array(v2)))
+    if similarity < 0:
+        similarity = 0.00
     return similarity
 
 
@@ -111,6 +113,8 @@ def matchCvWithJd(resume, jobDescription):
     similarity = 100*(np.dot(np.array(v1), np.array(v2))) / \
         (norm(np.array(v1)) * norm(np.array(v2)))
     # print("{:.2f}".format(similarity))
+    if similarity < 0:
+        similarity = 0.00
     return "{:.2f}".format(similarity)
 
 
@@ -404,6 +408,8 @@ def testCV(request):
 
 
     similarity = match(request, resume_path, input_text)
+    if similarity < 0:
+        similarity = 0.00
     estimation = calculateSalaryEstimationV2(input_text)
     data = {
         'estimation': estimation,

@@ -10,8 +10,7 @@ export default function EmployeeNavbarHomePage() {
       <>
         <Navbar/>
         <HeroSection/>
-        <FeatureSection/>
-        <Footer/>
+        
       </>
     );
   }
