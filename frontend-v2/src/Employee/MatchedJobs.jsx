@@ -210,11 +210,13 @@ export default function MatchedJobs() {
 
   const filterJobs = () => {
     // if there is no filter show all the matched jobs and exit
-    if (matchPercentageFilters.length == 0 && salaryEstimationFilters.length == 0) {
+    if (
+      matchPercentageFilters.length == 0 &&
+      salaryEstimationFilters.length == 0
+    ) {
       setFilteredJobs(matchedJobs);
       return;
     }
-
 
     let filtered = matchedJobs; // to store all matchedJobs
     // let filteredJobsSet = new Set(); //to store filtred Jobs
@@ -222,10 +224,10 @@ export default function MatchedJobs() {
     // Apply match percentage filter
     if (matchPercentageFilters.length > 0) {
       let filter1 = [];
-      matchPercentageFilters.forEach(filter => {
+      matchPercentageFilters.forEach((filter) => {
         let [min, max] = filter.split("-");
-        filtered.forEach( job => {
-          if (job.matchPercentage >= min && job.matchPercentage <= max) 
+        filtered.forEach((job) => {
+          if (job.matchPercentage >= min && job.matchPercentage <= max)
             filter1.push(job);
         });
       });
@@ -234,26 +236,21 @@ export default function MatchedJobs() {
 
     // Apply salary estimation filter
     if (salaryEstimationFilters.length > 0) {
-      if (filtered.length == 0){
+      if (filtered.length == 0) {
         setFilteredJobs(filtered);
         return;
       }
       let filter2 = [];
-      salaryEstimationFilters.forEach(filter => {
+      salaryEstimationFilters.forEach((filter) => {
         let [min, max] = filter.split("-");
-        filtered.forEach( job => {
-          if(job.salaryMin == min && job.salaryMax == max)
-            filter2.push(job);
+        filtered.forEach((job) => {
+          if (job.salaryMin == min && job.salaryMax == max) filter2.push(job);
         });
       });
       filtered = filter2;
     }
 
-
     setFilteredJobs(filtered);
-
-  
-
   };
 
   useEffect(() => {
@@ -398,39 +395,43 @@ export default function MatchedJobs() {
           </div>
         </div>
         <div className="w-4/6 ">
-          <div className="mt-4">
-            Applied Filters : 
-          </div>
+          {matchPercentageFilters.length > 0 &&
+            matchPercentageFilters.length > 0 && (
+              
+              <div className="mt-4">
+              <Typography>Applied Filters :</Typography>
+
+              
+            </div>    
+
+          )}
+
           {filteredJobs
-          .sort((a, b) => new Date(b.jobDate) - new Date(a.jobDate))
-          .map((job) => (
-            <div>
-              <MatchedCard
-                key={job.id}
-                id={job.id}
-                jobPosting={job.jobPosting}
-                jobTitle={job.jobTitle}
-                jobDescription={job.jobDescription}
-                salary={"$" + job.salaryMin + " - $" + job.salaryMax}
-                jobSalary={job.salary}
-                matchingPercentage={job.matchPercentage + "%"}
-                numberOfApplicants={job.numberOfApplicants}
-                level={job.level}
-                jobDate={job.jobDate}
-                companyName={job.companyName}
-                setRefreshTrigger={setRefreshTrigger}
-                refreshTrigger={refreshTrigger}
-                handleShowToast={handleShowToast}
-              />
+            .sort((a, b) => new Date(b.jobDate) - new Date(a.jobDate))
+            .map((job) => (
+              <div>
+                <MatchedCard
+                  key={job.id}
+                  id={job.id}
+                  jobPosting={job.jobPosting}
+                  jobTitle={job.jobTitle}
+                  jobDescription={job.jobDescription}
+                  salary={"$" + job.salaryMin + " - $" + job.salaryMax}
+                  jobSalary={job.salary}
+                  matchingPercentage={job.matchPercentage + "%"}
+                  numberOfApplicants={job.numberOfApplicants}
+                  level={job.level}
+                  jobDate={job.jobDate}
+                  companyName={job.companyName}
+                  setRefreshTrigger={setRefreshTrigger}
+                  refreshTrigger={refreshTrigger}
+                  handleShowToast={handleShowToast}
+                />
 
-              <Toaster position="bottom-right" reverseOrder={false} />
-            </div>
-          ))}
+                <Toaster position="bottom-right" reverseOrder={false} />
+              </div>
+            ))}
         </div>
-      </div>
-
-      <div>
-        {}
       </div>
     </>
   );

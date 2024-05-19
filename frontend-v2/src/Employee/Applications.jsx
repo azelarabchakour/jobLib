@@ -129,7 +129,7 @@ export default function Applications() {
     company: job.companyName,
     title: job.jobTitle,
     salary:
-      job.salary !== 0
+      job.salary !== 0 && job.salary!== null
         ? `$${job.salary}`
         : `$${job.salaryMin} - $${job.salaryMax}`,
     applicationDate: job.applicationDate,
