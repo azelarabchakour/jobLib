@@ -1,41 +1,18 @@
-import NavBarComponent1 from "./NavBarComponent1";
 import MatchedCard from "./MatchedCard";
-import FinalNavBar from "../Components/FinalNavbar";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
-import toast, { Toaster } from 'react-hot-toast';
-
+import toast, { Toaster } from "react-hot-toast";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
-  Card,
-  CardBody,
-  CardFooter,
   Typography,
-  Button,
-  Tooltip,
-  Avatar,
-  Textarea,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-  Alert,
-  Input,
   Checkbox,
   List,
   Accordion,
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import person from "../Assets/person.jpeg";
 import "../Components/line.css";
-import {
-  ClockIcon,
-  CommandLineIcon,
-  CurrencyDollarIcon,
-  SparklesIcon,
-} from "@heroicons/react/24/solid";
 import EmployeeNavbar from "./EmployeeNavbar";
 
 function Icon({ id, open }) {
@@ -166,6 +143,7 @@ export default function MatchedJobs() {
             })
           );
           setMatchedJobs(updatedMatchedJobs);
+          setFilteredJobs(updatedMatchedJobs);
           setLoading(false);
         }
       } catch (error) {
@@ -202,20 +180,87 @@ export default function MatchedJobs() {
 
   const [showToast, setShowToast] = useState(false);
 
-  useEffect(() => {
-    if (showToast) {
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [showToast]);
-
   const handleShowToast = () => {
     // setShowToast(true);
-    toast.success('You have successfully applied to this job posting.');
+    toast.success("You have successfully applied to this job posting.");
   };
+
+  //------------------------FILTERS------------------------
+  const [matchPercentageFilters, setMatchPercentageFilters] = useState([]);
+  const [salaryEstimationFilters, setSalaryEstimationFilters] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+
+  const handleMatchPercentageFilterChange = (filterValue) => {
+    // Check if the filterValue is already in the filters array
+    const updatedFilters = matchPercentageFilters.includes(filterValue)
+      ? matchPercentageFilters.filter((value) => value !== filterValue) // Remove the filter value if it's already selected
+      : [...matchPercentageFilters, filterValue]; // Add the filter value if it's not selected
+    // Update the state variable with the updated filters
+    setMatchPercentageFilters(updatedFilters);
+  };
+
+  const handleSalaryEstimationFilterChange = (filterValue) => {
+    // Check if the filterValue is already in the filters array
+    const updatedFilters = salaryEstimationFilters.includes(filterValue)
+      ? salaryEstimationFilters.filter((value) => value !== filterValue) // Remove the filter value if it's already selected
+      : [...salaryEstimationFilters, filterValue]; // Add the filter value if it's not selected
+    // Update the state variable with the updated filters
+    setSalaryEstimationFilters(updatedFilters);
+  };
+
+  const filterJobs = () => {
+    // if there is no filter show all the matched jobs and exit
+    if (matchPercentageFilters.length == 0 && salaryEstimationFilters.length == 0) {
+      setFilteredJobs(matchedJobs);
+      return;
+    }
+
+
+    let filtered = matchedJobs; // to store all matchedJobs
+    // let filteredJobsSet = new Set(); //to store filtred Jobs
+
+    // Apply match percentage filter
+    if (matchPercentageFilters.length > 0) {
+      let filter1 = [];
+      matchPercentageFilters.forEach(filter => {
+        let [min, max] = filter.split("-");
+        filtered.forEach( job => {
+          if (job.matchPercentage >= min && job.matchPercentage <= max) 
+            filter1.push(job);
+        });
+      });
+      filtered = filter1;
+    }
+
+    // Apply salary estimation filter
+    if (salaryEstimationFilters.length > 0) {
+      if (filtered.length == 0){
+        setFilteredJobs(filtered);
+        return;
+      }
+      let filter2 = [];
+      salaryEstimationFilters.forEach(filter => {
+        let [min, max] = filter.split("-");
+        filtered.forEach( job => {
+          if(job.salaryMin == min && job.salaryMax == max)
+            filter2.push(job);
+        });
+      });
+      filtered = filter2;
+    }
+
+
+    setFilteredJobs(filtered);
+
+  
+
+  };
+
+  useEffect(() => {
+    filterJobs();
+  }, [matchPercentageFilters, salaryEstimationFilters]);
+
+  //-------------------------------------------------------
 
   return (
     <>
@@ -248,6 +293,7 @@ export default function MatchedJobs() {
                     color="teal"
                     label="90% - 100%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() => handleMatchPercentageFilterChange("90-100")} // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -255,6 +301,7 @@ export default function MatchedJobs() {
                     color="teal"
                     label="80% - 90%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() => handleMatchPercentageFilterChange("80-90")} // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -262,6 +309,7 @@ export default function MatchedJobs() {
                     color="teal"
                     label="70% - 80%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() => handleMatchPercentageFilterChange("70-80")} // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -269,6 +317,7 @@ export default function MatchedJobs() {
                     color="teal"
                     label="60% - 70%"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() => handleMatchPercentageFilterChange("60-70")} // Pass the filter value here
                   />
                 </AccordionBody>
               </Accordion>
@@ -289,6 +338,9 @@ export default function MatchedJobs() {
                     color="teal"
                     label="$30,000 - $50,000"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() =>
+                      handleSalaryEstimationFilterChange("30000-50000")
+                    } // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -296,6 +348,9 @@ export default function MatchedJobs() {
                     color="teal"
                     label="$50,000 - $70,000"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() =>
+                      handleSalaryEstimationFilterChange("50000-70000")
+                    } // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -303,6 +358,9 @@ export default function MatchedJobs() {
                     color="teal"
                     label="$70,000 - $90,000"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() =>
+                      handleSalaryEstimationFilterChange("70000-90000")
+                    } // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -310,6 +368,9 @@ export default function MatchedJobs() {
                     color="teal"
                     label="$90,000 - $120,000"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() =>
+                      handleSalaryEstimationFilterChange("90000-120000")
+                    } // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -317,6 +378,9 @@ export default function MatchedJobs() {
                     color="teal"
                     label="$120,000 - $150,000"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() =>
+                      handleSalaryEstimationFilterChange("120000-150000")
+                    } // Pass the filter value here
                   />
                   <Checkbox
                     defaultUnchecked
@@ -324,47 +388,9 @@ export default function MatchedJobs() {
                     color="teal"
                     label="$150,000 - $200,000"
                     className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                </AccordionBody>
-              </Accordion>
-              <Accordion
-                open={openAccordions[1]}
-                icon={<Icon id={1} open={openAccordions[1]} />}
-              >
-                <AccordionHeader
-                  onClick={() => handleAccordionToggle(1)}
-                  className="text-mantis-700 hover:text-mantis-600"
-                >
-                  Creation Date
-                </AccordionHeader>
-                <AccordionBody className="flex flex-col">
-                  <Checkbox
-                    ripple={false}
-                    defaultUnchecked
-                    color="teal"
-                    label="Created Today"
-                    className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Created This Week"
-                    className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Created This Month"
-                    className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
-                  />
-                  <Checkbox
-                    defaultUnchecked
-                    ripple={false}
-                    color="teal"
-                    label="Created Last Month"
-                    className="h-5 w-5 border-mantis-500 text-mantis-900 transition-all hover:scale-105 hover:before:opacity-0"
+                    onChange={() =>
+                      handleSalaryEstimationFilterChange("150000-200000")
+                    } // Pass the filter value here
                   />
                 </AccordionBody>
               </Accordion>
@@ -372,7 +398,12 @@ export default function MatchedJobs() {
           </div>
         </div>
         <div className="w-4/6 ">
-          {matchedJobs.map((job) => (
+          <div className="mt-4">
+            Applied Filters : 
+          </div>
+          {filteredJobs
+          .sort((a, b) => new Date(b.jobDate) - new Date(a.jobDate))
+          .map((job) => (
             <div>
               <MatchedCard
                 key={job.id}
@@ -392,63 +423,14 @@ export default function MatchedJobs() {
                 handleShowToast={handleShowToast}
               />
 
-              {/* {showToast && (
-                <div
-                  id="toast-bottom-right"
-                  class="fixed flex items-center w-full max-w-xs p-4 space-x-4  divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg  right-5 bottom-5 space-x"
-                  role="alert"
-                >
-                  <div
-                    id="toast-success"
-                    class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-mantis-100 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-                    role="alert"
-                  >
-                    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                      <svg
-                        class="w-5 h-5"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                      </svg>
-                      <span class="sr-only">Check icon</span>
-                    </div>
-                    <div class="ms-3 text-sm font-normal">
-                      You have successfully applied to this job posting.
-                    </div>
-                    <button
-                      type="button"
-                      class="ms-auto -mx-1.5 -my-1.5 bg-mantis-100 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-                      data-dismiss-target="#toast-success"
-                      aria-label="Close"
-                    >
-                      <span class="sr-only">Close</span>
-                      <svg
-                        class="w-3 h-3"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 14 14"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              )} */}
-
               <Toaster position="bottom-right" reverseOrder={false} />
             </div>
           ))}
         </div>
+      </div>
+
+      <div>
+        {}
       </div>
     </>
   );
