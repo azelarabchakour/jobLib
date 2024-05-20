@@ -395,16 +395,6 @@ export default function MatchedJobs() {
           </div>
         </div>
         <div className="w-4/6 ">
-          {matchPercentageFilters.length > 0 &&
-            matchPercentageFilters.length > 0 && (
-              
-              <div className="mt-4">
-              <Typography>Applied Filters :</Typography>
-
-              
-            </div>    
-
-          )}
 
           {filteredJobs
             .sort((a, b) => new Date(b.jobDate) - new Date(a.jobDate))

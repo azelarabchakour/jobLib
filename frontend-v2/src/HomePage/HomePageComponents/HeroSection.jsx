@@ -26,8 +26,8 @@ const HeroSection = () => {
                 className="hero-content wow fadeInUp mx-auto max-w-[780px] text-center lg:text-left md:mt-0 mt-16 md:mt-[100px]"
                 data-wow-delay=".2s"
               >
-                <h1 className="mb-6 text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-poetsen text-mantis-700  leading-snug">
-                AI-Powered Career Boost: Your Dream Job Awaits
+                <h1 className="mb-6 text-3xl sm:text-4xl lg:text-4xl xl:text-6xl font-poetsen text-mantis-700  leading-snug">
+                Find Your Perfect Fit with AI Precision
                 </h1>
                 <p className="mx-auto mb-9 max-w-[600px] text-lg sm:text-xl lg:text-xxl font-medium italic text-mantis-50">
                 Let AI Work its Magic : Your Dream Job, Just a Click Away!
