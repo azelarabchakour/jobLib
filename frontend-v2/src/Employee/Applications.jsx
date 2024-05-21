@@ -148,7 +148,7 @@ export default function Applications() {
   return (
     <>
     <EmployeeNavbar selectedItem={1} />
-      <Card className="h-full w-3/4 mx-auto mt-16 p-2">
+      <Card className="h-full w-3/4 mx-auto mt-8 p-2">
         <CardHeader floated={false} shadow={false} className="rounded-none">
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
             <div className="">
