@@ -100,6 +100,7 @@ export default function JobDetailsComponent(props) {
         {
           jobTitle: jobTitleComponent,
           jobDescription: jobDescription,
+          companyName : props.company,
         },
         {
           headers: {

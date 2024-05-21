@@ -196,6 +196,7 @@ function JobPostingDetails(props) {
               jobTitle={job.jobTitle}
               jobDescription={job.jobDescription}
               jobStatus={job.jobStatus}
+              company={job.companyName}
             ></JobDetailsComponent>
           </center>
         </div>
