@@ -132,6 +132,8 @@ export default function TabsComponent({ activeJobs, oldJobs }) {
                     jobStatus={job.jobStatus}
                     jobDate={job.jobDate}
                     companyName = {job.companyName}
+                    level={job.level}
+                    jobSalary={job.salary}
                   />
                 ))}
               </TabPanel>
