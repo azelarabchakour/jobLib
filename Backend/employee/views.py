@@ -363,7 +363,8 @@ def apply(request, pk):
         'applicationStatus': application_status,
         'employee': employee.id,
         'job_posting': pk,
-        'matchPercentage': analytics.matchPercentage
+        'matchPercentage': analytics.matchPercentage,
+        'proposalLetter': "I am writing to express my interest in joining your team. With my skills and experience, I am confident that I can contribute effectively to your organization."
     }
 
     application_serializer = CreateJobApplicationSerializer(data=application_data)

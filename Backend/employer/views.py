@@ -109,6 +109,7 @@ def acceptApplication(request, pk):
     #mark the jobPosting as DONE
     jobPosting = JobPosting.objects.get(pk=jobApplication.job_posting.id)
     jobPosting.jobStatus = 'DONE'
+    jobPosting.numberOfApplicants = 0
     jobPosting.save()
     #mark the jobApllication of all other employees as taken
     jobApplications = JobApplication.objects.filter(job_posting=jobPosting.id).exclude(pk=pk)

@@ -286,6 +286,7 @@ export default function EmployeeNavbar(props) {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       console.error("Access token not found");
+      
       return;
     }
 

@@ -32,22 +32,8 @@ export default function MatchedCard(props) {
 
   const [openModify, setOpenModify] = React.useState(false);
   const handleOpenModify = () => setOpenModify(!openModify);
+
   const [refreshTrigger, setRefreshTrigger] = useState(false);
-
-  // const [showToast, setShowToast] = useState(false);
-
-  // useEffect(() => {
-  //   if (showToast) {
-  //     const timer = setTimeout(() => {
-  //       setShowToast(false);
-  //     }, 3000);
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [showToast]);
-  // const handleShowToast = () => {
-  //   setShowToast(true);
-  // };
 
   function parseDate(dateString) {
     const [year, month, day] = dateString.split("-").map(Number);
@@ -212,7 +198,7 @@ export default function MatchedCard(props) {
             <div className="flex items-center -space-x-3">
               <Button
                 variant="text"
-                className="flex items-center gap-2 hover:bg-mantis-700 hover:text-mantis-50" 
+                className="flex items-center gap-2 hover:bg-mantis-700 hover:text-mantis-50"
                 onClick={() => handleOpenModify()}
               >
                 Show Details{" "}
@@ -265,14 +251,15 @@ export default function MatchedCard(props) {
               <div className="flex flex-row">
                 <SparklesIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600" />
                 <Typography className="font-bold text-mantis-600 ">
-                {props.salary}
+                  {props.salary}
                 </Typography>
-                </div>
-              
+              </div>
+
               <div className="flex flex-row">
-              {props.jobSalary !== null && props.jobSalary !== 0 && (
-                  
-                    <Typography className="font-bold text-mantis-600">{"$"+props.jobSalary}</Typography>
+                {props.jobSalary !== null && props.jobSalary !== 0 && (
+                  <Typography className="font-bold text-mantis-600">
+                    {"$" + props.jobSalary}
+                  </Typography>
                 )}
               </div>
               {/* <div className="flex flex-row">
@@ -295,7 +282,7 @@ export default function MatchedCard(props) {
                   {formatDate(props.jobDate)}
                 </Typography>
               </div> */}
-               <div className="flex flex-row">
+              <div className="flex flex-row">
                 <SparklesIcon className="w-5 h-5 pt-1 mr-1 text-mantis-600" />
                 <Tooltip
                   placement="top"
@@ -317,12 +304,12 @@ export default function MatchedCard(props) {
           </DialogBody>
           <DialogFooter className="flex items-center justify-between">
             <div>
-            <div className="flex flex-row">
+              <div className="flex flex-row">
                 <CommandLineIcon className="w-6 h-4 mt-1 text-mantis-600 " />
                 <Typography className="font-bold text-mantis-600 ">
                   {props.level} Level
                 </Typography>
-              </div> 
+              </div>
 
               <div className="flex flex-row">
                 <svg
@@ -344,7 +331,6 @@ export default function MatchedCard(props) {
                   {formatDate(props.jobDate)}
                 </Typography>
               </div>
-              
             </div>
             <div>
               <Button
@@ -356,7 +342,7 @@ export default function MatchedCard(props) {
                 <span>Cancel</span>
               </Button>
               <Button
-              className="bg-mantis-600 hover:bg-mantis-700 text-mantis-50"
+                className="bg-mantis-600 hover:bg-mantis-700 text-mantis-50"
                 onClick={() => handleApply(props.jobPosting)}
               >
                 <span>Apply</span>
@@ -364,6 +350,8 @@ export default function MatchedCard(props) {
             </div>
           </DialogFooter>
         </Dialog>
+
+
       </div>
     </>
   );
