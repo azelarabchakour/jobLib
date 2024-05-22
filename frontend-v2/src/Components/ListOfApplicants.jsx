@@ -159,8 +159,6 @@ export default function ListOfApplicants(props) {
                 className="hover:bg-mantis-50"
                 onClick={() => handleOpenApplicationDialog(application)}
               >
-               
-
                 <div>
 
                   <div className="flex items-center justify-between">

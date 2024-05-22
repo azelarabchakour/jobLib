@@ -149,6 +149,8 @@ def modifyJob(request, pk):
     elif request.method in ['PUT', 'PATCH']: #Update the job posting
         serializer = CreateJobPostingSerializer(jobPosting, data=request.data)
         if serializer.is_valid():
+            # reset the number of applicants
+            serializer.validated_data['numberOfApplicants'] = 0
             serializer.save() 
             #After saving the new job posting delete all the job applications and the matches for this jobposting
             jobApplications = JobApplication.objects.filter(job_posting=pk)
@@ -157,6 +159,7 @@ def modifyJob(request, pk):
             analytics = Analytics.objects.filter(jobPosting=pk)
             for match in analytics:
                 match.delete()
+            
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
